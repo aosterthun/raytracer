@@ -1,0 +1,1 @@
+/usr/bin/c++   -std=c++0x    CMakeFiles/tests.dir/main.cpp.o  -o ../build/Release/tests -rdynamic ../framework/libframework.a ../external/glfw-3.0.3/src/libglfw3.a -lX11 -lpthread -lXrandr -lXi -lXxf86vm -lrt -lm -lGL 

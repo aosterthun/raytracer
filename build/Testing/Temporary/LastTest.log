@@ -1,0 +1,116 @@
+Start testing: Jul 06 14:53 CEST
+----------------------------------------------------------
+1/1 Testing: tests
+1/1 Test: tests
+Command: "/home/arne/Repositories/programmiersprachen-raytracer/build/build/Release/tests"
+Directory: /home/arne/Repositories/programmiersprachen-raytracer/build
+"tests" start time: Jul 06 14:53 CEST
+Output:
+----------------------------------------------------------
+define material red 1 0 0 1 0 0 1 0 0 1
+define material blue 0 0 1 0 0 1 0 0 1 1
+Shape construct 
+Sphere construct 
+Sphere destruct 
+Shape destruct 
+Shape construct 
+Sphere construct 
+Sphere destruct 
+Shape destruct 
+Shape construct 
+Sphere construct 
+Sphere destruct 
+Shape destruct 
+Shape construct 
+Sphere construct 
+Sphere destruct 
+Shape destruct 
+Shape construct 
+Sphere construct 
+Sphere destruct 
+Shape destruct 
+Shape construct 
+Sphere construct 
+Sphere destruct 
+Shape destruct 
+Shape construct 
+Sphere construct 
+Sphere destruct 
+Shape destruct 
+Shape construct 
+Box construct 
+Box destruct 
+Shape destruct 
+Shape construct 
+Box construct 
+Box destruct 
+Shape destruct 
+Shape construct 
+Box construct 
+Box destruct 
+Shape destruct 
+Shape construct 
+Box construct 
+Box destruct 
+Shape destruct 
+Shape construct 
+Box construct 
+Box destruct 
+Shape destruct 
+Shape construct 
+Box construct 
+Shape construct 
+Sphere construct 
+[Box ID: 0x7fffaef83c48]
+Name: untitled_box
+Color: (0,0,0)
+Min: fvec3(0.000000, 0.000000, 0.000000)
+Max: fvec3(0.000000, 0.000000, 0.000000)
+
+[Sphere ID: 0x7fffaef83c48]
+Name: untitled_sphere
+Color: (0,0,0)
+Center: fvec3(0.000000, 0.000000, 0.000000)
+Radius: 0
+
+Sphere destruct 
+Shape destruct 
+Box destruct 
+Shape destruct 
+Shape construct 
+Sphere construct 
+Sphere destruct 
+Shape destruct 
+============================================
+Shape construct 
+Sphere construct 
+Shape construct 
+Sphere construct 
+[Sphere ID: 0x7fffaef83c78]
+Name: sphere0
+Color: (255,0,0)
+Center: fvec3(0.000000, 0.000000, 0.000000)
+Radius: 1.2
+
+[Sphere ID: 0x7fffaef83c78]
+Name: sphere1
+Color: (255,0,0)
+Center: fvec3(0.000000, 0.000000, 0.000000)
+Radius: 1.2
+
+Sphere destruct 
+Shape destruct 
+Sphere destruct 
+Shape destruct 
+===============================================================================
+All tests passed (42 assertions in 19 test cases)
+
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"tests" end time: Jul 06 14:53 CEST
+"tests" time elapsed: 00:00:00
+----------------------------------------------------------
+
+End testing: Jul 06 14:53 CEST
