@@ -1,4 +1,4 @@
-# Install script for directory: /home/arne/Repositories/programmiersprachen-raytracer/framework
+# Install script for directory: /home/manuel/Medieninformatik/Programmiersprachen/Aufgaben/Aufgabenblatt8/raytracer/framework
 
 # Set the install prefix
 IF(NOT DEFINED CMAKE_INSTALL_PREFIX)

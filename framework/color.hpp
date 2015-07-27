@@ -14,58 +14,67 @@
 
 struct Color
 {
-  Color(float red, float green, float blue) : r(red), g(green), b(blue) {}
-  Color(float val) : r(val), g(val), b(val) {}
-  float r;
-  float g;
-  float b;
 
-  friend std::ostream& operator<<(std::ostream& os, Color const& c)
-  {
-    os << "(" << c.r << "," << c.g << "," << c.b << ")\n";
-    return os;
-  }
+	//default-constructor
+	Color() : r(0.0), g(0.0), b(0.0) {}
 
-  Color& operator+=(Color const& other)
-  {
-    r += other.r;
-    g += other.g;
-    b += other.b;
-    return *this;
-  }
+	Color(float val) : r(val), g(val), b(val) {}
 
-  Color& operator-=(Color const& other)
-  {
-    r -= other.r;
-    g -= other.g;
-    b -= other.b;
-    return *this;
-  }
+	Color(Color const& col) : r(col.r), g(col.g), b(col.b) {}
 
-  bool operator==(Color const& other)
-  {
-    if( r == other.r &&
-        g == other.g &&
-        b == other.b)
-    {
-      return true;
-    }
-    return false;
-  }
+	Color(float red, float green, float blue) : r(red), g(green), b(blue) {}
 
-  friend Color operator+(Color const& a, Color const& b)
-  {
-    auto tmp(a);
-    tmp += b;
-    return tmp;
-  }
+	//variables
+	float r;
+	float g;
+	float b;
 
-  friend Color operator-(Color const& a, Color const& b)
-  {
-    auto tmp(a);
-    tmp -= b;
-    return tmp;
-  }
-};
+	friend std::ostream& operator<<(std::ostream& os, Color const& c)
+	{
+		os << "(" << c.r << "," << c.g << "," << c.b << ")\n";
+		return os;
+	}
+
+	Color& operator+=(Color const& other)
+	{
+		r += other.r;
+		g += other.g;
+		b += other.b;
+		return *this;
+	}
+
+	Color& operator-=(Color const& other)
+	{
+		r -= other.r;
+		g -= other.g;
+		b -= other.b;
+		return *this;
+	}
+
+	bool operator==(Color const& other)
+	{
+		if( r == other.r &&
+			g == other.g &&
+			b == other.b)
+		{
+			return true;
+		}
+		return false;
+	}
+
+	friend Color operator+(Color const& a, Color const& b)
+	{
+		auto tmp(a);
+		tmp += b;
+		return tmp;
+	}
+
+	friend Color operator-(Color const& a, Color const& b)
+	{
+		auto tmp(a);
+		tmp -= b;
+		return tmp;
+	}
+	};
 
 #endif //#define BUW_COLOR_HPP

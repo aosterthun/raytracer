@@ -5,7 +5,7 @@ framework/CMakeFiles/framework.dir/glew.c.o
  ../external/GL/glew.h
  ../external/GL/glxew.h
  ../external/GL/wglew.h
- /home/arne/Repositories/programmiersprachen-raytracer/framework/glew.c
+ /home/manuel/Medieninformatik/Programmiersprachen/Aufgaben/Aufgabenblatt8/raytracer/framework/glew.c
 framework/CMakeFiles/framework.dir/box.cpp.o
  ../external/glm-0.9.5.3/glm/./common.hpp
  ../external/glm-0.9.5.3/glm/./detail/_noise.hpp
@@ -247,19 +247,23 @@ framework/CMakeFiles/framework.dir/box.cpp.o
  ../external/glm-0.9.5.3/glm/vec4.hpp
  ../external/glm-0.9.5.3/glm/vector_relational.hpp
  ../framework/ray.hpp
- /home/arne/Repositories/programmiersprachen-raytracer/framework/box.cpp
- /home/arne/Repositories/programmiersprachen-raytracer/framework/box.hpp
- /home/arne/Repositories/programmiersprachen-raytracer/framework/color.hpp
- /home/arne/Repositories/programmiersprachen-raytracer/framework/shape.hpp
+ /home/manuel/Medieninformatik/Programmiersprachen/Aufgaben/Aufgabenblatt8/raytracer/framework/box.cpp
+ /home/manuel/Medieninformatik/Programmiersprachen/Aufgaben/Aufgabenblatt8/raytracer/framework/box.hpp
+ /home/manuel/Medieninformatik/Programmiersprachen/Aufgaben/Aufgabenblatt8/raytracer/framework/color.hpp
+ /home/manuel/Medieninformatik/Programmiersprachen/Aufgaben/Aufgabenblatt8/raytracer/framework/shape.hpp
+framework/CMakeFiles/framework.dir/material.cpp.o
+ /home/manuel/Medieninformatik/Programmiersprachen/Aufgaben/Aufgabenblatt8/raytracer/framework/color.hpp
+ /home/manuel/Medieninformatik/Programmiersprachen/Aufgaben/Aufgabenblatt8/raytracer/framework/material.cpp
+ /home/manuel/Medieninformatik/Programmiersprachen/Aufgaben/Aufgabenblatt8/raytracer/framework/material.hpp
 framework/CMakeFiles/framework.dir/pixel.cpp.o
  ../framework/color.hpp
- /home/arne/Repositories/programmiersprachen-raytracer/framework/pixel.cpp
- /home/arne/Repositories/programmiersprachen-raytracer/framework/pixel.hpp
+ /home/manuel/Medieninformatik/Programmiersprachen/Aufgaben/Aufgabenblatt8/raytracer/framework/pixel.cpp
+ /home/manuel/Medieninformatik/Programmiersprachen/Aufgaben/Aufgabenblatt8/raytracer/framework/pixel.hpp
 framework/CMakeFiles/framework.dir/ppmwriter.cpp.o
  ../framework/color.hpp
  ../framework/pixel.hpp
- /home/arne/Repositories/programmiersprachen-raytracer/framework/ppmwriter.cpp
- /home/arne/Repositories/programmiersprachen-raytracer/framework/ppmwriter.hpp
+ /home/manuel/Medieninformatik/Programmiersprachen/Aufgaben/Aufgabenblatt8/raytracer/framework/ppmwriter.cpp
+ /home/manuel/Medieninformatik/Programmiersprachen/Aufgaben/Aufgabenblatt8/raytracer/framework/ppmwriter.hpp
 framework/CMakeFiles/framework.dir/renderer.cpp.o
  ../external/glm-0.9.5.3/glm/common.hpp
  ../external/glm-0.9.5.3/glm/detail/_fixes.hpp
@@ -337,11 +341,22 @@ framework/CMakeFiles/framework.dir/renderer.cpp.o
  ../external/glm-0.9.5.3/glm/vec3.hpp
  ../external/glm-0.9.5.3/glm/vec4.hpp
  ../external/glm-0.9.5.3/glm/vector_relational.hpp
- /home/arne/Repositories/programmiersprachen-raytracer/framework/color.hpp
- /home/arne/Repositories/programmiersprachen-raytracer/framework/pixel.hpp
- /home/arne/Repositories/programmiersprachen-raytracer/framework/ppmwriter.hpp
- /home/arne/Repositories/programmiersprachen-raytracer/framework/renderer.cpp
- /home/arne/Repositories/programmiersprachen-raytracer/framework/renderer.hpp
+ /home/manuel/Medieninformatik/Programmiersprachen/Aufgaben/Aufgabenblatt8/raytracer/framework/color.hpp
+ /home/manuel/Medieninformatik/Programmiersprachen/Aufgaben/Aufgabenblatt8/raytracer/framework/pixel.hpp
+ /home/manuel/Medieninformatik/Programmiersprachen/Aufgaben/Aufgabenblatt8/raytracer/framework/ppmwriter.hpp
+ /home/manuel/Medieninformatik/Programmiersprachen/Aufgaben/Aufgabenblatt8/raytracer/framework/renderer.cpp
+ /home/manuel/Medieninformatik/Programmiersprachen/Aufgaben/Aufgabenblatt8/raytracer/framework/renderer.hpp
+framework/CMakeFiles/framework.dir/scene.cpp.o
+ ../framework/color.hpp
+ ../framework/material.hpp
+ /home/manuel/Medieninformatik/Programmiersprachen/Aufgaben/Aufgabenblatt8/raytracer/framework/scene.cpp
+ /home/manuel/Medieninformatik/Programmiersprachen/Aufgaben/Aufgabenblatt8/raytracer/framework/scene.hpp
+framework/CMakeFiles/framework.dir/sdfloader.cpp.o
+ ../framework/color.hpp
+ ../framework/material.hpp
+ ../framework/scene.hpp
+ ../framework/sdfloader.hpp
+ /home/manuel/Medieninformatik/Programmiersprachen/Aufgaben/Aufgabenblatt8/raytracer/framework/sdfloader.cpp
 framework/CMakeFiles/framework.dir/shape.cpp.o
  ../external/glm-0.9.5.3/glm/./common.hpp
  ../external/glm-0.9.5.3/glm/./detail/_noise.hpp
@@ -583,9 +598,9 @@ framework/CMakeFiles/framework.dir/shape.cpp.o
  ../external/glm-0.9.5.3/glm/vec4.hpp
  ../external/glm-0.9.5.3/glm/vector_relational.hpp
  ../framework/ray.hpp
- /home/arne/Repositories/programmiersprachen-raytracer/framework/color.hpp
- /home/arne/Repositories/programmiersprachen-raytracer/framework/shape.cpp
- /home/arne/Repositories/programmiersprachen-raytracer/framework/shape.hpp
+ /home/manuel/Medieninformatik/Programmiersprachen/Aufgaben/Aufgabenblatt8/raytracer/framework/color.hpp
+ /home/manuel/Medieninformatik/Programmiersprachen/Aufgaben/Aufgabenblatt8/raytracer/framework/shape.cpp
+ /home/manuel/Medieninformatik/Programmiersprachen/Aufgaben/Aufgabenblatt8/raytracer/framework/shape.hpp
 framework/CMakeFiles/framework.dir/sphere.cpp.o
  ../external/glm-0.9.5.3/glm/./common.hpp
  ../external/glm-0.9.5.3/glm/./detail/_noise.hpp
@@ -827,10 +842,10 @@ framework/CMakeFiles/framework.dir/sphere.cpp.o
  ../external/glm-0.9.5.3/glm/vec4.hpp
  ../external/glm-0.9.5.3/glm/vector_relational.hpp
  ../framework/ray.hpp
- /home/arne/Repositories/programmiersprachen-raytracer/framework/color.hpp
- /home/arne/Repositories/programmiersprachen-raytracer/framework/shape.hpp
- /home/arne/Repositories/programmiersprachen-raytracer/framework/sphere.cpp
- /home/arne/Repositories/programmiersprachen-raytracer/framework/sphere.hpp
+ /home/manuel/Medieninformatik/Programmiersprachen/Aufgaben/Aufgabenblatt8/raytracer/framework/color.hpp
+ /home/manuel/Medieninformatik/Programmiersprachen/Aufgaben/Aufgabenblatt8/raytracer/framework/shape.hpp
+ /home/manuel/Medieninformatik/Programmiersprachen/Aufgaben/Aufgabenblatt8/raytracer/framework/sphere.cpp
+ /home/manuel/Medieninformatik/Programmiersprachen/Aufgaben/Aufgabenblatt8/raytracer/framework/sphere.hpp
 framework/CMakeFiles/framework.dir/window.cpp.o
  ../external/GL/glew.h
  ../external/glfw-3.0.3/include/GLFW/glfw3.h
@@ -912,6 +927,6 @@ framework/CMakeFiles/framework.dir/window.cpp.o
  ../external/glm-0.9.5.3/glm/vec3.hpp
  ../external/glm-0.9.5.3/glm/vec4.hpp
  ../external/glm-0.9.5.3/glm/vector_relational.hpp
- /home/arne/Repositories/programmiersprachen-raytracer/framework/color.hpp
- /home/arne/Repositories/programmiersprachen-raytracer/framework/window.cpp
- /home/arne/Repositories/programmiersprachen-raytracer/framework/window.hpp
+ /home/manuel/Medieninformatik/Programmiersprachen/Aufgaben/Aufgabenblatt8/raytracer/framework/color.hpp
+ /home/manuel/Medieninformatik/Programmiersprachen/Aufgaben/Aufgabenblatt8/raytracer/framework/window.cpp
+ /home/manuel/Medieninformatik/Programmiersprachen/Aufgaben/Aufgabenblatt8/raytracer/framework/window.hpp

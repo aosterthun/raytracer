@@ -1,15 +1,13 @@
-Start testing: Jul 06 14:53 CEST
+Start testing: Jul 27 12:57 CEST
 ----------------------------------------------------------
 1/1 Testing: tests
 1/1 Test: tests
-Command: "/home/arne/Repositories/programmiersprachen-raytracer/build/build/Release/tests"
-Directory: /home/arne/Repositories/programmiersprachen-raytracer/build
-"tests" start time: Jul 06 14:53 CEST
+Command: "/home/manuel/Medieninformatik/Programmiersprachen/Aufgaben/Aufgabenblatt8/raytracer/build/build/Release/tests"
+Directory: /home/manuel/Medieninformatik/Programmiersprachen/Aufgaben/Aufgabenblatt8/raytracer/build
+"tests" start time: Jul 27 12:57 CEST
 Output:
 ----------------------------------------------------------
-define material red 1 0 0 1 0 0 1 0 0 1
-define material blue 0 0 1 0 0 1 0 0 1 1
-Shape construct 
+Unable to open fileShape construct 
 Sphere construct 
 Sphere destruct 
 Shape destruct 
@@ -61,13 +59,13 @@ Shape construct
 Box construct 
 Shape construct 
 Sphere construct 
-[Box ID: 0x7fffaef83c48]
+[Box ID: 0x7ffd9872cd18]
 Name: untitled_box
 Color: (0,0,0)
 Min: fvec3(0.000000, 0.000000, 0.000000)
 Max: fvec3(0.000000, 0.000000, 0.000000)
 
-[Sphere ID: 0x7fffaef83c48]
+[Sphere ID: 0x7ffd9872cd18]
 Name: untitled_sphere
 Color: (0,0,0)
 Center: fvec3(0.000000, 0.000000, 0.000000)
@@ -86,13 +84,13 @@ Shape construct
 Sphere construct 
 Shape construct 
 Sphere construct 
-[Sphere ID: 0x7fffaef83c78]
+[Sphere ID: 0x7ffd9872cd48]
 Name: sphere0
 Color: (255,0,0)
 Center: fvec3(0.000000, 0.000000, 0.000000)
 Radius: 1.2
 
-[Sphere ID: 0x7fffaef83c78]
+[Sphere ID: 0x7ffd9872cd48]
 Name: sphere1
 Color: (255,0,0)
 Center: fvec3(0.000000, 0.000000, 0.000000)
@@ -109,8 +107,8 @@ All tests passed (42 assertions in 19 test cases)
 Test time =   0.00 sec
 ----------------------------------------------------------
 Test Passed.
-"tests" end time: Jul 06 14:53 CEST
+"tests" end time: Jul 27 12:57 CEST
 "tests" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-End testing: Jul 06 14:53 CEST
+End testing: Jul 27 12:57 CEST

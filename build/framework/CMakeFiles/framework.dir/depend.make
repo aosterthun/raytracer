@@ -251,6 +251,10 @@ framework/CMakeFiles/framework.dir/box.cpp.o: ../framework/box.hpp
 framework/CMakeFiles/framework.dir/box.cpp.o: ../framework/color.hpp
 framework/CMakeFiles/framework.dir/box.cpp.o: ../framework/shape.hpp
 
+framework/CMakeFiles/framework.dir/material.cpp.o: ../framework/color.hpp
+framework/CMakeFiles/framework.dir/material.cpp.o: ../framework/material.cpp
+framework/CMakeFiles/framework.dir/material.cpp.o: ../framework/material.hpp
+
 framework/CMakeFiles/framework.dir/pixel.cpp.o: ../framework/color.hpp
 framework/CMakeFiles/framework.dir/pixel.cpp.o: ../framework/pixel.cpp
 framework/CMakeFiles/framework.dir/pixel.cpp.o: ../framework/pixel.hpp
@@ -341,6 +345,17 @@ framework/CMakeFiles/framework.dir/renderer.cpp.o: ../framework/pixel.hpp
 framework/CMakeFiles/framework.dir/renderer.cpp.o: ../framework/ppmwriter.hpp
 framework/CMakeFiles/framework.dir/renderer.cpp.o: ../framework/renderer.cpp
 framework/CMakeFiles/framework.dir/renderer.cpp.o: ../framework/renderer.hpp
+
+framework/CMakeFiles/framework.dir/scene.cpp.o: ../framework/color.hpp
+framework/CMakeFiles/framework.dir/scene.cpp.o: ../framework/material.hpp
+framework/CMakeFiles/framework.dir/scene.cpp.o: ../framework/scene.cpp
+framework/CMakeFiles/framework.dir/scene.cpp.o: ../framework/scene.hpp
+
+framework/CMakeFiles/framework.dir/sdfloader.cpp.o: ../framework/color.hpp
+framework/CMakeFiles/framework.dir/sdfloader.cpp.o: ../framework/material.hpp
+framework/CMakeFiles/framework.dir/sdfloader.cpp.o: ../framework/scene.hpp
+framework/CMakeFiles/framework.dir/sdfloader.cpp.o: ../framework/sdfloader.hpp
+framework/CMakeFiles/framework.dir/sdfloader.cpp.o: ../framework/sdfloader.cpp
 
 framework/CMakeFiles/framework.dir/shape.cpp.o: ../external/glm-0.9.5.3/glm/./common.hpp
 framework/CMakeFiles/framework.dir/shape.cpp.o: ../external/glm-0.9.5.3/glm/./detail/_noise.hpp

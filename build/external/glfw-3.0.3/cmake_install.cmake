@@ -1,4 +1,4 @@
-# Install script for directory: /home/arne/Repositories/programmiersprachen-raytracer/external/glfw-3.0.3
+# Install script for directory: /home/manuel/Medieninformatik/Programmiersprachen/Aufgaben/Aufgabenblatt8/raytracer/external/glfw-3.0.3
 
 # Set the install prefix
 IF(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -34,7 +34,7 @@ ENDIF(NOT DEFINED CMAKE_INSTALL_SO_NO_EXE)
 
 IF(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
-  INCLUDE("/home/arne/Repositories/programmiersprachen-raytracer/build/external/glfw-3.0.3/src/cmake_install.cmake")
+  INCLUDE("/home/manuel/Medieninformatik/Programmiersprachen/Aufgaben/Aufgabenblatt8/raytracer/build/external/glfw-3.0.3/src/cmake_install.cmake")
 
 ENDIF(NOT CMAKE_INSTALL_LOCAL_ONLY)
 

@@ -35,13 +35,13 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The program to use to edit the cache.
-CMAKE_EDIT_COMMAND = /usr/bin/cmake-gui
+CMAKE_EDIT_COMMAND = /usr/bin/ccmake
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/arne/Repositories/programmiersprachen-raytracer
+CMAKE_SOURCE_DIR = /home/manuel/Medieninformatik/Programmiersprachen/Aufgaben/Aufgabenblatt8/raytracer
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/arne/Repositories/programmiersprachen-raytracer/build
+CMAKE_BINARY_DIR = /home/manuel/Medieninformatik/Programmiersprachen/Aufgaben/Aufgabenblatt8/raytracer/build
 
 # Include any dependencies generated for this target.
 include tests/CMakeFiles/tests.dir/depend.make
@@ -54,17 +54,17 @@ include tests/CMakeFiles/tests.dir/flags.make
 
 tests/CMakeFiles/tests.dir/main.cpp.o: tests/CMakeFiles/tests.dir/flags.make
 tests/CMakeFiles/tests.dir/main.cpp.o: ../tests/main.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/arne/Repositories/programmiersprachen-raytracer/build/CMakeFiles $(CMAKE_PROGRESS_1)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/manuel/Medieninformatik/Programmiersprachen/Aufgaben/Aufgabenblatt8/raytracer/build/CMakeFiles $(CMAKE_PROGRESS_1)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object tests/CMakeFiles/tests.dir/main.cpp.o"
-	cd /home/arne/Repositories/programmiersprachen-raytracer/build/tests && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/tests.dir/main.cpp.o -c /home/arne/Repositories/programmiersprachen-raytracer/tests/main.cpp
+	cd /home/manuel/Medieninformatik/Programmiersprachen/Aufgaben/Aufgabenblatt8/raytracer/build/tests && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/tests.dir/main.cpp.o -c /home/manuel/Medieninformatik/Programmiersprachen/Aufgaben/Aufgabenblatt8/raytracer/tests/main.cpp
 
 tests/CMakeFiles/tests.dir/main.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/tests.dir/main.cpp.i"
-	cd /home/arne/Repositories/programmiersprachen-raytracer/build/tests && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/arne/Repositories/programmiersprachen-raytracer/tests/main.cpp > CMakeFiles/tests.dir/main.cpp.i
+	cd /home/manuel/Medieninformatik/Programmiersprachen/Aufgaben/Aufgabenblatt8/raytracer/build/tests && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/manuel/Medieninformatik/Programmiersprachen/Aufgaben/Aufgabenblatt8/raytracer/tests/main.cpp > CMakeFiles/tests.dir/main.cpp.i
 
 tests/CMakeFiles/tests.dir/main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/tests.dir/main.cpp.s"
-	cd /home/arne/Repositories/programmiersprachen-raytracer/build/tests && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/arne/Repositories/programmiersprachen-raytracer/tests/main.cpp -o CMakeFiles/tests.dir/main.cpp.s
+	cd /home/manuel/Medieninformatik/Programmiersprachen/Aufgaben/Aufgabenblatt8/raytracer/build/tests && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/manuel/Medieninformatik/Programmiersprachen/Aufgaben/Aufgabenblatt8/raytracer/tests/main.cpp -o CMakeFiles/tests.dir/main.cpp.s
 
 tests/CMakeFiles/tests.dir/main.cpp.o.requires:
 .PHONY : tests/CMakeFiles/tests.dir/main.cpp.o.requires
@@ -95,7 +95,7 @@ build/Release/tests: /usr/lib/x86_64-linux-gnu/libm.so
 build/Release/tests: /usr/lib/x86_64-linux-gnu/libGL.so
 build/Release/tests: tests/CMakeFiles/tests.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --red --bold "Linking CXX executable ../build/Release/tests"
-	cd /home/arne/Repositories/programmiersprachen-raytracer/build/tests && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/tests.dir/link.txt --verbose=$(VERBOSE)
+	cd /home/manuel/Medieninformatik/Programmiersprachen/Aufgaben/Aufgabenblatt8/raytracer/build/tests && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/tests.dir/link.txt --verbose=$(VERBOSE)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Running tests"
 	ctest
 
@@ -107,10 +107,10 @@ tests/CMakeFiles/tests.dir/requires: tests/CMakeFiles/tests.dir/main.cpp.o.requi
 .PHONY : tests/CMakeFiles/tests.dir/requires
 
 tests/CMakeFiles/tests.dir/clean:
-	cd /home/arne/Repositories/programmiersprachen-raytracer/build/tests && $(CMAKE_COMMAND) -P CMakeFiles/tests.dir/cmake_clean.cmake
+	cd /home/manuel/Medieninformatik/Programmiersprachen/Aufgaben/Aufgabenblatt8/raytracer/build/tests && $(CMAKE_COMMAND) -P CMakeFiles/tests.dir/cmake_clean.cmake
 .PHONY : tests/CMakeFiles/tests.dir/clean
 
 tests/CMakeFiles/tests.dir/depend:
-	cd /home/arne/Repositories/programmiersprachen-raytracer/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/arne/Repositories/programmiersprachen-raytracer /home/arne/Repositories/programmiersprachen-raytracer/tests /home/arne/Repositories/programmiersprachen-raytracer/build /home/arne/Repositories/programmiersprachen-raytracer/build/tests /home/arne/Repositories/programmiersprachen-raytracer/build/tests/CMakeFiles/tests.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/manuel/Medieninformatik/Programmiersprachen/Aufgaben/Aufgabenblatt8/raytracer/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/manuel/Medieninformatik/Programmiersprachen/Aufgaben/Aufgabenblatt8/raytracer /home/manuel/Medieninformatik/Programmiersprachen/Aufgaben/Aufgabenblatt8/raytracer/tests /home/manuel/Medieninformatik/Programmiersprachen/Aufgaben/Aufgabenblatt8/raytracer/build /home/manuel/Medieninformatik/Programmiersprachen/Aufgaben/Aufgabenblatt8/raytracer/build/tests /home/manuel/Medieninformatik/Programmiersprachen/Aufgaben/Aufgabenblatt8/raytracer/build/tests/CMakeFiles/tests.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : tests/CMakeFiles/tests.dir/depend
 

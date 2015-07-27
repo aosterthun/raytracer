@@ -1,5 +1,5 @@
-/home/arne/Repositories/programmiersprachen-raytracer/build/source/CMakeFiles/example.dir
-/home/arne/Repositories/programmiersprachen-raytracer/build/framework/CMakeFiles/framework.dir
-/home/arne/Repositories/programmiersprachen-raytracer/build/external/glfw-3.0.3/src/CMakeFiles/glfw.dir
-/home/arne/Repositories/programmiersprachen-raytracer/build/source/CMakeFiles/raytracer.dir
-/home/arne/Repositories/programmiersprachen-raytracer/build/tests/CMakeFiles/tests.dir
+/home/manuel/Medieninformatik/Programmiersprachen/Aufgaben/Aufgabenblatt8/raytracer/build/source/CMakeFiles/example.dir
+/home/manuel/Medieninformatik/Programmiersprachen/Aufgaben/Aufgabenblatt8/raytracer/build/framework/CMakeFiles/framework.dir
+/home/manuel/Medieninformatik/Programmiersprachen/Aufgaben/Aufgabenblatt8/raytracer/build/external/glfw-3.0.3/src/CMakeFiles/glfw.dir
+/home/manuel/Medieninformatik/Programmiersprachen/Aufgaben/Aufgabenblatt8/raytracer/build/source/CMakeFiles/raytracer.dir
+/home/manuel/Medieninformatik/Programmiersprachen/Aufgaben/Aufgabenblatt8/raytracer/build/tests/CMakeFiles/tests.dir

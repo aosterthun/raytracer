@@ -1862,7 +1862,7 @@ cmath
 glm/vec3.hpp
 -
 
-/home/arne/Repositories/programmiersprachen-raytracer/tests/main.cpp
+/home/manuel/Medieninformatik/Programmiersprachen/Aufgaben/Aufgabenblatt8/raytracer/tests/main.cpp
 catch.hpp
 -
 sphere.hpp

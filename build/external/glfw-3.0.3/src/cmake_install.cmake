@@ -1,4 +1,4 @@
-# Install script for directory: /home/arne/Repositories/programmiersprachen-raytracer/external/glfw-3.0.3/src
+# Install script for directory: /home/manuel/Medieninformatik/Programmiersprachen/Aufgaben/Aufgabenblatt8/raytracer/external/glfw-3.0.3/src
 
 # Set the install prefix
 IF(NOT DEFINED CMAKE_INSTALL_PREFIX)

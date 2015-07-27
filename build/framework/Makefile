@@ -39,13 +39,13 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The program to use to edit the cache.
-CMAKE_EDIT_COMMAND = /usr/bin/cmake-gui
+CMAKE_EDIT_COMMAND = /usr/bin/ccmake
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/arne/Repositories/programmiersprachen-raytracer
+CMAKE_SOURCE_DIR = /home/manuel/Medieninformatik/Programmiersprachen/Aufgaben/Aufgabenblatt8/raytracer
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/arne/Repositories/programmiersprachen-raytracer/build
+CMAKE_BINARY_DIR = /home/manuel/Medieninformatik/Programmiersprachen/Aufgaben/Aufgabenblatt8/raytracer/build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -53,7 +53,7 @@ CMAKE_BINARY_DIR = /home/arne/Repositories/programmiersprachen-raytracer/build
 # Special rule for the target edit_cache
 edit_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake cache editor..."
-	/usr/bin/cmake-gui -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+	/usr/bin/ccmake -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
 .PHONY : edit_cache
 
 # Special rule for the target edit_cache
@@ -123,14 +123,14 @@ test/fast: test
 
 # The main all target
 all: cmake_check_build_system
-	cd /home/arne/Repositories/programmiersprachen-raytracer/build && $(CMAKE_COMMAND) -E cmake_progress_start /home/arne/Repositories/programmiersprachen-raytracer/build/CMakeFiles /home/arne/Repositories/programmiersprachen-raytracer/build/framework/CMakeFiles/progress.marks
-	cd /home/arne/Repositories/programmiersprachen-raytracer/build && $(MAKE) -f CMakeFiles/Makefile2 framework/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/arne/Repositories/programmiersprachen-raytracer/build/CMakeFiles 0
+	cd /home/manuel/Medieninformatik/Programmiersprachen/Aufgaben/Aufgabenblatt8/raytracer/build && $(CMAKE_COMMAND) -E cmake_progress_start /home/manuel/Medieninformatik/Programmiersprachen/Aufgaben/Aufgabenblatt8/raytracer/build/CMakeFiles /home/manuel/Medieninformatik/Programmiersprachen/Aufgaben/Aufgabenblatt8/raytracer/build/framework/CMakeFiles/progress.marks
+	cd /home/manuel/Medieninformatik/Programmiersprachen/Aufgaben/Aufgabenblatt8/raytracer/build && $(MAKE) -f CMakeFiles/Makefile2 framework/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/manuel/Medieninformatik/Programmiersprachen/Aufgaben/Aufgabenblatt8/raytracer/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
 clean:
-	cd /home/arne/Repositories/programmiersprachen-raytracer/build && $(MAKE) -f CMakeFiles/Makefile2 framework/clean
+	cd /home/manuel/Medieninformatik/Programmiersprachen/Aufgaben/Aufgabenblatt8/raytracer/build && $(MAKE) -f CMakeFiles/Makefile2 framework/clean
 .PHONY : clean
 
 # The main clean target
@@ -139,22 +139,22 @@ clean/fast: clean
 
 # Prepare targets for installation.
 preinstall: all
-	cd /home/arne/Repositories/programmiersprachen-raytracer/build && $(MAKE) -f CMakeFiles/Makefile2 framework/preinstall
+	cd /home/manuel/Medieninformatik/Programmiersprachen/Aufgaben/Aufgabenblatt8/raytracer/build && $(MAKE) -f CMakeFiles/Makefile2 framework/preinstall
 .PHONY : preinstall
 
 # Prepare targets for installation.
 preinstall/fast:
-	cd /home/arne/Repositories/programmiersprachen-raytracer/build && $(MAKE) -f CMakeFiles/Makefile2 framework/preinstall
+	cd /home/manuel/Medieninformatik/Programmiersprachen/Aufgaben/Aufgabenblatt8/raytracer/build && $(MAKE) -f CMakeFiles/Makefile2 framework/preinstall
 .PHONY : preinstall/fast
 
 # clear depends
 depend:
-	cd /home/arne/Repositories/programmiersprachen-raytracer/build && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
+	cd /home/manuel/Medieninformatik/Programmiersprachen/Aufgaben/Aufgabenblatt8/raytracer/build && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
 .PHONY : depend
 
 # Convenience name for target.
 framework/CMakeFiles/framework.dir/rule:
-	cd /home/arne/Repositories/programmiersprachen-raytracer/build && $(MAKE) -f CMakeFiles/Makefile2 framework/CMakeFiles/framework.dir/rule
+	cd /home/manuel/Medieninformatik/Programmiersprachen/Aufgaben/Aufgabenblatt8/raytracer/build && $(MAKE) -f CMakeFiles/Makefile2 framework/CMakeFiles/framework.dir/rule
 .PHONY : framework/CMakeFiles/framework.dir/rule
 
 # Convenience name for target.
@@ -163,7 +163,7 @@ framework: framework/CMakeFiles/framework.dir/rule
 
 # fast build rule for target.
 framework/fast:
-	cd /home/arne/Repositories/programmiersprachen-raytracer/build && $(MAKE) -f framework/CMakeFiles/framework.dir/build.make framework/CMakeFiles/framework.dir/build
+	cd /home/manuel/Medieninformatik/Programmiersprachen/Aufgaben/Aufgabenblatt8/raytracer/build && $(MAKE) -f framework/CMakeFiles/framework.dir/build.make framework/CMakeFiles/framework.dir/build
 .PHONY : framework/fast
 
 box.o: box.cpp.o
@@ -171,7 +171,7 @@ box.o: box.cpp.o
 
 # target to build an object file
 box.cpp.o:
-	cd /home/arne/Repositories/programmiersprachen-raytracer/build && $(MAKE) -f framework/CMakeFiles/framework.dir/build.make framework/CMakeFiles/framework.dir/box.cpp.o
+	cd /home/manuel/Medieninformatik/Programmiersprachen/Aufgaben/Aufgabenblatt8/raytracer/build && $(MAKE) -f framework/CMakeFiles/framework.dir/build.make framework/CMakeFiles/framework.dir/box.cpp.o
 .PHONY : box.cpp.o
 
 box.i: box.cpp.i
@@ -179,7 +179,7 @@ box.i: box.cpp.i
 
 # target to preprocess a source file
 box.cpp.i:
-	cd /home/arne/Repositories/programmiersprachen-raytracer/build && $(MAKE) -f framework/CMakeFiles/framework.dir/build.make framework/CMakeFiles/framework.dir/box.cpp.i
+	cd /home/manuel/Medieninformatik/Programmiersprachen/Aufgaben/Aufgabenblatt8/raytracer/build && $(MAKE) -f framework/CMakeFiles/framework.dir/build.make framework/CMakeFiles/framework.dir/box.cpp.i
 .PHONY : box.cpp.i
 
 box.s: box.cpp.s
@@ -187,7 +187,7 @@ box.s: box.cpp.s
 
 # target to generate assembly for a file
 box.cpp.s:
-	cd /home/arne/Repositories/programmiersprachen-raytracer/build && $(MAKE) -f framework/CMakeFiles/framework.dir/build.make framework/CMakeFiles/framework.dir/box.cpp.s
+	cd /home/manuel/Medieninformatik/Programmiersprachen/Aufgaben/Aufgabenblatt8/raytracer/build && $(MAKE) -f framework/CMakeFiles/framework.dir/build.make framework/CMakeFiles/framework.dir/box.cpp.s
 .PHONY : box.cpp.s
 
 glew.o: glew.c.o
@@ -195,7 +195,7 @@ glew.o: glew.c.o
 
 # target to build an object file
 glew.c.o:
-	cd /home/arne/Repositories/programmiersprachen-raytracer/build && $(MAKE) -f framework/CMakeFiles/framework.dir/build.make framework/CMakeFiles/framework.dir/glew.c.o
+	cd /home/manuel/Medieninformatik/Programmiersprachen/Aufgaben/Aufgabenblatt8/raytracer/build && $(MAKE) -f framework/CMakeFiles/framework.dir/build.make framework/CMakeFiles/framework.dir/glew.c.o
 .PHONY : glew.c.o
 
 glew.i: glew.c.i
@@ -203,7 +203,7 @@ glew.i: glew.c.i
 
 # target to preprocess a source file
 glew.c.i:
-	cd /home/arne/Repositories/programmiersprachen-raytracer/build && $(MAKE) -f framework/CMakeFiles/framework.dir/build.make framework/CMakeFiles/framework.dir/glew.c.i
+	cd /home/manuel/Medieninformatik/Programmiersprachen/Aufgaben/Aufgabenblatt8/raytracer/build && $(MAKE) -f framework/CMakeFiles/framework.dir/build.make framework/CMakeFiles/framework.dir/glew.c.i
 .PHONY : glew.c.i
 
 glew.s: glew.c.s
@@ -211,15 +211,39 @@ glew.s: glew.c.s
 
 # target to generate assembly for a file
 glew.c.s:
-	cd /home/arne/Repositories/programmiersprachen-raytracer/build && $(MAKE) -f framework/CMakeFiles/framework.dir/build.make framework/CMakeFiles/framework.dir/glew.c.s
+	cd /home/manuel/Medieninformatik/Programmiersprachen/Aufgaben/Aufgabenblatt8/raytracer/build && $(MAKE) -f framework/CMakeFiles/framework.dir/build.make framework/CMakeFiles/framework.dir/glew.c.s
 .PHONY : glew.c.s
+
+material.o: material.cpp.o
+.PHONY : material.o
+
+# target to build an object file
+material.cpp.o:
+	cd /home/manuel/Medieninformatik/Programmiersprachen/Aufgaben/Aufgabenblatt8/raytracer/build && $(MAKE) -f framework/CMakeFiles/framework.dir/build.make framework/CMakeFiles/framework.dir/material.cpp.o
+.PHONY : material.cpp.o
+
+material.i: material.cpp.i
+.PHONY : material.i
+
+# target to preprocess a source file
+material.cpp.i:
+	cd /home/manuel/Medieninformatik/Programmiersprachen/Aufgaben/Aufgabenblatt8/raytracer/build && $(MAKE) -f framework/CMakeFiles/framework.dir/build.make framework/CMakeFiles/framework.dir/material.cpp.i
+.PHONY : material.cpp.i
+
+material.s: material.cpp.s
+.PHONY : material.s
+
+# target to generate assembly for a file
+material.cpp.s:
+	cd /home/manuel/Medieninformatik/Programmiersprachen/Aufgaben/Aufgabenblatt8/raytracer/build && $(MAKE) -f framework/CMakeFiles/framework.dir/build.make framework/CMakeFiles/framework.dir/material.cpp.s
+.PHONY : material.cpp.s
 
 pixel.o: pixel.cpp.o
 .PHONY : pixel.o
 
 # target to build an object file
 pixel.cpp.o:
-	cd /home/arne/Repositories/programmiersprachen-raytracer/build && $(MAKE) -f framework/CMakeFiles/framework.dir/build.make framework/CMakeFiles/framework.dir/pixel.cpp.o
+	cd /home/manuel/Medieninformatik/Programmiersprachen/Aufgaben/Aufgabenblatt8/raytracer/build && $(MAKE) -f framework/CMakeFiles/framework.dir/build.make framework/CMakeFiles/framework.dir/pixel.cpp.o
 .PHONY : pixel.cpp.o
 
 pixel.i: pixel.cpp.i
@@ -227,7 +251,7 @@ pixel.i: pixel.cpp.i
 
 # target to preprocess a source file
 pixel.cpp.i:
-	cd /home/arne/Repositories/programmiersprachen-raytracer/build && $(MAKE) -f framework/CMakeFiles/framework.dir/build.make framework/CMakeFiles/framework.dir/pixel.cpp.i
+	cd /home/manuel/Medieninformatik/Programmiersprachen/Aufgaben/Aufgabenblatt8/raytracer/build && $(MAKE) -f framework/CMakeFiles/framework.dir/build.make framework/CMakeFiles/framework.dir/pixel.cpp.i
 .PHONY : pixel.cpp.i
 
 pixel.s: pixel.cpp.s
@@ -235,7 +259,7 @@ pixel.s: pixel.cpp.s
 
 # target to generate assembly for a file
 pixel.cpp.s:
-	cd /home/arne/Repositories/programmiersprachen-raytracer/build && $(MAKE) -f framework/CMakeFiles/framework.dir/build.make framework/CMakeFiles/framework.dir/pixel.cpp.s
+	cd /home/manuel/Medieninformatik/Programmiersprachen/Aufgaben/Aufgabenblatt8/raytracer/build && $(MAKE) -f framework/CMakeFiles/framework.dir/build.make framework/CMakeFiles/framework.dir/pixel.cpp.s
 .PHONY : pixel.cpp.s
 
 ppmwriter.o: ppmwriter.cpp.o
@@ -243,7 +267,7 @@ ppmwriter.o: ppmwriter.cpp.o
 
 # target to build an object file
 ppmwriter.cpp.o:
-	cd /home/arne/Repositories/programmiersprachen-raytracer/build && $(MAKE) -f framework/CMakeFiles/framework.dir/build.make framework/CMakeFiles/framework.dir/ppmwriter.cpp.o
+	cd /home/manuel/Medieninformatik/Programmiersprachen/Aufgaben/Aufgabenblatt8/raytracer/build && $(MAKE) -f framework/CMakeFiles/framework.dir/build.make framework/CMakeFiles/framework.dir/ppmwriter.cpp.o
 .PHONY : ppmwriter.cpp.o
 
 ppmwriter.i: ppmwriter.cpp.i
@@ -251,7 +275,7 @@ ppmwriter.i: ppmwriter.cpp.i
 
 # target to preprocess a source file
 ppmwriter.cpp.i:
-	cd /home/arne/Repositories/programmiersprachen-raytracer/build && $(MAKE) -f framework/CMakeFiles/framework.dir/build.make framework/CMakeFiles/framework.dir/ppmwriter.cpp.i
+	cd /home/manuel/Medieninformatik/Programmiersprachen/Aufgaben/Aufgabenblatt8/raytracer/build && $(MAKE) -f framework/CMakeFiles/framework.dir/build.make framework/CMakeFiles/framework.dir/ppmwriter.cpp.i
 .PHONY : ppmwriter.cpp.i
 
 ppmwriter.s: ppmwriter.cpp.s
@@ -259,7 +283,7 @@ ppmwriter.s: ppmwriter.cpp.s
 
 # target to generate assembly for a file
 ppmwriter.cpp.s:
-	cd /home/arne/Repositories/programmiersprachen-raytracer/build && $(MAKE) -f framework/CMakeFiles/framework.dir/build.make framework/CMakeFiles/framework.dir/ppmwriter.cpp.s
+	cd /home/manuel/Medieninformatik/Programmiersprachen/Aufgaben/Aufgabenblatt8/raytracer/build && $(MAKE) -f framework/CMakeFiles/framework.dir/build.make framework/CMakeFiles/framework.dir/ppmwriter.cpp.s
 .PHONY : ppmwriter.cpp.s
 
 renderer.o: renderer.cpp.o
@@ -267,7 +291,7 @@ renderer.o: renderer.cpp.o
 
 # target to build an object file
 renderer.cpp.o:
-	cd /home/arne/Repositories/programmiersprachen-raytracer/build && $(MAKE) -f framework/CMakeFiles/framework.dir/build.make framework/CMakeFiles/framework.dir/renderer.cpp.o
+	cd /home/manuel/Medieninformatik/Programmiersprachen/Aufgaben/Aufgabenblatt8/raytracer/build && $(MAKE) -f framework/CMakeFiles/framework.dir/build.make framework/CMakeFiles/framework.dir/renderer.cpp.o
 .PHONY : renderer.cpp.o
 
 renderer.i: renderer.cpp.i
@@ -275,7 +299,7 @@ renderer.i: renderer.cpp.i
 
 # target to preprocess a source file
 renderer.cpp.i:
-	cd /home/arne/Repositories/programmiersprachen-raytracer/build && $(MAKE) -f framework/CMakeFiles/framework.dir/build.make framework/CMakeFiles/framework.dir/renderer.cpp.i
+	cd /home/manuel/Medieninformatik/Programmiersprachen/Aufgaben/Aufgabenblatt8/raytracer/build && $(MAKE) -f framework/CMakeFiles/framework.dir/build.make framework/CMakeFiles/framework.dir/renderer.cpp.i
 .PHONY : renderer.cpp.i
 
 renderer.s: renderer.cpp.s
@@ -283,15 +307,63 @@ renderer.s: renderer.cpp.s
 
 # target to generate assembly for a file
 renderer.cpp.s:
-	cd /home/arne/Repositories/programmiersprachen-raytracer/build && $(MAKE) -f framework/CMakeFiles/framework.dir/build.make framework/CMakeFiles/framework.dir/renderer.cpp.s
+	cd /home/manuel/Medieninformatik/Programmiersprachen/Aufgaben/Aufgabenblatt8/raytracer/build && $(MAKE) -f framework/CMakeFiles/framework.dir/build.make framework/CMakeFiles/framework.dir/renderer.cpp.s
 .PHONY : renderer.cpp.s
+
+scene.o: scene.cpp.o
+.PHONY : scene.o
+
+# target to build an object file
+scene.cpp.o:
+	cd /home/manuel/Medieninformatik/Programmiersprachen/Aufgaben/Aufgabenblatt8/raytracer/build && $(MAKE) -f framework/CMakeFiles/framework.dir/build.make framework/CMakeFiles/framework.dir/scene.cpp.o
+.PHONY : scene.cpp.o
+
+scene.i: scene.cpp.i
+.PHONY : scene.i
+
+# target to preprocess a source file
+scene.cpp.i:
+	cd /home/manuel/Medieninformatik/Programmiersprachen/Aufgaben/Aufgabenblatt8/raytracer/build && $(MAKE) -f framework/CMakeFiles/framework.dir/build.make framework/CMakeFiles/framework.dir/scene.cpp.i
+.PHONY : scene.cpp.i
+
+scene.s: scene.cpp.s
+.PHONY : scene.s
+
+# target to generate assembly for a file
+scene.cpp.s:
+	cd /home/manuel/Medieninformatik/Programmiersprachen/Aufgaben/Aufgabenblatt8/raytracer/build && $(MAKE) -f framework/CMakeFiles/framework.dir/build.make framework/CMakeFiles/framework.dir/scene.cpp.s
+.PHONY : scene.cpp.s
+
+sdfloader.o: sdfloader.cpp.o
+.PHONY : sdfloader.o
+
+# target to build an object file
+sdfloader.cpp.o:
+	cd /home/manuel/Medieninformatik/Programmiersprachen/Aufgaben/Aufgabenblatt8/raytracer/build && $(MAKE) -f framework/CMakeFiles/framework.dir/build.make framework/CMakeFiles/framework.dir/sdfloader.cpp.o
+.PHONY : sdfloader.cpp.o
+
+sdfloader.i: sdfloader.cpp.i
+.PHONY : sdfloader.i
+
+# target to preprocess a source file
+sdfloader.cpp.i:
+	cd /home/manuel/Medieninformatik/Programmiersprachen/Aufgaben/Aufgabenblatt8/raytracer/build && $(MAKE) -f framework/CMakeFiles/framework.dir/build.make framework/CMakeFiles/framework.dir/sdfloader.cpp.i
+.PHONY : sdfloader.cpp.i
+
+sdfloader.s: sdfloader.cpp.s
+.PHONY : sdfloader.s
+
+# target to generate assembly for a file
+sdfloader.cpp.s:
+	cd /home/manuel/Medieninformatik/Programmiersprachen/Aufgaben/Aufgabenblatt8/raytracer/build && $(MAKE) -f framework/CMakeFiles/framework.dir/build.make framework/CMakeFiles/framework.dir/sdfloader.cpp.s
+.PHONY : sdfloader.cpp.s
 
 shape.o: shape.cpp.o
 .PHONY : shape.o
 
 # target to build an object file
 shape.cpp.o:
-	cd /home/arne/Repositories/programmiersprachen-raytracer/build && $(MAKE) -f framework/CMakeFiles/framework.dir/build.make framework/CMakeFiles/framework.dir/shape.cpp.o
+	cd /home/manuel/Medieninformatik/Programmiersprachen/Aufgaben/Aufgabenblatt8/raytracer/build && $(MAKE) -f framework/CMakeFiles/framework.dir/build.make framework/CMakeFiles/framework.dir/shape.cpp.o
 .PHONY : shape.cpp.o
 
 shape.i: shape.cpp.i
@@ -299,7 +371,7 @@ shape.i: shape.cpp.i
 
 # target to preprocess a source file
 shape.cpp.i:
-	cd /home/arne/Repositories/programmiersprachen-raytracer/build && $(MAKE) -f framework/CMakeFiles/framework.dir/build.make framework/CMakeFiles/framework.dir/shape.cpp.i
+	cd /home/manuel/Medieninformatik/Programmiersprachen/Aufgaben/Aufgabenblatt8/raytracer/build && $(MAKE) -f framework/CMakeFiles/framework.dir/build.make framework/CMakeFiles/framework.dir/shape.cpp.i
 .PHONY : shape.cpp.i
 
 shape.s: shape.cpp.s
@@ -307,7 +379,7 @@ shape.s: shape.cpp.s
 
 # target to generate assembly for a file
 shape.cpp.s:
-	cd /home/arne/Repositories/programmiersprachen-raytracer/build && $(MAKE) -f framework/CMakeFiles/framework.dir/build.make framework/CMakeFiles/framework.dir/shape.cpp.s
+	cd /home/manuel/Medieninformatik/Programmiersprachen/Aufgaben/Aufgabenblatt8/raytracer/build && $(MAKE) -f framework/CMakeFiles/framework.dir/build.make framework/CMakeFiles/framework.dir/shape.cpp.s
 .PHONY : shape.cpp.s
 
 sphere.o: sphere.cpp.o
@@ -315,7 +387,7 @@ sphere.o: sphere.cpp.o
 
 # target to build an object file
 sphere.cpp.o:
-	cd /home/arne/Repositories/programmiersprachen-raytracer/build && $(MAKE) -f framework/CMakeFiles/framework.dir/build.make framework/CMakeFiles/framework.dir/sphere.cpp.o
+	cd /home/manuel/Medieninformatik/Programmiersprachen/Aufgaben/Aufgabenblatt8/raytracer/build && $(MAKE) -f framework/CMakeFiles/framework.dir/build.make framework/CMakeFiles/framework.dir/sphere.cpp.o
 .PHONY : sphere.cpp.o
 
 sphere.i: sphere.cpp.i
@@ -323,7 +395,7 @@ sphere.i: sphere.cpp.i
 
 # target to preprocess a source file
 sphere.cpp.i:
-	cd /home/arne/Repositories/programmiersprachen-raytracer/build && $(MAKE) -f framework/CMakeFiles/framework.dir/build.make framework/CMakeFiles/framework.dir/sphere.cpp.i
+	cd /home/manuel/Medieninformatik/Programmiersprachen/Aufgaben/Aufgabenblatt8/raytracer/build && $(MAKE) -f framework/CMakeFiles/framework.dir/build.make framework/CMakeFiles/framework.dir/sphere.cpp.i
 .PHONY : sphere.cpp.i
 
 sphere.s: sphere.cpp.s
@@ -331,7 +403,7 @@ sphere.s: sphere.cpp.s
 
 # target to generate assembly for a file
 sphere.cpp.s:
-	cd /home/arne/Repositories/programmiersprachen-raytracer/build && $(MAKE) -f framework/CMakeFiles/framework.dir/build.make framework/CMakeFiles/framework.dir/sphere.cpp.s
+	cd /home/manuel/Medieninformatik/Programmiersprachen/Aufgaben/Aufgabenblatt8/raytracer/build && $(MAKE) -f framework/CMakeFiles/framework.dir/build.make framework/CMakeFiles/framework.dir/sphere.cpp.s
 .PHONY : sphere.cpp.s
 
 window.o: window.cpp.o
@@ -339,7 +411,7 @@ window.o: window.cpp.o
 
 # target to build an object file
 window.cpp.o:
-	cd /home/arne/Repositories/programmiersprachen-raytracer/build && $(MAKE) -f framework/CMakeFiles/framework.dir/build.make framework/CMakeFiles/framework.dir/window.cpp.o
+	cd /home/manuel/Medieninformatik/Programmiersprachen/Aufgaben/Aufgabenblatt8/raytracer/build && $(MAKE) -f framework/CMakeFiles/framework.dir/build.make framework/CMakeFiles/framework.dir/window.cpp.o
 .PHONY : window.cpp.o
 
 window.i: window.cpp.i
@@ -347,7 +419,7 @@ window.i: window.cpp.i
 
 # target to preprocess a source file
 window.cpp.i:
-	cd /home/arne/Repositories/programmiersprachen-raytracer/build && $(MAKE) -f framework/CMakeFiles/framework.dir/build.make framework/CMakeFiles/framework.dir/window.cpp.i
+	cd /home/manuel/Medieninformatik/Programmiersprachen/Aufgaben/Aufgabenblatt8/raytracer/build && $(MAKE) -f framework/CMakeFiles/framework.dir/build.make framework/CMakeFiles/framework.dir/window.cpp.i
 .PHONY : window.cpp.i
 
 window.s: window.cpp.s
@@ -355,7 +427,7 @@ window.s: window.cpp.s
 
 # target to generate assembly for a file
 window.cpp.s:
-	cd /home/arne/Repositories/programmiersprachen-raytracer/build && $(MAKE) -f framework/CMakeFiles/framework.dir/build.make framework/CMakeFiles/framework.dir/window.cpp.s
+	cd /home/manuel/Medieninformatik/Programmiersprachen/Aufgaben/Aufgabenblatt8/raytracer/build && $(MAKE) -f framework/CMakeFiles/framework.dir/build.make framework/CMakeFiles/framework.dir/window.cpp.s
 .PHONY : window.cpp.s
 
 # Help Target
@@ -378,6 +450,9 @@ help:
 	@echo "... glew.o"
 	@echo "... glew.i"
 	@echo "... glew.s"
+	@echo "... material.o"
+	@echo "... material.i"
+	@echo "... material.s"
 	@echo "... pixel.o"
 	@echo "... pixel.i"
 	@echo "... pixel.s"
@@ -387,6 +462,12 @@ help:
 	@echo "... renderer.o"
 	@echo "... renderer.i"
 	@echo "... renderer.s"
+	@echo "... scene.o"
+	@echo "... scene.i"
+	@echo "... scene.s"
+	@echo "... sdfloader.o"
+	@echo "... sdfloader.i"
+	@echo "... sdfloader.s"
 	@echo "... shape.o"
 	@echo "... shape.i"
 	@echo "... shape.s"
@@ -407,6 +488,6 @@ help:
 # No rule that depends on this can have commands that come from listfiles
 # because they might be regenerated.
 cmake_check_build_system:
-	cd /home/arne/Repositories/programmiersprachen-raytracer/build && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
+	cd /home/manuel/Medieninformatik/Programmiersprachen/Aufgaben/Aufgabenblatt8/raytracer/build && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
 .PHONY : cmake_check_build_system
 

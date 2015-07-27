@@ -4,21 +4,21 @@ SET(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 SET(CMAKE_DEPENDS_CHECK_CXX
-  "/home/arne/Repositories/programmiersprachen-raytracer/tests/main.cpp" "/home/arne/Repositories/programmiersprachen-raytracer/build/tests/CMakeFiles/tests.dir/main.cpp.o"
+  "/home/manuel/Medieninformatik/Programmiersprachen/Aufgaben/Aufgabenblatt8/raytracer/tests/main.cpp" "/home/manuel/Medieninformatik/Programmiersprachen/Aufgaben/Aufgabenblatt8/raytracer/build/tests/CMakeFiles/tests.dir/main.cpp.o"
   )
 SET(CMAKE_CXX_COMPILER_ID "GNU")
 
 # Preprocessor definitions for this target.
 SET(CMAKE_TARGET_DEFINITIONS
-  "FENSTERCHEN_BINARY_DIR=\"/home/arne/Repositories/programmiersprachen-raytracer/build\""
-  "FENSTERCHEN_SOURCE_DIR=\"/home/arne/Repositories/programmiersprachen-raytracer\""
+  "FENSTERCHEN_BINARY_DIR=\"/home/manuel/Medieninformatik/Programmiersprachen/Aufgaben/Aufgabenblatt8/raytracer/build\""
+  "FENSTERCHEN_SOURCE_DIR=\"/home/manuel/Medieninformatik/Programmiersprachen/Aufgaben/Aufgabenblatt8/raytracer\""
   "GLEW_STATIC"
   )
 
 # Targets to which this target links.
 SET(CMAKE_TARGET_LINKED_INFO_FILES
-  "/home/arne/Repositories/programmiersprachen-raytracer/build/framework/CMakeFiles/framework.dir/DependInfo.cmake"
-  "/home/arne/Repositories/programmiersprachen-raytracer/build/external/glfw-3.0.3/src/CMakeFiles/glfw.dir/DependInfo.cmake"
+  "/home/manuel/Medieninformatik/Programmiersprachen/Aufgaben/Aufgabenblatt8/raytracer/build/framework/CMakeFiles/framework.dir/DependInfo.cmake"
+  "/home/manuel/Medieninformatik/Programmiersprachen/Aufgaben/Aufgabenblatt8/raytracer/build/external/glfw-3.0.3/src/CMakeFiles/glfw.dir/DependInfo.cmake"
   )
 
 # The include file search paths:

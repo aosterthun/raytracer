@@ -5,24 +5,27 @@ SET(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 SET(CMAKE_DEPENDS_CHECK_C
-  "/home/arne/Repositories/programmiersprachen-raytracer/framework/glew.c" "/home/arne/Repositories/programmiersprachen-raytracer/build/framework/CMakeFiles/framework.dir/glew.c.o"
+  "/home/manuel/Medieninformatik/Programmiersprachen/Aufgaben/Aufgabenblatt8/raytracer/framework/glew.c" "/home/manuel/Medieninformatik/Programmiersprachen/Aufgaben/Aufgabenblatt8/raytracer/build/framework/CMakeFiles/framework.dir/glew.c.o"
   )
 SET(CMAKE_C_COMPILER_ID "GNU")
 SET(CMAKE_DEPENDS_CHECK_CXX
-  "/home/arne/Repositories/programmiersprachen-raytracer/framework/box.cpp" "/home/arne/Repositories/programmiersprachen-raytracer/build/framework/CMakeFiles/framework.dir/box.cpp.o"
-  "/home/arne/Repositories/programmiersprachen-raytracer/framework/pixel.cpp" "/home/arne/Repositories/programmiersprachen-raytracer/build/framework/CMakeFiles/framework.dir/pixel.cpp.o"
-  "/home/arne/Repositories/programmiersprachen-raytracer/framework/ppmwriter.cpp" "/home/arne/Repositories/programmiersprachen-raytracer/build/framework/CMakeFiles/framework.dir/ppmwriter.cpp.o"
-  "/home/arne/Repositories/programmiersprachen-raytracer/framework/renderer.cpp" "/home/arne/Repositories/programmiersprachen-raytracer/build/framework/CMakeFiles/framework.dir/renderer.cpp.o"
-  "/home/arne/Repositories/programmiersprachen-raytracer/framework/shape.cpp" "/home/arne/Repositories/programmiersprachen-raytracer/build/framework/CMakeFiles/framework.dir/shape.cpp.o"
-  "/home/arne/Repositories/programmiersprachen-raytracer/framework/sphere.cpp" "/home/arne/Repositories/programmiersprachen-raytracer/build/framework/CMakeFiles/framework.dir/sphere.cpp.o"
-  "/home/arne/Repositories/programmiersprachen-raytracer/framework/window.cpp" "/home/arne/Repositories/programmiersprachen-raytracer/build/framework/CMakeFiles/framework.dir/window.cpp.o"
+  "/home/manuel/Medieninformatik/Programmiersprachen/Aufgaben/Aufgabenblatt8/raytracer/framework/box.cpp" "/home/manuel/Medieninformatik/Programmiersprachen/Aufgaben/Aufgabenblatt8/raytracer/build/framework/CMakeFiles/framework.dir/box.cpp.o"
+  "/home/manuel/Medieninformatik/Programmiersprachen/Aufgaben/Aufgabenblatt8/raytracer/framework/material.cpp" "/home/manuel/Medieninformatik/Programmiersprachen/Aufgaben/Aufgabenblatt8/raytracer/build/framework/CMakeFiles/framework.dir/material.cpp.o"
+  "/home/manuel/Medieninformatik/Programmiersprachen/Aufgaben/Aufgabenblatt8/raytracer/framework/pixel.cpp" "/home/manuel/Medieninformatik/Programmiersprachen/Aufgaben/Aufgabenblatt8/raytracer/build/framework/CMakeFiles/framework.dir/pixel.cpp.o"
+  "/home/manuel/Medieninformatik/Programmiersprachen/Aufgaben/Aufgabenblatt8/raytracer/framework/ppmwriter.cpp" "/home/manuel/Medieninformatik/Programmiersprachen/Aufgaben/Aufgabenblatt8/raytracer/build/framework/CMakeFiles/framework.dir/ppmwriter.cpp.o"
+  "/home/manuel/Medieninformatik/Programmiersprachen/Aufgaben/Aufgabenblatt8/raytracer/framework/renderer.cpp" "/home/manuel/Medieninformatik/Programmiersprachen/Aufgaben/Aufgabenblatt8/raytracer/build/framework/CMakeFiles/framework.dir/renderer.cpp.o"
+  "/home/manuel/Medieninformatik/Programmiersprachen/Aufgaben/Aufgabenblatt8/raytracer/framework/scene.cpp" "/home/manuel/Medieninformatik/Programmiersprachen/Aufgaben/Aufgabenblatt8/raytracer/build/framework/CMakeFiles/framework.dir/scene.cpp.o"
+  "/home/manuel/Medieninformatik/Programmiersprachen/Aufgaben/Aufgabenblatt8/raytracer/framework/sdfloader.cpp" "/home/manuel/Medieninformatik/Programmiersprachen/Aufgaben/Aufgabenblatt8/raytracer/build/framework/CMakeFiles/framework.dir/sdfloader.cpp.o"
+  "/home/manuel/Medieninformatik/Programmiersprachen/Aufgaben/Aufgabenblatt8/raytracer/framework/shape.cpp" "/home/manuel/Medieninformatik/Programmiersprachen/Aufgaben/Aufgabenblatt8/raytracer/build/framework/CMakeFiles/framework.dir/shape.cpp.o"
+  "/home/manuel/Medieninformatik/Programmiersprachen/Aufgaben/Aufgabenblatt8/raytracer/framework/sphere.cpp" "/home/manuel/Medieninformatik/Programmiersprachen/Aufgaben/Aufgabenblatt8/raytracer/build/framework/CMakeFiles/framework.dir/sphere.cpp.o"
+  "/home/manuel/Medieninformatik/Programmiersprachen/Aufgaben/Aufgabenblatt8/raytracer/framework/window.cpp" "/home/manuel/Medieninformatik/Programmiersprachen/Aufgaben/Aufgabenblatt8/raytracer/build/framework/CMakeFiles/framework.dir/window.cpp.o"
   )
 SET(CMAKE_CXX_COMPILER_ID "GNU")
 
 # Preprocessor definitions for this target.
 SET(CMAKE_TARGET_DEFINITIONS
-  "FENSTERCHEN_BINARY_DIR=\"/home/arne/Repositories/programmiersprachen-raytracer/build\""
-  "FENSTERCHEN_SOURCE_DIR=\"/home/arne/Repositories/programmiersprachen-raytracer\""
+  "FENSTERCHEN_BINARY_DIR=\"/home/manuel/Medieninformatik/Programmiersprachen/Aufgaben/Aufgabenblatt8/raytracer/build\""
+  "FENSTERCHEN_SOURCE_DIR=\"/home/manuel/Medieninformatik/Programmiersprachen/Aufgaben/Aufgabenblatt8/raytracer\""
   "GLEW_STATIC"
   )
 
