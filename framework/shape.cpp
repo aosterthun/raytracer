@@ -3,16 +3,12 @@
 Shape::Shape(): 
 _name{"untitled_shape"}, 
 _color{0.0} 
-{
-	std::cout << "Shape construct \n";
-}
+{}
 
 Shape::Shape(std::string const& name, Color const& color): 
 _name{name}, 
 _color{color} 
-{
-	std::cout << "Shape construct \n";
-}
+{}
 
 std::ostream& Shape::print(std::ostream& os) const
 {

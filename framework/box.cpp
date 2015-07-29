@@ -4,9 +4,7 @@ Box::Box():
 Shape::Shape("untitled_box", Color{0.0}),
 _min{glm::vec3{0}},
 _max{glm::vec3{0}}
-{
-	std::cout << "Box construct \n";
-}
+{}
 
 Box::Box(glm::vec3 const& min, glm::vec3 const& max):
 Shape::Shape("untitled_box", Color{0.0}),
@@ -18,9 +16,7 @@ Box::Box(glm::vec3 const& min, glm::vec3 const& max, std::string const& name, Co
 Shape::Shape(name, color),
 _min{min},
 _max{max}
-{
-	std::cout << "Box construct \n";
-}
+{}
 
 std::ostream& Box::print(std::ostream& os) const
 {
