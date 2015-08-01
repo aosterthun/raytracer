@@ -5,30 +5,49 @@
 #include <fstream>
 #include <iostream>
 #include <glm/glm.hpp>
+#include <glm/matrix.hpp>
+#include <glm/vec4.hpp>
+#include <glm/gtx/transform.hpp>
+#include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtx/intersect.hpp>
 
 
-/*
-	SDF Test
-*/
 
-TEST_CASE("SDFRead","[SDF]")
+/*
+	SceneObject tests
+*/
+//Matrix initalisation for further SceneObject tests
+glm::vec4 col0 = glm::vec4{1.0f,2.0f,3.0f,4.0f};
+glm::vec4 col1 = glm::vec4{2.0f,3.0f,4.0f,5.0f};
+glm::vec4 col2 = glm::vec4{3.0f,4.0f,5.0f,6.0f};
+glm::vec4 col3 = glm::vec4{4.0f,5.0f,6.0f,7.0f};
+glm::mat4 mat = glm::mat4{col0,col1,col2,col3};
+TEST_CASE("sceneObjectDefaultConstructor","[SceneObject]")
 {
-	std::string line;
-	std::ifstream sdf("../sdf/test.txt");
-	if(sdf.is_open())
-	{
-		while(std::getline(sdf,line))
-		{
-			std::cout << line << '\n';
-		}
-		sdf.close();
-	}
-	else
-	{
-		std::cout << "Unable to open file";
-	}
+	SceneObject so = SceneObject{};
+	REQUIRE(so.transformMatrix() == glm::mat4{0.0});
 }
+TEST_CASE("sceneObjectMatrixConstructor","[SceneObject]")
+{
+	SceneObject so = SceneObject{mat};
+	REQUIRE(so.transformMatrix() == mat);	
+};
+TEST_CASE("sceneObjectInverseMatrix","[SceneObject]"){
+	SceneObject so = SceneObject{mat};
+	REQUIRE(so.inverseTransformMatrix() == glm::inverse(mat));
+};
+TEST_CASE("sceneObjectTranslateMatrix","[SceneObject]"){
+	SceneObject so = SceneObject{mat};
+	REQUIRE(so.inverseTransformMatrix() == glm::translate(mat,glm::vec3(1,2,3)));
+};
+TEST_CASE("sceneObjectRotateMatrix","[SceneObject]"){
+	SceneObject so = SceneObject{mat};
+	REQUIRE(so.rotate(glm::vec3(1.0f,2.0f,3.0f),45) == glm::rotate(mat,45.0f,glm::vec3(1,2,3)));
+};
+TEST_CASE("sceneObjectScaleMatrix","[SceneObject]"){
+	SceneObject so = SceneObject{mat};
+	REQUIRE(so.inverseTransformMatrix() == glm::scale(mat,glm::vec3(1,2,3)));
+};
 /*
 	Sphere tests
 */
