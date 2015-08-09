@@ -2,6 +2,7 @@
 #include <catch.hpp>
 #include <sphere.hpp>
 #include <box.hpp>
+#include <sceneobject.hpp>
 #include <fstream>
 #include <iostream>
 #include <glm/glm.hpp>
@@ -13,40 +14,67 @@
 
 
 
+
 /*
 	SceneObject tests
 */
 //Matrix initalisation for further SceneObject tests
-glm::vec4 col0 = glm::vec4{1.0f,2.0f,3.0f,4.0f};
+
+TEST_CASE("sceneObjectDefaultConstructor","[SceneObject]")
+{
+	glm::vec4 col0 = glm::vec4{1.0f,2.0f,3.0f,4.0f};
 glm::vec4 col1 = glm::vec4{2.0f,3.0f,4.0f,5.0f};
 glm::vec4 col2 = glm::vec4{3.0f,4.0f,5.0f,6.0f};
 glm::vec4 col3 = glm::vec4{4.0f,5.0f,6.0f,7.0f};
 glm::mat4 mat = glm::mat4{col0,col1,col2,col3};
-TEST_CASE("sceneObjectDefaultConstructor","[SceneObject]")
-{
 	SceneObject so = SceneObject{};
 	REQUIRE(so.transformMatrix() == glm::mat4{0.0});
 }
 TEST_CASE("sceneObjectMatrixConstructor","[SceneObject]")
 {
+	glm::vec4 col0 = glm::vec4{1.0f,2.0f,3.0f,4.0f};
+glm::vec4 col1 = glm::vec4{2.0f,3.0f,4.0f,5.0f};
+glm::vec4 col2 = glm::vec4{3.0f,4.0f,5.0f,6.0f};
+glm::vec4 col3 = glm::vec4{4.0f,5.0f,6.0f,7.0f};
+glm::mat4 mat = glm::mat4{col0,col1,col2,col3};
 	SceneObject so = SceneObject{mat};
 	REQUIRE(so.transformMatrix() == mat);	
 };
 TEST_CASE("sceneObjectInverseMatrix","[SceneObject]"){
+	glm::vec4 col0 = glm::vec4{1.0f,2.0f,3.0f,4.0f};
+glm::vec4 col1 = glm::vec4{2.0f,3.0f,4.0f,5.0f};
+glm::vec4 col2 = glm::vec4{3.0f,4.0f,5.0f,6.0f};
+glm::vec4 col3 = glm::vec4{4.0f,5.0f,6.0f,7.0f};
+glm::mat4 mat = glm::mat4{col0,col1,col2,col3};
 	SceneObject so = SceneObject{mat};
 	REQUIRE(so.inverseTransformMatrix() == glm::inverse(mat));
 };
 TEST_CASE("sceneObjectTranslateMatrix","[SceneObject]"){
+	glm::vec4 col0 = glm::vec4{1.0f,2.0f,3.0f,4.0f};
+glm::vec4 col1 = glm::vec4{2.0f,3.0f,4.0f,5.0f};
+glm::vec4 col2 = glm::vec4{3.0f,4.0f,5.0f,6.0f};
+glm::vec4 col3 = glm::vec4{4.0f,5.0f,6.0f,7.0f};
+glm::mat4 mat = glm::mat4{col0,col1,col2,col3};
 	SceneObject so = SceneObject{mat};
-	REQUIRE(so.inverseTransformMatrix() == glm::translate(mat,glm::vec3(1,2,3)));
+	REQUIRE(so.translate(glm::vec3(1.0,2.0,3.0)) == glm::translate(mat,glm::vec3(1,2,3)));
 };
 TEST_CASE("sceneObjectRotateMatrix","[SceneObject]"){
+	glm::vec4 col0 = glm::vec4{1.0f,2.0f,3.0f,4.0f};
+glm::vec4 col1 = glm::vec4{2.0f,3.0f,4.0f,5.0f};
+glm::vec4 col2 = glm::vec4{3.0f,4.0f,5.0f,6.0f};
+glm::vec4 col3 = glm::vec4{4.0f,5.0f,6.0f,7.0f};
+glm::mat4 mat = glm::mat4{col0,col1,col2,col3};
 	SceneObject so = SceneObject{mat};
-	REQUIRE(so.rotate(glm::vec3(1.0f,2.0f,3.0f),45) == glm::rotate(mat,45.0f,glm::vec3(1,2,3)));
+	REQUIRE(so.rotate(45.0f,glm::vec3(1.0,2.0,3.0)) == glm::rotate(mat,45.0f,glm::vec3(1,2,3)));
 };
 TEST_CASE("sceneObjectScaleMatrix","[SceneObject]"){
+	glm::vec4 col0 = glm::vec4{1.0f,2.0f,3.0f,4.0f};
+glm::vec4 col1 = glm::vec4{2.0f,3.0f,4.0f,5.0f};
+glm::vec4 col2 = glm::vec4{3.0f,4.0f,5.0f,6.0f};
+glm::vec4 col3 = glm::vec4{4.0f,5.0f,6.0f,7.0f};
+glm::mat4 mat = glm::mat4{col0,col1,col2,col3};
 	SceneObject so = SceneObject{mat};
-	REQUIRE(so.inverseTransformMatrix() == glm::scale(mat,glm::vec3(1,2,3)));
+	REQUIRE(so.scale(glm::vec3(1.0,2.0,3.0)) == glm::scale(mat,glm::vec3(1,2,3)));
 };
 /*
 	Sphere tests
