@@ -236,5 +236,17 @@ TEST_CASE("virtualDestructor","[destruct]")
 
 int main(int argc, char *argv[])
 {
+	glm::vec4 col0 = glm::vec4{1.0f,2.0f,3.0f,4.0f};
+	glm::vec4 col1 = glm::vec4{2.0f,3.0f,4.0f,5.0f};
+	glm::vec4 col2 = glm::vec4{3.0f,4.0f,5.0f,6.0f};
+	glm::vec4 col3 = glm::vec4{4.0f,5.0f,6.0f,7.0f};
+	glm::mat4 mat = glm::mat4{col0,col1,col2,col3};
+	SceneObject so1 = SceneObject{mat};
+	SceneObject so2 = SceneObject{mat};
+	if(so1.scale(glm::vec3(1.0,2.0,3.0)) == glm::scale(mat,glm::vec3(1,2,3))){
+		std::cout << "True";
+	}else{
+		std::cout << "False";
+	}
 	return Catch::Session().run(argc, argv);
 }
