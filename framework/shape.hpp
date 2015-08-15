@@ -8,7 +8,8 @@
 #include <iostream>
 #include <glm/ext.hpp>
 #include <stdexcept>
-class Shape
+#include "SceneObject.hpp"
+class Shape : public SceneObject
 {
 	public: 
 		Shape();

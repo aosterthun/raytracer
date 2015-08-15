@@ -17,7 +17,7 @@ class SceneObject
 		glm::mat4 inverseTransformMatrix() const;
 		glm::mat4 transformMatrix() const;
 
-	private:
+	protected:
 		glm::mat4 _transformMatrix;
 };
 
