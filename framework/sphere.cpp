@@ -4,41 +4,31 @@ Sphere::Sphere():
 Shape::Shape("untitled_sphere", Color{0.0}),
 _center{glm::vec3{0}},
 _radius{0}
-{
-	std::cout << "Sphere construct \n";
-}
+{}
 
 Sphere::Sphere(glm::vec3 const& center):
 Shape::Shape("untitled_sphere", Color{0.0}),
 _center{center},
 _radius{0}
-{
-	std::cout << "Sphere construct \n";
-}
+{}
 
 Sphere::Sphere(double radius):
 Shape::Shape("untitled_sphere", Color{0.0}),
 _center{glm::vec3{0}},
 _radius{radius}
-{
-	std::cout << "Sphere construct \n";
-}
+{}
 
 Sphere::Sphere(glm::vec3 const& center, double radius):
 Shape::Shape("untitled_sphere", Color{0}),
 _center{center},
 _radius{radius}
-{
-	std::cout << "Sphere construct \n";
-}
+{}
 
 Sphere::Sphere(glm::vec3 const& center, double radius, std::string const& name, Color const& color):
 Shape::Shape(name, color),
 _center{center},
 _radius{radius}
-{
-	std::cout << "Sphere construct \n";
-}
+{}
 
 bool Sphere::intersect(Ray const& ray, float& distance) const
 {
