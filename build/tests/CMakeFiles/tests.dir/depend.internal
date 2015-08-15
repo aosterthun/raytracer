@@ -14,9 +14,13 @@ tests/CMakeFiles/tests.dir/main.cpp.o
  ../external/glm-0.9.5.3/glm/./detail/intrinsic_integer.inl
  ../external/glm-0.9.5.3/glm/./detail/intrinsic_matrix.hpp
  ../external/glm-0.9.5.3/glm/./detail/intrinsic_matrix.inl
+ ../external/glm-0.9.5.3/glm/./detail/precision.hpp
+ ../external/glm-0.9.5.3/glm/./detail/setup.hpp
  ../external/glm-0.9.5.3/glm/./detail/type_half.hpp
+ ../external/glm-0.9.5.3/glm/./detail/type_half.inl
  ../external/glm-0.9.5.3/glm/./detail/type_int.hpp
  ../external/glm-0.9.5.3/glm/./detail/type_vec1.hpp
+ ../external/glm-0.9.5.3/glm/./detail/type_vec1.inl
  ../external/glm-0.9.5.3/glm/./exponential.hpp
  ../external/glm-0.9.5.3/glm/./gtc/constants.hpp
  ../external/glm-0.9.5.3/glm/./gtc/constants.inl
@@ -144,8 +148,20 @@ tests/CMakeFiles/tests.dir/main.cpp.o
  ../external/glm-0.9.5.3/glm/./gtx/vector_query.inl
  ../external/glm-0.9.5.3/glm/./gtx/wrap.hpp
  ../external/glm-0.9.5.3/glm/./gtx/wrap.inl
+ ../external/glm-0.9.5.3/glm/./mat2x2.hpp
+ ../external/glm-0.9.5.3/glm/./mat2x3.hpp
+ ../external/glm-0.9.5.3/glm/./mat2x4.hpp
+ ../external/glm-0.9.5.3/glm/./mat3x2.hpp
+ ../external/glm-0.9.5.3/glm/./mat3x3.hpp
+ ../external/glm-0.9.5.3/glm/./mat3x4.hpp
+ ../external/glm-0.9.5.3/glm/./mat4x2.hpp
+ ../external/glm-0.9.5.3/glm/./mat4x3.hpp
+ ../external/glm-0.9.5.3/glm/./mat4x4.hpp
  ../external/glm-0.9.5.3/glm/./matrix.hpp
  ../external/glm-0.9.5.3/glm/./trigonometric.hpp
+ ../external/glm-0.9.5.3/glm/./vec2.hpp
+ ../external/glm-0.9.5.3/glm/./vec3.hpp
+ ../external/glm-0.9.5.3/glm/./vec4.hpp
  ../external/glm-0.9.5.3/glm/./vector_relational.hpp
  ../external/glm-0.9.5.3/glm/common.hpp
  ../external/glm-0.9.5.3/glm/detail/_fixes.hpp
@@ -172,7 +188,6 @@ tests/CMakeFiles/tests.dir/main.cpp.o
  ../external/glm-0.9.5.3/glm/detail/setup.hpp
  ../external/glm-0.9.5.3/glm/detail/type_float.hpp
  ../external/glm-0.9.5.3/glm/detail/type_half.hpp
- ../external/glm-0.9.5.3/glm/detail/type_half.inl
  ../external/glm-0.9.5.3/glm/detail/type_int.hpp
  ../external/glm-0.9.5.3/glm/detail/type_mat.hpp
  ../external/glm-0.9.5.3/glm/detail/type_mat2x2.hpp
@@ -195,7 +210,6 @@ tests/CMakeFiles/tests.dir/main.cpp.o
  ../external/glm-0.9.5.3/glm/detail/type_mat4x4.inl
  ../external/glm-0.9.5.3/glm/detail/type_vec.hpp
  ../external/glm-0.9.5.3/glm/detail/type_vec1.hpp
- ../external/glm-0.9.5.3/glm/detail/type_vec1.inl
  ../external/glm-0.9.5.3/glm/detail/type_vec2.hpp
  ../external/glm-0.9.5.3/glm/detail/type_vec2.inl
  ../external/glm-0.9.5.3/glm/detail/type_vec3.hpp
@@ -229,7 +243,9 @@ tests/CMakeFiles/tests.dir/main.cpp.o
  ../external/glm-0.9.5.3/glm/vec4.hpp
  ../external/glm-0.9.5.3/glm/vector_relational.hpp
  ../framework/box.hpp
+ ../framework/camera.hpp
  ../framework/color.hpp
+ ../framework/light.hpp
  ../framework/ray.hpp
  ../framework/shape.hpp
  ../framework/sphere.hpp

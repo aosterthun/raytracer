@@ -1,114 +1,25 @@
-Start testing: Jul 27 12:57 CEST
+Start testing: Aug 15 15:04 CEST
 ----------------------------------------------------------
 1/1 Testing: tests
 1/1 Test: tests
 Command: "/home/manuel/Medieninformatik/Programmiersprachen/Aufgaben/Aufgabenblatt8/raytracer/build/build/Release/tests"
 Directory: /home/manuel/Medieninformatik/Programmiersprachen/Aufgaben/Aufgabenblatt8/raytracer/build
-"tests" start time: Jul 27 12:57 CEST
+"tests" start time: Aug 15 15:04 CEST
 Output:
 ----------------------------------------------------------
-Unable to open fileShape construct 
-Sphere construct 
-Sphere destruct 
-Shape destruct 
-Shape construct 
-Sphere construct 
-Sphere destruct 
-Shape destruct 
-Shape construct 
-Sphere construct 
-Sphere destruct 
-Shape destruct 
-Shape construct 
-Sphere construct 
-Sphere destruct 
-Shape destruct 
-Shape construct 
-Sphere construct 
-Sphere destruct 
-Shape destruct 
-Shape construct 
-Sphere construct 
-Sphere destruct 
-Shape destruct 
-Shape construct 
-Sphere construct 
-Sphere destruct 
-Shape destruct 
-Shape construct 
-Box construct 
-Box destruct 
-Shape destruct 
-Shape construct 
-Box construct 
-Box destruct 
-Shape destruct 
-Shape construct 
-Box construct 
-Box destruct 
-Shape destruct 
-Shape construct 
-Box construct 
-Box destruct 
-Shape destruct 
-Shape construct 
-Box construct 
-Box destruct 
-Shape destruct 
-Shape construct 
-Box construct 
-Shape construct 
-Sphere construct 
-[Box ID: 0x7ffd9872cd18]
-Name: untitled_box
-Color: (0,0,0)
-Min: fvec3(0.000000, 0.000000, 0.000000)
-Max: fvec3(0.000000, 0.000000, 0.000000)
-
-[Sphere ID: 0x7ffd9872cd18]
-Name: untitled_sphere
-Color: (0,0,0)
-Center: fvec3(0.000000, 0.000000, 0.000000)
-Radius: 0
-
-Sphere destruct 
-Shape destruct 
-Box destruct 
-Shape destruct 
-Shape construct 
-Sphere construct 
-Sphere destruct 
-Shape destruct 
-============================================
-Shape construct 
-Sphere construct 
-Shape construct 
-Sphere construct 
-[Sphere ID: 0x7ffd9872cd48]
-Name: sphere0
-Color: (255,0,0)
-Center: fvec3(0.000000, 0.000000, 0.000000)
-Radius: 1.2
-
-[Sphere ID: 0x7ffd9872cd48]
-Name: sphere1
-Color: (255,0,0)
-Center: fvec3(0.000000, 0.000000, 0.000000)
-Radius: 1.2
-
-Sphere destruct 
-Shape destruct 
-Sphere destruct 
-Shape destruct 
+[Camera] position: fvec3(0.000000, 0.000000, 0.000000)
+direction: fvec3(1.000000, 0.000000, 0.000000)
+[Camera] position: fvec3(0.000000, 0.000000, 0.000000)
+direction: fvec3(3.000000, 3.000000, 3.000000)
 ===============================================================================
-All tests passed (42 assertions in 19 test cases)
+All tests passed (12 assertions in 4 test cases)
 
 <end of output>
 Test time =   0.00 sec
 ----------------------------------------------------------
 Test Passed.
-"tests" end time: Jul 27 12:57 CEST
+"tests" end time: Aug 15 15:04 CEST
 "tests" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-End testing: Jul 27 12:57 CEST
+End testing: Aug 15 15:04 CEST

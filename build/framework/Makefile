@@ -190,6 +190,30 @@ box.cpp.s:
 	cd /home/manuel/Medieninformatik/Programmiersprachen/Aufgaben/Aufgabenblatt8/raytracer/build && $(MAKE) -f framework/CMakeFiles/framework.dir/build.make framework/CMakeFiles/framework.dir/box.cpp.s
 .PHONY : box.cpp.s
 
+camera.o: camera.cpp.o
+.PHONY : camera.o
+
+# target to build an object file
+camera.cpp.o:
+	cd /home/manuel/Medieninformatik/Programmiersprachen/Aufgaben/Aufgabenblatt8/raytracer/build && $(MAKE) -f framework/CMakeFiles/framework.dir/build.make framework/CMakeFiles/framework.dir/camera.cpp.o
+.PHONY : camera.cpp.o
+
+camera.i: camera.cpp.i
+.PHONY : camera.i
+
+# target to preprocess a source file
+camera.cpp.i:
+	cd /home/manuel/Medieninformatik/Programmiersprachen/Aufgaben/Aufgabenblatt8/raytracer/build && $(MAKE) -f framework/CMakeFiles/framework.dir/build.make framework/CMakeFiles/framework.dir/camera.cpp.i
+.PHONY : camera.cpp.i
+
+camera.s: camera.cpp.s
+.PHONY : camera.s
+
+# target to generate assembly for a file
+camera.cpp.s:
+	cd /home/manuel/Medieninformatik/Programmiersprachen/Aufgaben/Aufgabenblatt8/raytracer/build && $(MAKE) -f framework/CMakeFiles/framework.dir/build.make framework/CMakeFiles/framework.dir/camera.cpp.s
+.PHONY : camera.cpp.s
+
 glew.o: glew.c.o
 .PHONY : glew.o
 
@@ -213,6 +237,30 @@ glew.s: glew.c.s
 glew.c.s:
 	cd /home/manuel/Medieninformatik/Programmiersprachen/Aufgaben/Aufgabenblatt8/raytracer/build && $(MAKE) -f framework/CMakeFiles/framework.dir/build.make framework/CMakeFiles/framework.dir/glew.c.s
 .PHONY : glew.c.s
+
+light.o: light.cpp.o
+.PHONY : light.o
+
+# target to build an object file
+light.cpp.o:
+	cd /home/manuel/Medieninformatik/Programmiersprachen/Aufgaben/Aufgabenblatt8/raytracer/build && $(MAKE) -f framework/CMakeFiles/framework.dir/build.make framework/CMakeFiles/framework.dir/light.cpp.o
+.PHONY : light.cpp.o
+
+light.i: light.cpp.i
+.PHONY : light.i
+
+# target to preprocess a source file
+light.cpp.i:
+	cd /home/manuel/Medieninformatik/Programmiersprachen/Aufgaben/Aufgabenblatt8/raytracer/build && $(MAKE) -f framework/CMakeFiles/framework.dir/build.make framework/CMakeFiles/framework.dir/light.cpp.i
+.PHONY : light.cpp.i
+
+light.s: light.cpp.s
+.PHONY : light.s
+
+# target to generate assembly for a file
+light.cpp.s:
+	cd /home/manuel/Medieninformatik/Programmiersprachen/Aufgaben/Aufgabenblatt8/raytracer/build && $(MAKE) -f framework/CMakeFiles/framework.dir/build.make framework/CMakeFiles/framework.dir/light.cpp.s
+.PHONY : light.cpp.s
 
 material.o: material.cpp.o
 .PHONY : material.o
@@ -447,9 +495,15 @@ help:
 	@echo "... box.o"
 	@echo "... box.i"
 	@echo "... box.s"
+	@echo "... camera.o"
+	@echo "... camera.i"
+	@echo "... camera.s"
 	@echo "... glew.o"
 	@echo "... glew.i"
 	@echo "... glew.s"
+	@echo "... light.o"
+	@echo "... light.i"
+	@echo "... light.s"
 	@echo "... material.o"
 	@echo "... material.i"
 	@echo "... material.s"
