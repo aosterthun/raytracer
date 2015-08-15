@@ -49,7 +49,7 @@ bool Sphere::intersect(Ray const& ray, float& distance) const
 
 std::ostream& Sphere::print(std::ostream& os) const
 {
-	os << "[Sphere ID: " << std::addressof(this) << "]\n" <<
+	os << "[Sphere]\n" <<
 				"Name: " << _name << "\n" <<
  				"Color: " << _color <<
  				"Center: " << glm::to_string(_center) << "\n" <<

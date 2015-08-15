@@ -26,7 +26,7 @@ _max{max}
 
 std::ostream& Box::print(std::ostream& os) const
 {
-	os << "[Box ID: " << std::addressof(this) << "]\n" <<
+	os << "[Box]\n" <<
 				"Name: " << _name << "\n" <<
  				"Color: " << _color <<
  				"Min: " << glm::to_string(_min) << "\n" <<
