@@ -18,6 +18,9 @@ _min{min},
 _max{max}
 {}
 
+Box::~Box()
+{}
+
 std::ostream& Box::print(std::ostream& os) const
 {
 	os << "[Box]\n" <<

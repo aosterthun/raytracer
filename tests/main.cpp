@@ -3,6 +3,8 @@
 #include <sphere.hpp>
 #include <box.hpp>
 #include <sceneobject.hpp>
+#include <light.hpp>
+#include <camera.hpp>
 #include <fstream>
 #include <iostream>
 #include <glm/glm.hpp>
@@ -11,7 +13,6 @@
 #include <glm/gtx/transform.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtx/intersect.hpp>
-
 
 namespace glm
 {
@@ -121,9 +122,9 @@ TEST_CASE("sphereVolume","[Sphere]")
 	REQUIRE(s.volume() == Approx(33.5103));
 }
 
-/*
-	Box tests
-*/
+
+//	Box tests
+
 TEST_CASE("boxDefaultConstructor","[Box]")
 {
 	Box b = Box{};
@@ -170,9 +171,11 @@ TEST_CASE("printShape","[Shape]")
 	std::cout << b;
 	std::cout << s;
 }
-/*
- Ray tests
-*/
+
+
+//		Ray tests
+
+
 TEST_CASE("rayDefaultConstructor", "[ray]")
 {
 	Ray r = Ray{};
@@ -187,9 +190,9 @@ TEST_CASE("rayCustomConstructor", "[ray]")
 	REQUIRE(r.direction == glm::vec3{5});
 }
 
-/*
- Intersect tests
-*/
+
+//		Intersect tests
+
 
 TEST_CASE("intersectRaySphere","[intersect]")
 {
@@ -215,9 +218,9 @@ TEST_CASE("customIntersectRaySphere","[intersect]")
 	REQUIRE(sphere.intersect(ray,d));
 }
 
-/*
- Virtual destructor test
-*/
+
+//		Virtual destructor test
+
 
 TEST_CASE("virtualDestructor","[destruct]")
 {
@@ -232,6 +235,87 @@ TEST_CASE("virtualDestructor","[destruct]")
 	s2->print(std::cout);
 	delete s1 ;
 	delete s2 ;
+}
+
+
+//	light test cases
+
+
+TEST_CASE("lightDefaultConstructor","light")
+{
+	Light light{};
+
+	std::cout << light;
+
+	REQUIRE(light.name() == "untitledLight");
+	REQUIRE(light.position().x == 0.0);
+	REQUIRE(light.position().y == 0.0);
+	REQUIRE(light.position().z == 0.0);
+	REQUIRE(light.ld() == 0.0);
+	REQUIRE(light.la() == 0.0);
+}
+
+TEST_CASE("lightCustomConstructor","light")
+{
+	glm::vec3 vec{1.0};
+	Light light{"light1",vec,1.0,1.0};
+
+	std::cout << light;
+
+	REQUIRE(light.name() == "light1");
+	REQUIRE(light.position().x == 1.0);
+	REQUIRE(light.position().y == 1.0);
+	REQUIRE(light.position().z == 1.0);
+	REQUIRE(light.ld() == 1.0);
+	REQUIRE(light.la() == 1.0);
+}
+
+
+//	camera test cases
+
+
+*/
+TEST_CASE("cameraDefaultConstructor","camera")
+{
+	Camera camera{};
+
+	std::cout << camera;
+
+	REQUIRE(camera.position().x == 0.0);
+	REQUIRE(camera.position().y == 0.0);
+	REQUIRE(camera.position().z == 0.0);
+
+	REQUIRE(camera.direction().x == 1.0);
+	REQUIRE(camera.direction().y == 0.0);
+	REQUIRE(camera.direction().z == 0.0);
+}
+
+TEST_CASE("cameraCustomConstructor","camera")
+{
+	glm::vec3 vec1{0.0};
+	glm::vec3 vec2{3.0};
+
+	Camera camera{vec1,vec2};
+
+	std::cout << camera;
+
+	REQUIRE(camera.position().x == 0.0);
+	REQUIRE(camera.position().y == 0.0);
+	REQUIRE(camera.position().z == 0.0);
+
+	REQUIRE(camera.direction().x == 3.0);
+	REQUIRE(camera.direction().y == 3.0);
+	REQUIRE(camera.direction().z == 3.0);
+}
+
+TEST_CASE("lightDefaultConstructor","light")
+{
+
+}
+
+TEST_CASE("lightCustomConstructor","light")
+{
+
 }
 
 int main(int argc, char *argv[])
