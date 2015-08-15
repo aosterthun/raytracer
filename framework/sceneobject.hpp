@@ -3,9 +3,9 @@
 #define GLM_FORCE_RADIANS
 #include <glm/matrix.hpp>
 #include <glm/gtx/transform.hpp>
+#include <iosfwd>
 
 bool operator==(glm::mat4 const& a,glm::mat4 const& b);
-
 class SceneObject
 {
 	public:

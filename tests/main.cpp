@@ -14,65 +14,42 @@
 
 
 
-
+std::ostream& operator<<(std::ostream& os, glm::mat4 const& mat)
+{
+	os << glm::to_string(mat);
+}
 /*
 	SceneObject tests
 */
 //Matrix initalisation for further SceneObject tests
-
-TEST_CASE("sceneObjectDefaultConstructor","[SceneObject]")
-{
-	glm::vec4 col0 = glm::vec4{1.0f,2.0f,3.0f,4.0f};
+glm::vec4 col0 = glm::vec4{1.0f,2.0f,3.0f,4.0f};
 glm::vec4 col1 = glm::vec4{2.0f,3.0f,4.0f,5.0f};
 glm::vec4 col2 = glm::vec4{3.0f,4.0f,5.0f,6.0f};
 glm::vec4 col3 = glm::vec4{4.0f,5.0f,6.0f,7.0f};
 glm::mat4 mat = glm::mat4{col0,col1,col2,col3};
+TEST_CASE("sceneObjectDefaultConstructor","[SceneObject]")
+{
 	SceneObject so = SceneObject{};
 	REQUIRE(so.transformMatrix() == glm::mat4{0.0});
 }
 TEST_CASE("sceneObjectMatrixConstructor","[SceneObject]")
 {
-	glm::vec4 col0 = glm::vec4{1.0f,2.0f,3.0f,4.0f};
-glm::vec4 col1 = glm::vec4{2.0f,3.0f,4.0f,5.0f};
-glm::vec4 col2 = glm::vec4{3.0f,4.0f,5.0f,6.0f};
-glm::vec4 col3 = glm::vec4{4.0f,5.0f,6.0f,7.0f};
-glm::mat4 mat = glm::mat4{col0,col1,col2,col3};
 	SceneObject so = SceneObject{mat};
 	REQUIRE(so.transformMatrix() == mat);	
 };
 TEST_CASE("sceneObjectInverseMatrix","[SceneObject]"){
-	glm::vec4 col0 = glm::vec4{1.0f,2.0f,3.0f,4.0f};
-glm::vec4 col1 = glm::vec4{2.0f,3.0f,4.0f,5.0f};
-glm::vec4 col2 = glm::vec4{3.0f,4.0f,5.0f,6.0f};
-glm::vec4 col3 = glm::vec4{4.0f,5.0f,6.0f,7.0f};
-glm::mat4 mat = glm::mat4{col0,col1,col2,col3};
 	SceneObject so = SceneObject{mat};
 	REQUIRE(so.inverseTransformMatrix() == glm::inverse(mat));
 };
 TEST_CASE("sceneObjectTranslateMatrix","[SceneObject]"){
-	glm::vec4 col0 = glm::vec4{1.0f,2.0f,3.0f,4.0f};
-glm::vec4 col1 = glm::vec4{2.0f,3.0f,4.0f,5.0f};
-glm::vec4 col2 = glm::vec4{3.0f,4.0f,5.0f,6.0f};
-glm::vec4 col3 = glm::vec4{4.0f,5.0f,6.0f,7.0f};
-glm::mat4 mat = glm::mat4{col0,col1,col2,col3};
 	SceneObject so = SceneObject{mat};
 	REQUIRE(so.translate(glm::vec3(1.0,2.0,3.0)) == glm::translate(mat,glm::vec3(1,2,3)));
 };
 TEST_CASE("sceneObjectRotateMatrix","[SceneObject]"){
-	glm::vec4 col0 = glm::vec4{1.0f,2.0f,3.0f,4.0f};
-glm::vec4 col1 = glm::vec4{2.0f,3.0f,4.0f,5.0f};
-glm::vec4 col2 = glm::vec4{3.0f,4.0f,5.0f,6.0f};
-glm::vec4 col3 = glm::vec4{4.0f,5.0f,6.0f,7.0f};
-glm::mat4 mat = glm::mat4{col0,col1,col2,col3};
 	SceneObject so = SceneObject{mat};
 	REQUIRE(so.rotate(45.0f,glm::vec3(1.0,2.0,3.0)) == glm::rotate(mat,45.0f,glm::vec3(1,2,3)));
 };
 TEST_CASE("sceneObjectScaleMatrix","[SceneObject]"){
-	glm::vec4 col0 = glm::vec4{1.0f,2.0f,3.0f,4.0f};
-glm::vec4 col1 = glm::vec4{2.0f,3.0f,4.0f,5.0f};
-glm::vec4 col2 = glm::vec4{3.0f,4.0f,5.0f,6.0f};
-glm::vec4 col3 = glm::vec4{4.0f,5.0f,6.0f,7.0f};
-glm::mat4 mat = glm::mat4{col0,col1,col2,col3};
 	SceneObject so = SceneObject{mat};
 	REQUIRE(so.scale(glm::vec3(1.0,2.0,3.0)) == glm::scale(mat,glm::vec3(1,2,3)));
 };
@@ -257,5 +234,11 @@ TEST_CASE("virtualDestructor","[destruct]")
 
 int main(int argc, char *argv[])
 {
-  return Catch::Session().run(argc, argv);
+	glm::vec4 col0 = glm::vec4{1.0f,2.0f,3.0f,4.0f};
+	glm::vec4 col1 = glm::vec4{2.0f,3.0f,4.0f,5.0f};
+	glm::vec4 col2 = glm::vec4{3.0f,4.0f,5.0f,6.0f};
+	glm::vec4 col3 = glm::vec4{4.0f,5.0f,6.0f,7.0f};
+	glm::mat4 mat = glm::mat4{col0,col1,col2,col3};
+	std::cout << mat;
+	return Catch::Session().run(argc, argv);
 }
