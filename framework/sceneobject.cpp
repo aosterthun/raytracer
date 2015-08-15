@@ -2,9 +2,9 @@
 
 bool operator==(glm::mat4 const& a,glm::mat4 const& b)
 {
-	for (int i = 0; i < 5; ++i)
+	for (int i = 0; i < 4; ++i)
 	{
-		for (int j = 0; j < 5; ++j)
+		for (int j = 0; j < 4; ++j)
 		{
 			float epsilon = a[i][j] - b[i][j];
 			if(epsilon < 0)

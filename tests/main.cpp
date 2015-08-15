@@ -13,10 +13,12 @@
 #include <glm/gtx/intersect.hpp>
 
 
-
-std::ostream& operator<<(std::ostream& os, glm::mat4 const& mat)
+namespace glm
 {
-	os << glm::to_string(mat);
+	std::ostream& operator<<(std::ostream& os, glm::mat4 const& mat)
+	{
+		os << glm::to_string(mat);
+	}
 }
 /*
 	SceneObject tests
@@ -234,11 +236,5 @@ TEST_CASE("virtualDestructor","[destruct]")
 
 int main(int argc, char *argv[])
 {
-	glm::vec4 col0 = glm::vec4{1.0f,2.0f,3.0f,4.0f};
-	glm::vec4 col1 = glm::vec4{2.0f,3.0f,4.0f,5.0f};
-	glm::vec4 col2 = glm::vec4{3.0f,4.0f,5.0f,6.0f};
-	glm::vec4 col3 = glm::vec4{4.0f,5.0f,6.0f,7.0f};
-	glm::mat4 mat = glm::mat4{col0,col1,col2,col3};
-	std::cout << mat;
 	return Catch::Session().run(argc, argv);
 }
