@@ -31,7 +31,7 @@ TEST_CASE("sceneObjectDefaultConstructor","[SceneObject]")
 {
 	SceneObject so = SceneObject{};
 	REQUIRE(so.transformMatrix() == glm::mat4{0.0});
-}
+};
 TEST_CASE("sceneObjectMatrixConstructor","[SceneObject]")
 {
 	SceneObject so = SceneObject{mat};
