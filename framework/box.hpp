@@ -9,13 +9,18 @@ class Box : public Shape
 		Box();
 		Box(glm::vec3 const& min, glm::vec3 const& max);
 		Box(glm::vec3 const& min, glm::vec3 const& max, std::string const& name, Color const& color);
+
+		~Box() override; 
+
 		double area() const override;
 		double volume() const override;
-		std::ostream& print(std::ostream& os) const override;
-		bool intersect(Ray const& ray, float& distance) const override;
+		
 		glm::vec3 min() const;
 		glm::vec3 max() const;
-		~Box() override; 
+
+		std::ostream& print(std::ostream& os) const override;
+		bool intersect(Ray const& ray, float& distance) const override;
+
 	private:
 		glm::vec3 _min;
 		glm::vec3 _max;

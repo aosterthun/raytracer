@@ -8,6 +8,7 @@
 #include <iostream>
 #include <glm/ext.hpp>
 #include <stdexcept>
+
 class Shape
 {
 	public: 

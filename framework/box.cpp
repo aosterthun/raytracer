@@ -18,6 +18,9 @@ _min{min},
 _max{max}
 {}
 
+Box::~Box()
+{}
+
 std::ostream& Box::print(std::ostream& os) const
 {
 	os << "[Box ID: " << std::addressof(this) << "]\n" <<
@@ -71,9 +74,4 @@ double Box::volume() const
 {
 	glm::vec3 v = _max - _min;
 	return v.x * v.y * v.z;
-}
-
-Box::~Box()
-{
-	std::cout << "Box destruct \n";
 }
