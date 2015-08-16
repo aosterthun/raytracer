@@ -5,6 +5,8 @@ class ShapeComposite : public Shape
 {
 	public:
 		ShapeComposite();
+		ShapeComposite(std::vector<Shape> const& shapes);
+		ShapeComposite(Shape const& shape);
 		void add(Shape const& shape);
 		void remove(Shape const& shape);
 		bool intersect(Ray const& ray, float& distance) const override;
