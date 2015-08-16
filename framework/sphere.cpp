@@ -57,16 +57,6 @@ double Sphere::radius() const
 	return _radius;
 }
 
-double Sphere::area() const
-{
-	return 4 * M_PI * _radius * _radius;
-}
-
-double Sphere::volume() const
-{
-	return 4.0/3.0 * M_PI * _radius * _radius * _radius;
-}
-
 Sphere::~Sphere()
 {
 	std::cout << "Sphere destruct \n";

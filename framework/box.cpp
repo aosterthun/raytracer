@@ -64,18 +64,6 @@ glm::vec3 Box::max() const
 	return _max;
 }
 
-double Box::area() const
-{
-	glm::vec3 v = _max - _min;
-	return 2 * (v.x * v.y) + 2 * (v.x * v.z) + 2 * (v.z * v.y);
-}
-
-double Box::volume() const
-{
-	glm::vec3 v = _max - _min;
-	return v.x * v.y * v.z;
-}
-
 Box::~Box()
 {
 	std::cout << "Box destruct \n";

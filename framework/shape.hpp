@@ -14,8 +14,6 @@ class Shape : public SceneObject
 	public: 
 		Shape();
 		Shape(std::string const& name, Color const& color);
-		virtual double area() const = 0;
-		virtual double volume() const = 0;
 		virtual bool intersect(Ray const& ray, float& distance) const = 0;
 		virtual std::ostream& print(std::ostream& os) const;
 		Color color() const;
