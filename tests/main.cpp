@@ -3,6 +3,7 @@
 #include <sphere.hpp>
 #include <box.hpp>
 #include <sceneobject.hpp>
+#include <shapecomposite.hpp>
 #include <light.hpp>
 #include <camera.hpp>
 #include <fstream>
@@ -21,9 +22,26 @@ namespace glm
 		os << glm::to_string(mat);
 	}
 }
+
+/*
+	ShapeComposite tests
+
+TEST_CASE("shapecompositeDefaultConstructor","[ShapeComposite]")
+{
+	ShapeComposite sc{};
+	REQUIRE(sc.getChilds().isEmpty()));
+};
+
+TEST_CASE("shapecompositeCustomConstructor","[ShapeComposite]")
+{
+	Box box{glm::vec3{},glm::vec3{1.0},"Test",Color{}};
+	ShapeComposite sc{box};
+	REQUIRE(box == sc.getShape("Test"));
+};
+
 /*
 	SceneObject tests
-*/
+
 //Matrix initalisation for further SceneObject tests
 glm::vec4 col0 = glm::vec4{1.0f,2.0f,3.0f,4.0f};
 glm::vec4 col1 = glm::vec4{2.0f,3.0f,4.0f,5.0f};
@@ -58,7 +76,7 @@ TEST_CASE("sceneObjectScaleMatrix","[SceneObject]"){
 };
 /*
 	Sphere tests
-*/
+
 
 TEST_CASE("sphereDefaultConstructor","[Sphere]")
 {
@@ -272,9 +290,6 @@ TEST_CASE("lightCustomConstructor","light")
 
 
 //	camera test cases
-
-
-*/
 TEST_CASE("cameraDefaultConstructor","camera")
 {
 	Camera camera{};
@@ -307,17 +322,7 @@ TEST_CASE("cameraCustomConstructor","camera")
 	REQUIRE(camera.direction().y == 3.0);
 	REQUIRE(camera.direction().z == 3.0);
 }
-
-TEST_CASE("lightDefaultConstructor","light")
-{
-
-}
-
-TEST_CASE("lightCustomConstructor","light")
-{
-
-}
-
+*/
 int main(int argc, char *argv[])
 {
 	glm::vec4 col0 = glm::vec4{1.0f,2.0f,3.0f,4.0f};
