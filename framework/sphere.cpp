@@ -1,31 +1,31 @@
 #include "sphere.hpp"
 
 Sphere::Sphere():
-Shape::Shape("untitled_sphere", Color{0.0}),
+Shape::Shape("untitled_sphere", Material{}),
 _center{glm::vec3{0}},
 _radius{0}
 {}
 
 Sphere::Sphere(glm::vec3 const& center):
-Shape::Shape("untitled_sphere", Color{0.0}),
+Shape::Shape("untitled_sphere", Material{}),
 _center{center},
 _radius{0}
 {}
 
 Sphere::Sphere(double radius):
-Shape::Shape("untitled_sphere", Color{0.0}),
+Shape::Shape("untitled_sphere", Material{}),
 _center{glm::vec3{0}},
 _radius{radius}
 {}
 
 Sphere::Sphere(glm::vec3 const& center, double radius):
-Shape::Shape("untitled_sphere", Color{0}),
+Shape::Shape("untitled_sphere", Material{}),
 _center{center},
 _radius{radius}
 {}
 
-Sphere::Sphere(glm::vec3 const& center, double radius, std::string const& name, Color const& color):
-Shape::Shape(name, color),
+Sphere::Sphere(glm::vec3 const& center, double radius, std::string const& name, Material const& material):
+Shape::Shape(name, material),
 _center{center},
 _radius{radius}
 {}
@@ -41,7 +41,7 @@ std::ostream& Sphere::print(std::ostream& os) const
 {
 	os << "[Sphere]\n" <<
 				"Name: " << _name << "\n" <<
- 				"Color: " << _color <<
+ 				"Material: " << _material <<
  				"Center: " << glm::to_string(_center) << "\n" <<
  				"Radius: " << _radius << "\n\n";
 	return os;
