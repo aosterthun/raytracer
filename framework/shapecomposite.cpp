@@ -7,7 +7,7 @@ Shape::Shape("untitled_shapecomposite", Material{})
 ShapeComposite::ShapeComposite(std::map<std::string,std::shared_ptr<Shape>> const& shapes):
 Shape::Shape("untitled_shapecomposite", Material())
 {
-	//_shapes.insert(shapes);
+	_shapes.insert(shapes.begin(),shapes.end());
 }
 
 ShapeComposite::ShapeComposite(std::shared_ptr<Shape> shape):
@@ -25,7 +25,7 @@ Shape::Shape(name, Material())
 ShapeComposite::ShapeComposite(std::string const& name, std::map<std::string,std::shared_ptr<Shape>> const& shapes):
 Shape::Shape(name, Material())
 {
-	//_shapes.insert(shapes);
+	_shapes.insert(shapes.begin(),shapes.end());
 }
 
 void ShapeComposite::add(std::shared_ptr<Shape> shape)

@@ -22,7 +22,27 @@ namespace glm
 		os << glm::to_string(mat);
 	}
 }
-
+//ShapeComposite TestCase
+TEST_CASE("shapecompositeDefaultConstructor","[ShapeComposite]")
+{}
+TEST_CASE("shapecompositeCustomMapCopyConstructor","[ShapeComposite]")
+{}
+TEST_CASE("shapecompositeCustomMapCopyWithNameConstructor","[ShapeComposite]")
+{}
+TEST_CASE("shapecompositeCustomShapeConstructor","[ShapeComposite]")
+{}
+TEST_CASE("shapecompositeCustomShapeWithNameConstructor","[ShapeComposite]")
+{}
+TEST_CASE("shapecompositeAdd","[ShapeComposite]")
+{}
+TEST_CASE("shapecompositeRemove","[ShapeComposite]")
+{}
+TEST_CASE("shapecompositeGetChilds","[ShapeComposite]")
+{}
+TEST_CASE("shapecompositeGetShape","[ShapeComposite]")
+{}
+TEST_CASE("shapecompositeIntersect","[ShapeComposite]")
+{}
 
 int main(int argc, char *argv[])
 {
