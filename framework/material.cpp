@@ -53,3 +53,8 @@ std::ostream& operator<<(std::ostream& os, Material const& m)
 {
 	return m.print(os);
 }
+
+bool operator==(Material const& m1, Material const& m2)
+{
+	return (m1.name() == m2.name());
+}
