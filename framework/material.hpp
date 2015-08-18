@@ -41,5 +41,6 @@ private:
 
 //operators
 std::ostream& operator<<(std::ostream&, Material const&);
+bool operator==(Material const& m1, Material const& m2);
 
 #endif // define BUW_MATERIAL_HPP

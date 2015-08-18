@@ -1,19 +1,19 @@
 #include "box.hpp"
 
 Box::Box():
-Shape::Shape("untitled_box", Color{0.0}),
+Shape::Shape("untitled_box", Material{}),
 _min{glm::vec3{0}},
 _max{glm::vec3{0}}
 {}
 
 Box::Box(glm::vec3 const& min, glm::vec3 const& max):
-Shape::Shape("untitled_box", Color{0.0}),
+Shape::Shape("untitled_box", Material{}),
 _min{min},
 _max{max}
 {}
 
-Box::Box(glm::vec3 const& min, glm::vec3 const& max, std::string const& name, Color const& color):
-Shape::Shape(name, color),
+Box::Box(glm::vec3 const& min, glm::vec3 const& max, std::string const& name, Material const& material):
+Shape::Shape(name, material),
 _min{min},
 _max{max}
 {}
@@ -27,7 +27,7 @@ std::ostream& Box::print(std::ostream& os) const
 {
 	os << "[Box]\n" <<
 				"Name: " << _name << "\n" <<
- 				"Color: " << _color <<
+ 				"Material: " << _material <<
  				"Min: " << glm::to_string(_min) << "\n" <<
  				"Max: " << glm::to_string(_max) << "\n\n"; 
 	return os;
@@ -64,16 +64,4 @@ glm::vec3 Box::min() const
 glm::vec3 Box::max() const
 {
 	return _max;
-}
-
-double Box::area() const
-{
-	glm::vec3 v = _max - _min;
-	return 2 * (v.x * v.y) + 2 * (v.x * v.z) + 2 * (v.z * v.y);
-}
-
-double Box::volume() const
-{
-	glm::vec3 v = _max - _min;
-	return v.x * v.y * v.z;
 }

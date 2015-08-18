@@ -11,10 +11,8 @@ class Sphere : public Shape
 		Sphere(glm::vec3 const& center);
 		Sphere(double radius);
 		Sphere(glm::vec3 const& center, double radius);
-		Sphere(glm::vec3 const& center, double radius, std::string const& name, Color const& color);
+		Sphere(glm::vec3 const& center, double radius, std::string const& name, Material const& material);
 		bool intersect(Ray const& ray, float& distance) const override;
-		double area() const override;
-		double volume() const override;
 		std::ostream& print(std::ostream& os) const override;
 		glm::vec3 center() const;
 		double radius() const;

@@ -2,25 +2,25 @@
 
 Shape::Shape(): 
 _name{"untitled_shape"}, 
-_color{0.0} 
+_material{Material{}} 
 {}
 
-Shape::Shape(std::string const& name, Color const& color): 
+Shape::Shape(std::string const& name, Material const& material): 
 _name{name}, 
-_color{color} 
+_material{material} 
 {}
 
 std::ostream& Shape::print(std::ostream& os) const
 {
 	os << "[Shape ID: " << this << "]\n" <<
 				"Name: " << _name << "\n" <<
- 				"Color: " << _color;
+ 				"Material: " << _material;
 	return os;
 }
 
-Color Shape::color() const
+Material Shape::material() const
 {
-	return _color;
+	return _material;
 }
 
 std::string Shape::name() const
