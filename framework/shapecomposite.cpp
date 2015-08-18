@@ -4,10 +4,10 @@ ShapeComposite::ShapeComposite():
 Shape::Shape("untitled_shapecomposite", Material{})
 {}
 
-ShapeComposite::ShapeComposite(std::map<std::string,std::shared_ptr<Shape>> const& shapes):
+ShapeComposite::ShapeComposite(ShapeComposite const& sc):
 Shape::Shape("untitled_shapecomposite", Material())
 {
-	_shapes.insert(shapes.begin(),shapes.end());
+	_shapes.insert(sc.getChilds().begin(),sc.getChilds().end());
 }
 
 ShapeComposite::ShapeComposite(std::shared_ptr<Shape> shape):
@@ -22,11 +22,14 @@ Shape::Shape(name, Material())
 	_shapes.insert(std::make_pair(shape->name(),shape));
 }
 
-ShapeComposite::ShapeComposite(std::string const& name, std::map<std::string,std::shared_ptr<Shape>> const& shapes):
+ShapeComposite::ShapeComposite(std::string const& name, ShapeComposite const& sc):
 Shape::Shape(name, Material())
 {
-	_shapes.insert(shapes.begin(),shapes.end());
+	_shapes.insert(sc.getChilds().begin(),sc.getChilds().end());
 }
+
+ShapeComposite::~ShapeComposite()
+{}
 
 void ShapeComposite::add(std::shared_ptr<Shape> shape)
 {
@@ -39,7 +42,7 @@ void ShapeComposite::remove(std::string const& name)
 	_shapes.erase(it);
 }
 
-std::map<std::string,std::shared_ptr<Shape>> ShapeComposite::getChilds()
+std::map<std::string,std::shared_ptr<Shape>> ShapeComposite::getChilds() const
 {
 	return _shapes;
 }
