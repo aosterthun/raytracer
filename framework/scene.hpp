@@ -3,6 +3,7 @@
 #include <map>
 #include <vector>
 #include <tuple>
+#include "camera.hpp"
 #include "material.hpp"
 #include "shape.hpp"
 #include "light.hpp"
@@ -14,6 +15,7 @@ struct Scene
 	~Scene();
 
 	float _ambientLight;
+	Camera _camera;
 	std::vector<std::shared_ptr<Shape>> _shapes;
 	std::vector<Light> _lights;
 	std::tuple<int,int> _resolution;
