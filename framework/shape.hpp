@@ -1,6 +1,7 @@
 #ifndef BUW_SHAPE_HPP
 #define BUW_SHAPE_HPP
 #define GLM_FORCE_RADIANS
+
 #include "color.hpp"
 #include <string>
 #include <ray.hpp>
@@ -8,7 +9,8 @@
 #include <iostream>
 #include <glm/ext.hpp>
 #include <stdexcept>
-#include "SceneObject.hpp"
+#include "sceneobject.hpp"
+
 class Shape : public SceneObject
 {
 	public: 
