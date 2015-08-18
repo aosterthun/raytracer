@@ -74,3 +74,9 @@ PpmWriter::save()
 
   file.close();
 }
+
+void setResolution(std::tuple<int,int> const& resolution)
+{
+  size_t width_ = std::get<0>(resolution);
+  size_t height_ = std::get<1>(resolution);
+}

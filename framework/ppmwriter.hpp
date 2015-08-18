@@ -22,11 +22,13 @@ class PpmWriter
 public:
   PpmWriter(std::size_t w, std::size_t h, std::string const& file);
   PpmWriter(std::size_t w, std::size_t h);
+  PpmWriter();
 
 public:
   void write(Pixel const& p);
   void save(std::string const& file);
   void save();
+  void setResolution(std::tuple<int,int> const& resolution);
 
 private:
   std::string file_;
