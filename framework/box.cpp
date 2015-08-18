@@ -19,7 +19,9 @@ _max{max}
 {}
 
 Box::~Box()
-{}
+{
+	std::cout << "Box destruct \n";
+}
 
 std::ostream& Box::print(std::ostream& os) const
 {
@@ -74,9 +76,4 @@ double Box::volume() const
 {
 	glm::vec3 v = _max - _min;
 	return v.x * v.y * v.z;
-}
-
-Box::~Box()
-{
-	std::cout << "Box destruct \n";
 }
