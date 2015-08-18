@@ -3,20 +3,23 @@
 
 #define GLM_FORCE_RADIANS
 
+#include "sceneobject.hpp"
+#include "ray.hpp"
+
 #include <iostream>
 #include <stdexcept>
 #include <glm/glm.hpp>
 #include <glm/ext.hpp>
 #include <glm/vec3.hpp>
 
-class Camera
+class Camera : public SceneObject
 {
 public:
 
 	//constructors
 	Camera();
 
-	Camera(glm::vec3 const& position, glm::vec3 const& diection);
+	Camera(glm::vec3 const& position, glm::vec3 const& diection, float angle);
 
 	//destructors
 	~Camera();
@@ -30,21 +33,20 @@ public:
 
 	//non-member functions
 
-	//marix-operations
-	void scale();
+	Ray getEyeRay(int x, int y, float &distance) const;
 
-	void translate();
-
-	void rotate();
+	float getDistance(int width) const;
 
 	//outstream methods
-	std::ostream& print(std::ostream&);
+	std::ostream& print(std::ostream&) const;
 	
 private:
 
 	glm::vec3 _position;
 	
 	glm::vec3 _direction;
+
+	float _angle;
 };
 
 //operators

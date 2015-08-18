@@ -3,12 +3,14 @@
 //constructors
 Camera::Camera() :
 _position{0.0},
-_direction{1.0,0.0,0.0}
+_direction{1.0,0.0,0.0},
+_angle{40.0}
 {}
 
-Camera::Camera(glm::vec3 const& position, glm::vec3 const& direction) :
+Camera::Camera(glm::vec3 const& position, glm::vec3 const& direction, float angle) :
 _position{position},
-_direction{direction}
+_direction{direction},
+_angle{angle}
 {}
 
 //destructors
@@ -27,22 +29,19 @@ glm::vec3 const& Camera::direction() const
 	return _direction;
 }
 
-void Camera::scale()
+//non-member functions
+
+Ray Camera::getEyeRay(int x, int y, float &distance) const
 {
-	throw std::runtime_error("not implemented");
+	return Ray{glm::vec3{_position}, glm::vec3{x, y, distance}};
 }
 
-void Camera::translate()
+float Camera::getDistance(int width) const
 {
-	throw std::runtime_error("not implemented");
+	return (width/2)/tan(_angle/2);
 }
 
-void Camera::rotate()
-{
-	throw std::runtime_error("not implemented");
-}
-
-std::ostream& Camera::print(std::ostream& os)
+std::ostream& Camera::print(std::ostream& os) const
 {
 	os << "[Camera] " <<
  				"position: " << glm::to_string(_position) << "\n" <<
