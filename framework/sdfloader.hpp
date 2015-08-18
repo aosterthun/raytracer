@@ -1,4 +1,4 @@
-#ifndef BUW_SDF_HPP
+/*#ifndef BUW_SDF_HPP
 #define BUW_SDF_HPP
 #include <string>
 #include <fstream>
@@ -29,4 +29,4 @@ private:
 };
 
 
-#endif // BUW_SDF_HPP
+#endif // BUW_SDF_HPP*/

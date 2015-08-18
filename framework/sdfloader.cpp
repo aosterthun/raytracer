@@ -1,4 +1,4 @@
-#include <sdfloader.hpp>
+/*#include <sdfloader.hpp>
 #include <fstream>
 #include <sstream>
 #include <iostream>
@@ -61,7 +61,7 @@ void SDFloader::readSdf(std::string const& path)
 			//case "box": create_box(iss);
 			}
 		}
-		*/
+		
 	}
 }
 
@@ -84,3 +84,4 @@ void SDFloader::create_material(std::istringstream& iss)
 	scene_.materials[name] = Material(name,ka,kd,ks,m);
 }
 
+*/
