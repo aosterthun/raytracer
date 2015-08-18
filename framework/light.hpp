@@ -3,13 +3,15 @@
 
 #define GLM_FORCE_RADIANS
 
+#include "sceneobject.hpp"
+
 #include <iostream>
 #include <stdexcept>
 #include <glm/glm.hpp>
 #include <glm/ext.hpp>
 #include <glm/vec3.hpp>
 
-class Light
+class Light : public SceneObject
 {
 public:
 
