@@ -68,18 +68,49 @@ void Renderer::raycast()
 
 Color Renderer::trace(Ray r)
 {
-	for(std::map<std::string, std::shared_ptr<Shape>>::iterator i = _scene._shapes.begin(), i != _scene._shapes.end(); ++i)
-	{
-		i
-	}
+	float distance = 0.0;
 
-	return ;
+	float nearestDistance = 0.0;
+
+	std::shared_ptr<Shape> nearestObject;
+
+	for(std::map<std::string, std::shared_ptr<Shape>>::iterator i = _scene._shapes.begin(); i != _scene._shapes.end(); ++i)
+	{
+		bool hit = i->second->intersect(r, distance);
+		OptionalHit tmp{};
+
+		tmp._hit = hit;
+
+		if(hit)
+		{
+			if(distance < nearestDistance || nearestDistance == 0.0)
+			{
+				nearestDistance = distance;
+				nearestObject = i->second;
+				tmp._shape = i->second;
+			}
+			else
+			{
+				tmp._shape = nullptr;
+				tmp._t = INFINITY;
+			}
+		}
+		return shade(tmp);
+	}
 }
 
-Color Renderer::shade(std::shared_ptr<Shape> s, Ray r, double t)
+Color Renderer::shade(OptionalHit hit)
 {
+	Color backgroundColor{0.0, 0.0, 0.0};
 
-	return ;
+	if(hit._hit)
+	{
+		return hit._shape->material().ka();
+	}
+	else
+	{
+		return backgroundColor;
+	}
 }
 
 void Renderer::write(Pixel const& p)

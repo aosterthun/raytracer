@@ -18,6 +18,7 @@
 #include "shape.hpp"
 #include "camera.hpp"
 #include "scene.hpp"
+#include "optionalHit.hpp"
 
 #include <memory>
 #include <string>
@@ -64,7 +65,7 @@ private:
 
 	Color trace(Ray r);
 
-	Color shade(std::shared_ptr<Shape> s, Ray r, double t);
+	Color shade(OptionalHit hit);
 
 };
 
