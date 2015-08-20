@@ -9,50 +9,69 @@
 
 #include "renderer.hpp"
 
-Renderer::Renderer(unsigned w, unsigned h, std::string const& file)
-  : width_(w)
-  , height_(h)
-  , colorbuffer_(w*h, Color(0.0, 0.0, 0.0))
-  , filename_(file)
-  , ppm_(width_, height_)
+Renderer::Renderer() :
+_scene{},
+_colorbuffer{},
+_ppm{}
 {}
 
 void Renderer::render()
 {
+	
+	reserveColorbuffer(_scene._resolution);
+
+	_ppm.setResolution(_scene._resolution);
+
+	raycast();
+
 	/*
-	//NOTE: MIGHT BE OUTSIDE
-	SDFloader loader{};
-	loader.readSdf(filename_);
-
-	//retrieving the scene from the loader
-	Scene scene = loader.scene();
-	//////////////////////////////////////////
-
-	raycast(colorbuffer_, scene.camera);
-
-	Pixel p(300,300);
+	//some testing
+	Pixel p(std::get<0>(scene._resolution)/2,std::get<1>(scene._resolution)/2);
+	
 	p.color = Color(1.0, 1.0, 1.0);
 	write(p);
-
-	ppm_.save(filename_);
-	
 	*/
+
+	_ppm.save("test");
 }
 
-void Renderer::raycast(std::vector<Color> &colorbuffer, Camera &camera)
+void Renderer::setScene(Scene const& scene)
 {
-	/*
-	float distance = camera.getDistance(width_);
-	for(auto pixel : colorbuffer)
-	{
-		pixel = trace(camera.getEyeRay( (pixel.x)-960, (pixel.y)-960, distance));
-	}
-	*/
+	_scene = scene;
 }
 
+void Renderer::reserveColorbuffer(std::tuple<int,int> const& resolution)
+{
+	float size = std::get<0>(resolution) * std::get<1>(resolution);
+	_colorbuffer.resize(size, Color(0.0, 0.0, 0.0));
+}
+
+void Renderer::raycast()
+{
+	
+	float distance = _scene._camera.getDistance(std::get<0>(_scene._resolution));
+
+	Color white{1.0,1.0,1.0};
+	Color black{0.0,0.0,0.0};
+
+	//float distance{0.0};
+
+	for (std::vector<Color>::iterator i = _colorbuffer.begin(); i != _colorbuffer.end(); ++i)
+	{
+		int x = (i - _colorbuffer.begin()) % std::get<0>(_scene._resolution);
+		int y =	floor((i - _colorbuffer.begin()) / std::get<0>(_scene._resolution)); 
+
+		*i = trace(_scene._camera.getEyeRay( x, y, distance));
+	}
+	
+}
 
 Color Renderer::trace(Ray r)
 {
+	for(std::map<std::string, std::shared_ptr<Shape>>::iterator i = _scene._shapes.begin(), i != _scene._shapes.end(); ++i)
+	{
+		i
+	}
 
 	return ;
 }
@@ -65,18 +84,23 @@ Color Renderer::shade(std::shared_ptr<Shape> s, Ray r, double t)
 
 void Renderer::write(Pixel const& p)
 {
-  // flip pixels, because of opengl glDrawPixels
-  size_t buf_pos = (width_*p.y + p.x);
-  if (buf_pos >= colorbuffer_.size() || (int)buf_pos < 0) {
-    std::cerr << "Fatal Error Renderer::write(Pixel p) : "
-      << "pixel out of ppm_ : "
-      << (int)p.x << "," << (int)p.y
-      << std::endl;
-  } else {
-    colorbuffer_[buf_pos] = p.color;
-  }
+	// flip pixels, because of opengl glDrawPixels
+	size_t position = (std::get<0>(_resolution)*p.y + p.x);
 
-  ppm_.write(p);
+	if (position >= _colorbuffer.size() || (int)position < 0)
+	{
+		std::cerr << "Fatal Error Renderer::write(Pixel p) : "
+		<< "pixel out of ppm_ : "
+		<< (int)p.x << "," << (int)p.y
+		<< std::endl;
+	}
+	else
+	{
+		_colorbuffer[position] = p.color;
+	}
+
+	//extra for the image-file output
+	_ppm.write(p);
 }
 
 /*
