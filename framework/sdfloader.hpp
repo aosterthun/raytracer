@@ -1,32 +1,28 @@
-/*#ifndef BUW_SDF_HPP
+#ifndef BUW_SDF_HPP
 #define BUW_SDF_HPP
 #include <string>
 #include <fstream>
 #include <sstream>
 #include <iostream>
 #include <material.hpp>
+#include <map>
 #include <scene.hpp>
 
-class SDFloader
+class SDFLoader
 {
 public:
 	//Constructor
-	SDFloader();
-	//SDFloader(std::string const& path, std::string const& file);
-	~SDFloader();
+	SDFLoader();
+	~SDFLoader();
 
-	Scene const& scene() const;
-
-	void readSdf(std::string const& path);
-
+	Scene loadScene(std::string const& filePath);
 private:
-
-	void create_material(std::istringstream&);
-
-	//MIGHT NEED TO BE SEPERATE
-	Scene scene_;
-
+	std::map<std::string,Material> _materials;
+	Material createMaterial(std::istringstream &textStream);
+	std::shared_ptr<Shape> createSphere(std::istringstream &textStream);
+	std::shared_ptr<Shape> createBox(std::istringstream &textStream);
+	std::shared_ptr<Shape> createShapeComposite(std::istringstream &textStream, std::map<std::string,std::shared_ptr<Shape>> const& shapes);
 };
 
 
-#endif // BUW_SDF_HPP*/
+#endif // BUW_SDF_HPP

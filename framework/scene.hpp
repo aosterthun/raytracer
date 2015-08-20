@@ -11,12 +11,14 @@
 
 struct Scene
 {
-	Scene();
-	~Scene();
+	Scene()
+	{}
+	~Scene()
+	{}
 
 	float _ambientLight;
 	Camera _camera;
-	std::vector<std::shared_ptr<Shape>> _shapes;
+	std::map<std::string,std::shared_ptr<Shape>> _shapes;
 	std::vector<Light> _lights;
 	std::tuple<int,int> _resolution;
 
