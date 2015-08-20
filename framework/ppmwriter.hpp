@@ -20,9 +20,9 @@
 class PpmWriter
 {
 public:
+  PpmWriter();
   PpmWriter(std::size_t w, std::size_t h, std::string const& file);
   PpmWriter(std::size_t w, std::size_t h);
-  PpmWriter();
 
 public:
   void write(Pixel const& p);
