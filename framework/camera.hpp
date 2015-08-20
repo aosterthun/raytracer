@@ -19,7 +19,7 @@ public:
 	//constructors
 	Camera();
 
-	Camera(glm::vec3 const& position, glm::vec3 const& diection, float angle);
+	Camera(glm::vec3 const& diection, float angle);
 
 	//destructors
 	~Camera();
