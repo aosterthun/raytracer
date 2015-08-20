@@ -6,7 +6,13 @@
 struct OptionalHit
 {
 	//default-constructor
-	OptionalHit(bool hit, Shape shape, double t) :
+	OptionalHit() :
+	_hit{},
+	_shape{},
+	_t{}
+	{}
+	
+	OptionalHit(bool hit, std::shared_ptr<Shape> shape, double t) :
 	_hit{hit},
 	_shape{shape},
 	_t{t}
@@ -14,7 +20,7 @@ struct OptionalHit
 
 	//variables
 	bool _hit;
-	Shape _shape;
+	std::shared_ptr<Shape> _shape;
 	double _t;
 };
 
