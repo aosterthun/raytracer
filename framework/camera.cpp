@@ -7,8 +7,7 @@ _direction{1.0,0.0,0.0},
 _angle{40.0}
 {}
 
-Camera::Camera(glm::vec3 const& position, glm::vec3 const& direction, float angle) :
-_position{position},
+Camera::Camera(glm::vec3 const& direction, float angle) :
 _direction{direction},
 _angle{angle}
 {}

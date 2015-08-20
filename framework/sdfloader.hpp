@@ -23,6 +23,7 @@ private:
 	std::shared_ptr<Shape> createBox(std::istringstream &textStream);
 	std::shared_ptr<Shape> createShapeComposite(std::istringstream &textStream, std::map<std::string,std::shared_ptr<Shape>> const& shapes);
 	Light& createLight(std::istringstream &textStream);
+	Camera& createCamera(std::istringstream &textStream);
 };
 
 

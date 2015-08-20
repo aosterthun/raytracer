@@ -34,6 +34,11 @@ Scene SDFLoader::loadScene(std::string const& filePath)
 		{
 			textStream >> word;
 
+			if(word = "camera")
+			{
+				scene.camera = createCamera(textStream);
+			}
+
 			if(word == "light")
 			{
 				auto tmpLight = createLight(textStream);
@@ -131,3 +136,10 @@ Light& createLight(std::istringstream &textStream)
 	return Light(name,glm::vec3{x,y,z},la,ld);
 }
 
+Camera& createCamera(std::istringstream &textStream)
+{
+	std::string name;
+	float aperture;
+	textStream >> name >> aperture;
+	return Camera(name,aperture);
+}
