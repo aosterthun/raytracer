@@ -28,7 +28,7 @@ int main(int argc, char* argv[])
 
 	//std::thread thr([&app]() { app.render(); });
 
-	std::thread thr([&app,&scene]() { app.render(scene); });
+	std::thread thr([&app]() { app.render(); });
 
 	Window win(glm::ivec2(width,height));
 
