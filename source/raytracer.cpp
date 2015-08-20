@@ -18,11 +18,11 @@ int main(int argc, char* argv[])
 
 	unsigned const width = 600;
 	unsigned const height = 600;
-	std::string const filename = "./checkerboard.ppm";
+	std::string const filename = "/home/manuel/Medieninformatik/Programmiersprachen/Aufgaben/Aufgabenblatt8/raytracer/scene.sdf";
 
-	Scene scene{};
+	SDFloader loader{};
 
-	scene._resolution = std::make_tuple(width, height);
+	Scene scene = loader.loadScene(filename);
 
 	Renderer app{};
 
