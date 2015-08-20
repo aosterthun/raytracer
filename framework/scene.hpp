@@ -11,8 +11,15 @@
 
 struct Scene
 {
-	Scene();
-	~Scene();
+	Scene() :
+	_ambientLight{},
+	_shapes{},
+	_lights{},
+	_resolution{}
+	{}
+
+	~Scene()
+	{}
 
 	float _ambientLight;
 	Camera _camera;
