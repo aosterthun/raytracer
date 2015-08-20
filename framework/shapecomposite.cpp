@@ -4,6 +4,11 @@ ShapeComposite::ShapeComposite():
 Shape::Shape("untitled_shapecomposite", Material{})
 {}
 
+ShapeComposite::ShapeComposite(std::string const& name):
+Shape::Shape(name, Material())
+{}
+
+
 ShapeComposite::ShapeComposite(ShapeComposite const& sc):
 Shape::Shape("untitled_shapecomposite", Material())
 {

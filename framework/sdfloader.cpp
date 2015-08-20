@@ -1,87 +1,118 @@
-/*#include <sdfloader.hpp>
+#include <sdfloader.hpp>
 #include <fstream>
 #include <sstream>
 #include <iostream>
 #include <algorithm>
 #include <iterator>
 #include <string>
+#include "sphere.hpp"
+#include "box.hpp"
+#include "shapecomposite.hpp"
 
-SDFloader::SDFloader(): scene_{}
+SDFLoader::SDFLoader() 
 {}
 
-SDFloader::~SDFloader()
+SDFLoader::~SDFLoader()
 {}
 
-Scene const& SDFloader::scene() const
-{
-  return scene_;
-}
-
-void SDFloader::readSdf(std::string const& path)
+Scene SDFLoader::loadScene(std::string const& filePath)
 {
 	std::ifstream file;
-	std::string s;
-
-	file.open(path, std::ios::in);
+	std::string text;
+	Scene scene;
+	file.open(filePath, std::ios::in);
 
 	while(!file.eof())
 	{
-		getline(file, s);
-
-		std::istringstream iss(s);
-
-		std::string tmp;
-
-		iss >> tmp;
+		std::getline(file, text);
+		std::istringstream textStream{text};
+		std::string word;
 		
-		if(tmp == "define")
-		{
-			iss >> tmp;
-
-			if(tmp == "material")
-			{
-				create_material(iss);
-			}
-			//here could be future classes!
-		}
-
-		/*
-		if(tmp == "define")
-		{
-			iss >> tmp;
-
-			switch(tmp)
-			{
-			case "material": create_material(iss);
-
-			//case "shape": create_shape(iss);
-
-			//case "sphere": create_sphere(iss);
-
-			//case "box": create_box(iss);
-			}
-		}
+		textStream >> word;
 		
+		if(textStream == "define")
+		{
+			textStream >> word;
+
+			if(word == "material")
+			{
+				auto tmpMaterial = createMaterial(textStream);
+				_materials.insert(std::make_pair(tmpMaterial.name(),tmpMaterial));
+			}
+			
+			if (word == "shape")
+			{
+				textStream >> word;
+				if(word == "sphere")
+				{
+					auto tmpSphere = createSphere(textStream);
+					scene._shapes.insert(std::make_pair(tmpSphere->name(),tmpSphere));
+				}
+				if(word == "box")
+				{
+					auto tmpBox = createBox(textStream);
+					scene._shapes.insert(std::make_pair(tmpBox->name(),tmpBox));
+				}
+				if(word == "composite")
+				{
+					auto tmpShapeComposite = createShapeComposite(textStream,scene._shapes);
+					scene._shapes.insert(std::make_pair(tmpShapeComposite->name(),tmpShapeComposite));	
+				}
+			}
+		}
 	}
+	return scene;
 }
 
-void SDFloader::create_material(std::istringstream& iss)
+std::shared_ptr<Shape> SDFLoader::createSphere(std::istringstream &textStream)
+{
+	std::string name,materialName;
+	float x,y,z,rad;
+	textStream >> name >> x >> y >> z >> rad >> materialName;
+	Material material = _materials.find(materialName)->second;
+	return std::make_shared<Sphere>(glm::vec3(x,y,z),(double)rad,name,material);
+}
+
+std::shared_ptr<Shape> SDFLoader::createBox(std::istringstream &textStream)
+{
+	std::string name,materialName;
+	float x0,y0,z0,x1,y1,z1;
+	textStream >> name >> x0 >> y0 >> z0 >> x1 >> y1 >> z1 >> materialName;
+	Material material = _materials.find(materialName)->second;
+	return std::make_shared<Box>(glm::vec3(x0,y0,z0),glm::vec3(x1,y1,z1),name,material);
+}
+
+std::shared_ptr<Shape> SDFLoader::createShapeComposite(std::istringstream &textStream, std::map<std::string,std::shared_ptr<Shape>> const& shapes)
+{
+	std::string name;
+	std::string newName;
+	textStream >> name;
+	auto sc = std::make_shared<ShapeComposite>(name);
+	while(textStream)
+	{
+		textStream >> newName;
+		sc->add(shapes.find(newName)->second);
+	}
+	
+	return sc;
+}
+
+Material SDFLoader::createMaterial(std::istringstream& textStream)
 {
 	std::string name;
 	float r,g,b,m;
 
-	iss >> name >> r >> g >> b;
+	textStream >> name >> r >> g >> b;
 	Color ka{r,g,b};
 
-	iss >> r >> g >> b;
+	textStream >> r >> g >> b;
 	Color kd{r,g,b};
 
-	iss >> r >> g >> b;
+	textStream >> r >> g >> b;
 	Color ks{r,g,b};
 
-	iss >> m;
+	textStream >> m;
 
-	scene_.materials[name] = Material(name,ka,kd,ks,m);
+	return Material(name,ka,kd,ks,m);
 }
 
-*/

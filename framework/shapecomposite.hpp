@@ -9,6 +9,7 @@ class ShapeComposite : public Shape
 {
 	public:
 		ShapeComposite();
+		ShapeComposite(std::string const& name);
 		ShapeComposite(ShapeComposite const& sc);
 		ShapeComposite(std::string const& name,ShapeComposite const& sc);
 		ShapeComposite(std::shared_ptr<Shape> shape);
