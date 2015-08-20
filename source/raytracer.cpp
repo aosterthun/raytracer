@@ -1,31 +1,50 @@
 #include <thread>
 #include <renderer.hpp>
+#include <scene.hpp>
 #include <fensterchen.hpp>
 
 int main(int argc, char* argv[])
 {
-  unsigned const width = 600;
-  unsigned const height = 600;
-  std::string const filename = "./checkerboard.ppm";
+	/*
+	SDFloader loader{};
 
-  Renderer app(width, height, filename);
+	loader.readSdf(filename_);
 
-  std::thread thr([&app](){app.render();});
+	//retrieving the scene from the loader
+	Scene scene = loader.scene();
 
-  Window win(glm::ivec2(width,height));
+	Renderer app{scene.widht(), scene.height()};
+	*/
 
-  while (!win.shouldClose()) {
-    if (win.isKeyPressed(GLFW_KEY_ESCAPE)) {
-      win.stop();
-    }
+	unsigned const width = 600;
+	unsigned const height = 600;
+	std::string const filename = "./checkerboard.ppm";
 
-    glDrawPixels( width, height, GL_RGB, GL_FLOAT
-                , app.colorbuffer().data());
+	Scene scene{};
 
-    win.update();
-  }
+	scene._resolution = std::make_tuple(width, height);
 
-  thr.join();
+	Renderer app{};
 
-  return 0;
+	//std::thread thr([&app]() { app.render(); });
+
+	std::thread thr([&app,&scene]() { app.render(scene); });
+
+	Window win(glm::ivec2(width,height));
+
+	while (!win.shouldClose())
+	{
+		if (win.isKeyPressed(GLFW_KEY_ESCAPE))
+		{
+			win.stop();
+		}
+
+		glDrawPixels( width, height, GL_RGB, GL_FLOAT, app.colorbuffer().data());
+
+		win.update();
+	}
+
+	thr.join();
+
+	return 0;
 }
