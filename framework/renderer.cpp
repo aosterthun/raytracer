@@ -23,20 +23,10 @@ _ppm{}
 
 void Renderer::render()
 {
-	
 	reserveColorbuffer(_scene._resolution);
-
 	_ppm.setResolution(_scene._resolution);
 
 	raycast();
-
-	/*
-	//some testing
-	Pixel p(std::get<0>(scene._resolution)/2,std::get<1>(scene._resolution)/2);
-	
-	p.color = Color(1.0, 1.0, 1.0);
-	write(p);
-	*/
 
 	_ppm.save("test");
 }
@@ -61,15 +51,24 @@ void Renderer::raycast()
 	Color black{0.0,0.0,0.0};
 
 	//float distance{0.0};
+	int c1, c2;
+	c1 = _colorbuffer.size();
+	c2 = 0;
 
 	for (std::vector<Color>::iterator i = _colorbuffer.begin(); i != _colorbuffer.end(); ++i)
 	{
+		std::cout << "Test";
+
 		int x = (i - _colorbuffer.begin()) % std::get<0>(_scene._resolution);
 		int y =	floor((i - _colorbuffer.begin()) / std::get<0>(_scene._resolution)); 
 
 		*i = trace(_scene._camera.getEyeRay( x, y, distance));
+
+		++c2;
+
+		std::cout << "Percentage: " << c2/c1;
 	}
-	
+
 }
 
 Color Renderer::trace(Ray r)
