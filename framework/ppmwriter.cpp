@@ -65,31 +65,36 @@ PpmWriter::save(std::string const& file)
 void
 PpmWriter::save()
 {
-  const std::size_t line_length = 18;
+	const std::size_t line_length = 18;
 
-  std::fstream file(file_.c_str(), std::ios::out);
-  file.clear();
-  file << "P3 "
-       << (unsigned int)width_ << " "
-       << (unsigned int)height_ << " "
-       << 255 << " \n";
+	std::fstream file(file_.c_str(), std::ios::out);
+	file.clear();
+	file << "P3 "
+	<< (unsigned int)width_ << " "
+	<< (unsigned int)height_ << " "
+	<< 255 << " \n";
 
-  std::size_t pos = 1;
-  for (auto i = data_.begin(); i < data_.end(); ++i, ++pos) {
-      file << (int)*i << " ";
-      if (pos > line_length) {
-        file << "\n";
-        pos=0;
-      }
-    }
+	std::size_t pos = 1;
+	for (auto i = data_.begin(); i < data_.end(); ++i, ++pos) {
+	file << (int)*i << " ";
+	if (pos > line_length) {
+	file << "\n";
+	pos=0;
+	}
+	}
 
-  file.close();
+	file.close();
 }
 
 void PpmWriter::setResolution(std::tuple<int,int> const& resolution)
 {
-  size_t width_ = std::get<0>(resolution);
-  size_t height_ = std::get<1>(resolution);
+	size_t width_ = std::get<0>(resolution);
+	size_t height_ = std::get<1>(resolution);
 
-  data_.resize(width_ * height_ * (sizeof(Color)/sizeof(float)));
+	data_.resize(width_ * height_ * (sizeof(Color)/sizeof(float)));
+}
+
+void PpmWriter::setFilename(std::string const& file)
+{
+	file_ = file;
 }

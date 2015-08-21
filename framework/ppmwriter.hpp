@@ -20,21 +20,22 @@
 class PpmWriter
 {
 public:
-  PpmWriter();
-  PpmWriter(std::size_t w, std::size_t h, std::string const& file);
-  PpmWriter(std::size_t w, std::size_t h);
+	PpmWriter();
+	PpmWriter(std::size_t w, std::size_t h, std::string const& file);
+	PpmWriter(std::size_t w, std::size_t h);
 
 public:
-  void write(Pixel const& p);
-  void save(std::string const& file);
-  void save();
-  void setResolution(std::tuple<int,int> const& resolution);
+	void write(Pixel const& p);
+	void save(std::string const& file);
+	void save();
+	void setResolution(std::tuple<int,int> const& resolution);
+	void setFilename(std::string const& file);
 
 private:
-  std::string file_;
-  std::vector<unsigned int> data_;
-  size_t width_;
-  size_t height_;
+	std::string file_;
+	std::vector<unsigned int> data_;
+	size_t width_;
+	size_t height_;
 };
 
 #endif // BUW_PPMWRITER
