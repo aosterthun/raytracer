@@ -34,15 +34,15 @@ Scene SDFLoader::loadScene(std::string const& filePath)
 		{
 			textStream >> word;
 
-			if(word = "camera")
+			if(word == "camera")
 			{
-				scene.camera = createCamera(textStream);
+				scene._camera = createCamera(textStream);
 			}
 
 			if(word == "light")
 			{
 				auto tmpLight = createLight(textStream);
-				scene._lights.push_back(tmpLight);
+				scene._lights.insert(std::make_pair(tmpLight.name(),tmpLight));
 			}
 
 			if(word == "material")
@@ -127,7 +127,7 @@ Material SDFLoader::createMaterial(std::istringstream& textStream)
 	return Material(name,ka,kd,ks,m);
 }
 
-Light& createLight(std::istringstream &textStream)
+Light createLight(std::istringstream &textStream)
 {
 	std::string name;
 	double la,ld;
@@ -136,7 +136,7 @@ Light& createLight(std::istringstream &textStream)
 	return Light(name,glm::vec3{x,y,z},la,ld);
 }
 
-Camera& createCamera(std::istringstream &textStream)
+Camera createCamera(std::istringstream &textStream)
 {
 	std::string name;
 	float aperture;

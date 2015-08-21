@@ -19,13 +19,17 @@ public:
 	//constructors
 	Camera();
 
-	Camera(glm::vec3 const& diection, float angle);
+	Camera(glm::vec3 const& diection, float aperture);
+
+	Camera(std::string const& name, float aperture);
 
 	//destructors
 	~Camera();
 
 
 	//get-methods
+
+	std::string const& name() const;
 
 	glm::vec3 const& position() const;
 
@@ -46,7 +50,9 @@ private:
 	
 	glm::vec3 _direction;
 
-	float _angle;
+	float _aperture;
+
+	std::string _name;
 };
 
 //operators

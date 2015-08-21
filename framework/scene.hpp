@@ -1,5 +1,6 @@
 #ifndef BUW_SCENE_HPP
 #define BUW_SCENE_HPP
+#include <memory>
 #include <map>
 #include <vector>
 #include <tuple>
@@ -7,7 +8,7 @@
 #include "material.hpp"
 #include "shape.hpp"
 #include "light.hpp"
-#include <memory>
+
 
 struct Scene
 {
@@ -24,8 +25,8 @@ struct Scene
 
 	float _ambientLight;
 	Camera _camera;
-	std::map<std::string name,std::shared_ptr<Shape>> _shapes;
-	std::map<std::string name,Light> _lights;
+	std::map<std::string,std::shared_ptr<Shape>> _shapes;
+	std::map<std::string,Light> _lights;
 	std::tuple<int,int> _resolution;
 
 };
