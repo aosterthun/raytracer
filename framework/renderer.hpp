@@ -33,6 +33,8 @@ public:
 
 	Renderer();
 
+	Renderer(Scene const& scene);
+	
 	void render();
 
 	//void render();

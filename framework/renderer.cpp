@@ -15,6 +15,12 @@ _colorbuffer{},
 _ppm{}
 {}
 
+Renderer(Scene const& scene) :
+_scene{scene},
+_colorbuffer{},
+_ppm{}
+{}
+
 void Renderer::render()
 {
 	
