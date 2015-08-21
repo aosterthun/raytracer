@@ -24,9 +24,7 @@ int main(int argc, char* argv[])
 
 	Scene scene = loader.loadScene(filename);
 
-	Renderer app{};
-
-	//std::thread thr([&app]() { app.render(); });
+	Renderer app{scene};
 
 	std::thread thr([&app]() { app.render(); });
 
