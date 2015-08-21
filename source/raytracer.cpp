@@ -20,7 +20,7 @@ int main(int argc, char* argv[])
 	unsigned const height = 600;
 	std::string const filename = "/home/manuel/Medieninformatik/Programmiersprachen/Aufgaben/Aufgabenblatt8/raytracer/scene.sdf";
 
-	SDFloader loader{};
+	SDFLoader loader{};
 
 	Scene scene = loader.loadScene(filename);
 
