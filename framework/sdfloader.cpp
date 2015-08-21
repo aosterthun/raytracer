@@ -127,7 +127,7 @@ Material SDFLoader::createMaterial(std::istringstream& textStream)
 	return Material(name,ka,kd,ks,m);
 }
 
-Light createLight(std::istringstream &textStream)
+Light SDFLoader::createLight(std::istringstream &textStream)
 {
 	std::string name;
 	double la,ld;
@@ -136,7 +136,7 @@ Light createLight(std::istringstream &textStream)
 	return Light(name,glm::vec3{x,y,z},la,ld);
 }
 
-Camera createCamera(std::istringstream &textStream)
+Camera SDFLoader::createCamera(std::istringstream &textStream)
 {
 	std::string name;
 	float aperture;
