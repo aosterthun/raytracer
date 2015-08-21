@@ -4,12 +4,17 @@
 Camera::Camera() :
 _position{0.0},
 _direction{1.0,0.0,0.0},
-_angle{40.0}
+_aperture{40.0}
 {}
 
-Camera::Camera(glm::vec3 const& direction, float angle) :
+Camera::Camera(glm::vec3 const& direction, float aperture) :
 _direction{direction},
-_angle{angle}
+_aperture{aperture}
+{}
+
+Camera::Camera(std::string const& name, float aperture) :
+_name{name},
+_aperture{aperture}
 {}
 
 //destructors
@@ -17,6 +22,11 @@ Camera::~Camera()
 {}
 
 //get-methods
+
+std::string const& Camera::name() const
+{
+	return _name;
+}
 
 glm::vec3 const& Camera::position() const
 {
@@ -37,7 +47,7 @@ Ray Camera::getEyeRay(int x, int y, float &distance) const
 
 float Camera::getDistance(int width) const
 {
-	return (width/2)/tan(_angle/2);
+	return (width/2)/tan(_aperture/2);
 }
 
 std::ostream& Camera::print(std::ostream& os) const
