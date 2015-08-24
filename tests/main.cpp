@@ -6,6 +6,7 @@
 #include <shapecomposite.hpp>
 #include <light.hpp>
 #include <camera.hpp>
+#include <sdfloader.hpp>
 #include <fstream>
 #include <iostream>
 #include <glm/glm.hpp>
@@ -36,5 +37,7 @@ TEST_CASE("shapecompositeIntersect","[ShapeComposite]")
 
 int main(int argc, char *argv[])
 {
+	SDFLoader sdfLoader{};
+	auto scene = sdfLoader.loadScene("../scene.sdf");
 	return Catch::Session().run(argc, argv);
 }

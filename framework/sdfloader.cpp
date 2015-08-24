@@ -30,14 +30,20 @@ Scene SDFLoader::loadScene(std::string const& filePath)
 		
 		textStream >> word;
 		
+		if(word == "camera")
+		{
+			auto tmpCamera = createCamera(textStream);
+			_cameras.insert(std::make_pair(tmpCamera.name(),tmpCamera));
+		}
+
+		if(word == "render")
+		{
+			setRenderData(textStream,scene);
+		}
+
 		if(textStream == "define")
 		{
 			textStream >> word;
-
-			if(word == "camera")
-			{
-				scene._camera = createCamera(textStream);
-			}
 
 			if(word == "light")
 			{
@@ -142,4 +148,12 @@ Camera SDFLoader::createCamera(std::istringstream &textStream)
 	float aperture;
 	textStream >> name >> aperture;
 	return Camera(name,aperture);
+}
+
+void SDFLoader::setRenderData(std::istringstream &textStream, Scene &scene)
+{
+	std::string camName;
+	textStream >> camName;
+	scene._camera = _cameras.find(camName)->second;
+	textStream >> scene._renderFilename >> std::get<0>(scene._resolution) >> std::get<1>(scene._resolution);
 }
