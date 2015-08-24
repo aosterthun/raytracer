@@ -4,6 +4,6 @@ define shape box test 0 0 -100 10 10 -200
 
 define light sun 1000 700 0 0.2 0.2 0.2 0.8 0.8 0.8
 
-define camera eye 45.0
+camera eye 45.0
 
 render eye image.ppm 480 320 

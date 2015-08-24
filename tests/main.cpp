@@ -21,6 +21,7 @@ namespace glm
 	std::ostream& operator<<(std::ostream& os, glm::mat4 const& mat)
 	{
 		os << glm::to_string(mat);
+		return os;
 	}
 }
 
