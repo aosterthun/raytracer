@@ -13,8 +13,8 @@ int main(int argc, char* argv[])
 	
 	Renderer app{scene};
 
-	unsigned const width = std::get<0>(scene._resolution);
-	unsigned const height = std::get<1>(scene._resolution);
+	unsigned const width = std::get<0>(scene._camera.getResolution());
+	unsigned const height = std::get<1>(scene._camera.getResolution());
 	
 	//std::cout << scene;
 

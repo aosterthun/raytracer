@@ -162,7 +162,11 @@ Camera SDFLoader::createCamera(std::istringstream& textStream)
 void SDFLoader::setRenderData(std::istringstream& textStream, Scene& scene)
 {
 	std::string camName;
+	int width, height;
+
 	textStream >> camName;
 	scene._camera = _cameras.find(camName)->second;
-	textStream >> scene._renderFilename >> std::get<0>(scene._resolution) >> std::get<1>(scene._resolution);
+	textStream >> scene._renderFilename;
+	textStream >> width >> height;
+	scene._camera.setResolution(width, height);
 }
