@@ -29,49 +29,57 @@ Scene SDFLoader::loadScene(std::string const& filePath)
 		std::string word;
 		
 		textStream >> word;
+		//std::cout << "Word:" << word << "\n";
 		
 		if(word == "camera")
 		{
+			//std::cout << "Is Camera \n";
 			auto tmpCamera = createCamera(textStream);
 			_cameras.insert(std::make_pair(tmpCamera.name(),tmpCamera));
 		}
 
 		if(word == "render")
 		{
+			//std::cout << "Is Render \n";
 			setRenderData(textStream,scene);
 		}
-
-		if(textStream == "define")
+		if(word == "define")
 		{
+			//std::cout << "Is Define \n";
 			textStream >> word;
-
 			if(word == "light")
 			{
+				//std::cout << "Is Light \n";
 				auto tmpLight = createLight(textStream);
 				scene._lights.insert(std::make_pair(tmpLight.name(),tmpLight));
 			}
 
 			if(word == "material")
 			{
+				//std::cout << "Is Material \n";
 				auto tmpMaterial = createMaterial(textStream);
 				_materials.insert(std::make_pair(tmpMaterial.name(),tmpMaterial));
 			}
 			
 			if (word == "shape")
 			{
+				//std::cout << "Is Shape \n";
 				textStream >> word;
 				if(word == "sphere")
 				{
+					//std::cout << "Is Sphere \n";
 					auto tmpSphere = createSphere(textStream);
 					scene._shapes.insert(std::make_pair(tmpSphere->name(),tmpSphere));
 				}
 				if(word == "box")
 				{
+					//std::cout << "Is Box \n";
 					auto tmpBox = createBox(textStream);
 					scene._shapes.insert(std::make_pair(tmpBox->name(),tmpBox));
 				}
 				if(word == "composite")
 				{
+					//std::cout << "Is Compsite \n";
 					auto tmpShapeComposite = createShapeComposite(textStream,scene._shapes);
 					scene._shapes.insert(std::make_pair(tmpShapeComposite->name(),tmpShapeComposite));	
 				}
@@ -86,6 +94,7 @@ std::shared_ptr<Shape> SDFLoader::createSphere(std::istringstream& textStream)
 	std::string name,materialName;
 	float x,y,z,rad;
 	textStream >> name >> x >> y >> z >> rad >> materialName;
+	//std::cout << name << x << y << z << rad <<materialName; 
 	Material material = _materials.find(materialName)->second;
 	return std::make_shared<Sphere>(glm::vec3(x,y,z),(double)rad,name,material);
 }
@@ -95,6 +104,7 @@ std::shared_ptr<Shape> SDFLoader::createBox(std::istringstream& textStream)
 	std::string name,materialName;
 	float x0,y0,z0,x1,y1,z1;
 	textStream >> name >> x0 >> y0 >> z0 >> x1 >> y1 >> z1 >> materialName;
+	//std::cout << name << x0 << y0 << z0 << x1 << y1 << z1 << materialName;
 	Material material = _materials.find(materialName)->second;
 	return std::make_shared<Box>(glm::vec3(x0,y0,z0),glm::vec3(x1,y1,z1),name,material);
 }
@@ -139,6 +149,7 @@ Light SDFLoader::createLight(std::istringstream& textStream)
 	double la,ld;
 	float x,y,z;
 	textStream >> name >> x >> y >> z >> la >> ld;
+	//std::cout << name << x << y << z << la << ld;
 	return Light(name,glm::vec3{x,y,z},la,ld);
 }
 

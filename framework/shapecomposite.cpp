@@ -58,6 +58,16 @@ std::shared_ptr<Shape> ShapeComposite::getShape(std::string const& name)
 	return it->second;
 }
 
+std::ostream& ShapeComposite::print(std::ostream& os) const
+{
+	os << "[ShapeComposite]";
+	for(auto shapePair : _shapes)
+	{
+		os << shapePair.second;
+	}
+	return os;
+}
+
 bool ShapeComposite::intersect(Ray const& ray, float& distance) const
 {
 	float tmpDist;

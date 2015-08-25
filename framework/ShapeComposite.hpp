@@ -14,6 +14,7 @@ class ShapeComposite : public Shape
 		ShapeComposite(std::string const& name,ShapeComposite const& sc);
 		ShapeComposite(std::shared_ptr<Shape> shape);
 		ShapeComposite(std::string const& name,std::shared_ptr<Shape> shape);
+		std::ostream& print(std::ostream& os) const override;
 		void add(std::shared_ptr<Shape> shape);
 		void remove(std::string const& name);
 		std::map<std::string,std::shared_ptr<Shape>> getChilds() const;

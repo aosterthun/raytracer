@@ -53,6 +53,8 @@ float Camera::getDistance(int width) const
 std::ostream& Camera::print(std::ostream& os) const
 {
 	os << "[Camera] " <<
+				"name: " << _name << "\n" <<
+				"aperture: " << _aperture << "\n" <<
  				"position: " << glm::to_string(_position) << "\n" <<
  				"direction: " << glm::to_string(_direction) << "\n"; 
 	return os;

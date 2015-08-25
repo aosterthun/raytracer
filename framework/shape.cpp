@@ -33,6 +33,11 @@ Shape::~Shape()
 	std::cout << "Shape destruct \n";
 }
 
+std::ostream& operator<<(std::ostream& os , std::shared_ptr<Shape> const& s)
+{
+	return s->print(os);
+}
+
 std::ostream& operator<<(std::ostream& os , Shape const& s)
 {
 	return s.print(os);

@@ -45,7 +45,7 @@ double Light::la() const
 //outstream methods
 std::ostream& Light::print(std::ostream& os) const
 {
-	os << "[Shape ID: " << this << "]\n" <<
+	os << "[Light]\n" <<
 				"Name: " << _name << "\n" <<
  				"Position: " << glm::to_string(_position) << "\n" <<
  				"ld-value: " << _ld << "\n" <<

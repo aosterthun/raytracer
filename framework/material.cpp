@@ -45,7 +45,7 @@ float Material::m() const
 //outstream methods
 std::ostream& Material::print(std::ostream& os) const
 {
-	os << "Name: " << _name << "\nColors:\n" << _ka << _kd << _ks << _m;
+	os << "Name: " << _name << "\nColors:\n" << _ka << _kd << _ks << "Reflection:" <<  _m << "\n";
 	return os;
 }
 

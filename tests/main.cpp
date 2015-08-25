@@ -3,6 +3,7 @@
 #include <sphere.hpp>
 #include <box.hpp>
 #include <sceneobject.hpp>
+#include <sdfloader.hpp>
 #include <shapecomposite.hpp>
 #include <light.hpp>
 #include <camera.hpp>
@@ -40,5 +41,6 @@ int main(int argc, char *argv[])
 {
 	SDFLoader sdfLoader{};
 	auto scene = sdfLoader.loadScene("../scene.sdf");
+	std::cout << scene;
 	return Catch::Session().run(argc, argv);
 }

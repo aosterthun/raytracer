@@ -9,6 +9,7 @@
 #include <iostream>
 #include <glm/ext.hpp>
 #include <stdexcept>
+#include <memory>
 #include "sceneobject.hpp"
 
 class Shape : public SceneObject
@@ -27,6 +28,7 @@ class Shape : public SceneObject
 		Material _material;
 };
 
-std::ostream& operator<<(std::ostream& os , Shape const& s);
+std::ostream& operator<<(std::ostream& os , std::shared_ptr<Shape> const& s);
+std::ostream& operator<<(std::ostream& os ,Shape const& s);
 
 #endif
