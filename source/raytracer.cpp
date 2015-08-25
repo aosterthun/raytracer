@@ -16,6 +16,8 @@ int main(int argc, char* argv[])
 	unsigned const width = std::get<0>(scene._resolution);
 	unsigned const height = std::get<1>(scene._resolution);
 	
+	//std::cout << scene;
+
 	std::thread thr([&app]() { app.render(); });
 
 	Window win(glm::ivec2( width ,height));
@@ -29,7 +31,7 @@ int main(int argc, char* argv[])
 
 		glDrawPixels( width, height, GL_RGB, GL_FLOAT, app.colorbuffer().data());
 
-		std::cout << "X: " << width << "Y: " << height;
+		//std::cout << "X: " << width << "Y: " << height;
 		
 		win.update();
 	}

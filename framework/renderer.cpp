@@ -47,23 +47,25 @@ void Renderer::raycast()
 {	
 	float distance = _scene._camera.getDistance(std::get<0>(_scene._resolution));
 
-	//float distance = 0.0;
-
-	Color white{1.0,1.0,1.0};
-	Color black{0.0,0.0,0.0};
-
-	//float distance{0.0};
-
 	//might be a member variable for class App
 	float counter = 0;
 
 	std::vector<Color>::iterator i = _colorbuffer.begin();
+
+	glm::vec3 origin{};
+	glm::vec3 direction{};
 
 	for( i; i != _colorbuffer.end(); ++i)
 	{
 		int x = (i - _colorbuffer.begin()) % std::get<0>(_scene._resolution);
 		int y =	floor((i - _colorbuffer.begin()) / std::get<0>(_scene._resolution)); 
 
+		origin = _scene._camera.getEyeRay( x, y, distance).origin;
+
+		direction = _scene._camera.getEyeRay( x, y, distance).direction;
+
+		//std::cout << "Origin: " << "x " << origin.x << "y " << origin.y << "z " << origin.z << "\n" << "Direction: " << "x " << direction.x << "y " << direction.y << "z " << direction.z << "\n";
+		
 		*i = trace(_scene._camera.getEyeRay( x, y, distance));
 		
 		++counter;
@@ -108,8 +110,8 @@ Color Renderer::trace(Ray r)
 
 Color Renderer::shade(OptionalHit hit)
 {
-	Color backgroundColor{1.0, 1.0, 0.0};
-	Color testColor{ 0.5, 0.5, 0.5};
+	Color backgroundColor{0.0, 0.0, 0.0};
+	Color testColor{ 1.0, 1.0, 1.0};
 
 	if(hit._hit)
 	{
