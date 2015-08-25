@@ -23,8 +23,8 @@ _ppm{}
 
 void Renderer::render()
 {
-	reserveColorbuffer(_scene._resolution);
-	_ppm.setResolution(_scene._resolution);
+	reserveColorbuffer(_scene._camera.getResolution());
+	_ppm.setResolution(_scene._camera.getResolution());
 
 	raycast();
 
@@ -45,28 +45,25 @@ void Renderer::reserveColorbuffer(std::tuple<int,int> const& resolution)
 //Idea: std::vector<Color> Renderer::raycast();
 void Renderer::raycast()
 {	
-	float distance = _scene._camera.getDistance(std::get<0>(_scene._resolution));
+	float distance = _scene._camera.getDistance(std::get<0>(_scene._camera.getResolution()));
 
 	//might be a member variable for class App
 	float counter = 0;
 
-	std::vector<Color>::iterator i = _colorbuffer.begin();
+	Ray eyeRay{};
 
-	glm::vec3 origin{};
-	glm::vec3 direction{};
+	std::vector<Color>::iterator i = _colorbuffer.begin();
 
 	for( i; i != _colorbuffer.end(); ++i)
 	{
-		int x = (i - _colorbuffer.begin()) % std::get<0>(_scene._resolution);
-		int y =	floor((i - _colorbuffer.begin()) / std::get<0>(_scene._resolution)); 
+		int x = 1 + (i - _colorbuffer.begin()) % std::get<0>(_scene._camera.getResolution());
+		int y =	1 + floor((i - _colorbuffer.begin()) / std::get<0>(_scene._camera.getResolution())); 
 
-		origin = _scene._camera.getEyeRay( x, y, distance).origin;
+		eyeRay = _scene._camera.getEyeRay( x, y, distance);
 
-		direction = _scene._camera.getEyeRay( x, y, distance).direction;
+		//std::cout << "X: " << x << "Y: " << y << "\n" << "EyeRay: " << eyeRay << "###########";
 
-		//std::cout << "Origin: " << "x " << origin.x << "y " << origin.y << "z " << origin.z << "\n" << "Direction: " << "x " << direction.x << "y " << direction.y << "z " << direction.z << "\n";
-		
-		*i = trace(_scene._camera.getEyeRay( x, y, distance));
+		*i = trace(eyeRay);
 		
 		++counter;
 
@@ -110,7 +107,7 @@ Color Renderer::trace(Ray r)
 
 Color Renderer::shade(OptionalHit hit)
 {
-	Color backgroundColor{0.0, 0.0, 0.0};
+	Color backgroundColor{1.0, 0.25, 1.0};
 	Color testColor{ 1.0, 1.0, 1.0};
 
 	if(hit._hit)

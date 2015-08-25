@@ -9,15 +9,13 @@
 #include "shape.hpp"
 #include "light.hpp"
 
-
 struct Scene
 {
 	Scene() :
 	_ambientLight{},
 	_camera{},
 	_shapes{},
-	_lights{},
-	_resolution{}
+	_lights{}
 	{}
 
 	~Scene()
@@ -27,8 +25,8 @@ struct Scene
 	Camera _camera;
 	std::map<std::string,std::shared_ptr<Shape>> _shapes;
 	std::map<std::string,Light> _lights;
-	std::tuple<int,int> _resolution;
 	std::string _renderFilename;
+	
 	friend std::ostream& operator<<(std::ostream& os , Scene const& s)
 	{
 		for(auto shapePair : s._shapes)
@@ -42,7 +40,6 @@ struct Scene
 		os << s._camera;
 		os << "AmbientLight: " << s._ambientLight << "\n"; 
 		os << "RenderFilename: " << s._renderFilename << "\n";
-		os << "Resolution: X:" << std::get<0>(s._resolution) << "Y:" << std::get<0>(s._resolution) << "\n";
 		
 		return os;
 	}

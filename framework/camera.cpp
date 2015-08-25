@@ -5,18 +5,27 @@ Camera::Camera() :
 _position{0.0},
 _direction{0.0,0.0,-1.0},
 _aperture{40.0}
-{}
+{
+	std::get<0>(_resolution) = 600;
+	std::get<1>(_resolution) = 400;
+}
 
 Camera::Camera(glm::vec3 const& direction, float aperture) :
 _direction{direction},
 _aperture{aperture}
-{}
+{
+	std::get<0>(_resolution) = 600;
+	std::get<1>(_resolution) = 400;
+}
 
 Camera::Camera(std::string const& name, float aperture) :
 _name{name},
 _direction{0.0,0.0,-1.0},
 _aperture{aperture}
-{}
+{
+	std::get<0>(_resolution) = 600;
+	std::get<1>(_resolution) = 400;
+}
 
 //destructors
 Camera::~Camera()
@@ -40,10 +49,22 @@ glm::vec3 const& Camera::direction() const
 }
 
 //non-member functions
+void Camera::setResolution(int width, int height)
+{
+	std::get<0>(_resolution) = width;
+	std::get<1>(_resolution) = height;
+}
+
+std::tuple<int,int> Camera::getResolution() const
+{
+	return _resolution;
+}
 
 Ray Camera::getEyeRay(int x, int y, float &distance) const
 {
-	return Ray{glm::vec3{_position}, glm::vec3{x, y, distance}};
+	int width = x - (std::get<0>(_resolution)/2);
+	int height = y - (std::get<1>(_resolution)/2);
+	return Ray{glm::vec3{_position}, glm::vec3{ width, height, distance}};
 }
 
 float Camera::getDistance(int width) const
@@ -57,7 +78,9 @@ std::ostream& Camera::print(std::ostream& os) const
 				"name: " << _name << "\n" <<
 				"aperture: " << _aperture << "\n" <<
  				"position: " << glm::to_string(_position) << "\n" <<
- 				"direction: " << glm::to_string(_direction) << "\n"; 
+ 				"direction: " << glm::to_string(_direction) << "\n" <<
+ 				"Resolution: X:" << std::get<0>(_resolution) << "Y:" << std::get<0>(_resolution) << "\n";
+
 	return os;
 }
 
