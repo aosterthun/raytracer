@@ -47,6 +47,11 @@ std::ostream& Sphere::print(std::ostream& os) const
 	return os;
 }
 
+glm::vec3 Sphere::normal(Ray const& ray) const
+{
+
+}
+
 glm::vec3 Sphere::center() const
 {
 	return _center;

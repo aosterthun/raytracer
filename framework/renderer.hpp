@@ -17,38 +17,60 @@
 #include "ray.hpp"
 #include "shape.hpp"
 #include "camera.hpp"
+#include "scene.hpp"
+#include "optionalHit.hpp"
 
 #include <memory>
 #include <string>
 #include <glm/glm.hpp>
 
+//floor()
+#include <math.h> 
+
 class Renderer
 {
 public:
 
-	Renderer(unsigned w, unsigned h, std::string const& file);
+	Renderer();
 
+	Renderer(Scene const& scene);
+	
 	void render();
+
+	//void render();
+
 	void write(Pixel const& p);
 
-	void raycast(std::vector<Color> &colorbuffer, Camera &camera);
+	void setScene(Scene const& scene);
 
 	inline std::vector<Color> const& colorbuffer() const
 	{
-		return colorbuffer_;
+		return _colorbuffer;
 	}
 
 private:
 
-	unsigned width_;
-	unsigned height_;
-	std::vector<Color> colorbuffer_;
-	std::string filename_;
-	PpmWriter ppm_;
+	//variables
+	std::tuple<int,int> _resolution;
+
+	std::vector<Color> _colorbuffer;
+
+	PpmWriter _ppm;
+
+	Scene _scene;
+
+	//methods
+
+	std::string getPercentage(int counter) const;
+
+	void reserveColorbuffer(std::tuple<int,int> const& resolution);
+
+	void raycast();
 
 	Color trace(Ray r);
 
-	Color shade(std::shared_ptr<Shape> s, Ray r, double t);
+	Color shade(OptionalHit hit);
+
 };
 
 #endif // #ifndef BUW_RENDERER_HPP

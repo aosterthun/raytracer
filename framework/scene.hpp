@@ -12,8 +12,14 @@
 
 struct Scene
 {
-	Scene()
+	Scene() :
+	_ambientLight{},
+	_camera{},
+	_shapes{},
+	_lights{},
+	_resolution{}
 	{}
+
 	~Scene()
 	{}
 
