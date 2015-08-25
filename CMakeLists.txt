@@ -78,6 +78,7 @@ if (CMAKE_COMPILER_IS_GNUCC OR CMAKE_C_COMPILER_ID STREQUAL "Clang")
   if (NOT APPLE)
     add_definitions(-fpermissive)
   endif()
+  add_definitions(-Wall)
 endif()
 
 if(MSVC)

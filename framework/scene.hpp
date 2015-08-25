@@ -28,6 +28,7 @@ struct Scene
 	std::map<std::string,std::shared_ptr<Shape>> _shapes;
 	std::map<std::string,Light> _lights;
 	std::tuple<int,int> _resolution;
+	std::string _renderFilename;
 
 };
 

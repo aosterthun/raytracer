@@ -30,14 +30,20 @@ Scene SDFLoader::loadScene(std::string const& filePath)
 		
 		textStream >> word;
 		
+		if(word == "camera")
+		{
+			auto tmpCamera = createCamera(textStream);
+			_cameras.insert(std::make_pair(tmpCamera.name(),tmpCamera));
+		}
+
+		if(word == "render")
+		{
+			setRenderData(textStream,scene);
+		}
+
 		if(textStream == "define")
 		{
 			textStream >> word;
-
-			if(word == "camera")
-			{
-				scene._camera = createCamera(textStream);
-			}
 
 			if(word == "light")
 			{
@@ -75,7 +81,7 @@ Scene SDFLoader::loadScene(std::string const& filePath)
 	return scene;
 }
 
-std::shared_ptr<Shape> SDFLoader::createSphere(std::istringstream &textStream)
+std::shared_ptr<Shape> SDFLoader::createSphere(std::istringstream& textStream)
 {
 	std::string name,materialName;
 	float x,y,z,rad;
@@ -84,7 +90,7 @@ std::shared_ptr<Shape> SDFLoader::createSphere(std::istringstream &textStream)
 	return std::make_shared<Sphere>(glm::vec3(x,y,z),(double)rad,name,material);
 }
 
-std::shared_ptr<Shape> SDFLoader::createBox(std::istringstream &textStream)
+std::shared_ptr<Shape> SDFLoader::createBox(std::istringstream& textStream)
 {
 	std::string name,materialName;
 	float x0,y0,z0,x1,y1,z1;
@@ -93,7 +99,7 @@ std::shared_ptr<Shape> SDFLoader::createBox(std::istringstream &textStream)
 	return std::make_shared<Box>(glm::vec3(x0,y0,z0),glm::vec3(x1,y1,z1),name,material);
 }
 
-std::shared_ptr<Shape> SDFLoader::createShapeComposite(std::istringstream &textStream, std::map<std::string,std::shared_ptr<Shape>> const& shapes)
+std::shared_ptr<Shape> SDFLoader::createShapeComposite(std::istringstream& textStream, std::map<std::string,std::shared_ptr<Shape>> const& shapes)
 {
 	std::string name;
 	std::string newName;
@@ -127,7 +133,7 @@ Material SDFLoader::createMaterial(std::istringstream& textStream)
 	return Material(name,ka,kd,ks,m);
 }
 
-Light SDFLoader::createLight(std::istringstream &textStream)
+Light SDFLoader::createLight(std::istringstream& textStream)
 {
 	std::string name;
 	double la,ld;
@@ -136,10 +142,18 @@ Light SDFLoader::createLight(std::istringstream &textStream)
 	return Light(name,glm::vec3{x,y,z},la,ld);
 }
 
-Camera SDFLoader::createCamera(std::istringstream &textStream)
+Camera SDFLoader::createCamera(std::istringstream& textStream)
 {
 	std::string name;
 	float aperture;
 	textStream >> name >> aperture;
 	return Camera(name,aperture);
+}
+
+void SDFLoader::setRenderData(std::istringstream& textStream, Scene& scene)
+{
+	std::string camName;
+	textStream >> camName;
+	scene._camera = _cameras.find(camName)->second;
+	textStream >> scene._renderFilename >> std::get<0>(scene._resolution) >> std::get<1>(scene._resolution);
 }

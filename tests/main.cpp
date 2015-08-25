@@ -8,9 +8,6 @@
 #include <shapecomposite.hpp>
 #include <light.hpp>
 #include <camera.hpp>
-#include <scene.hpp>
-#include <renderer.hpp>
-
 #include <iostream>
 
 namespace glm
@@ -18,6 +15,7 @@ namespace glm
 	std::ostream& operator<<(std::ostream& os, glm::mat4 const& mat)
 	{
 		os << glm::to_string(mat);
+		return os;
 	}
 }
 
@@ -34,5 +32,7 @@ TEST_CASE("shapecompositeIntersect","[ShapeComposite]")
 
 int main(int argc, char *argv[])
 {
+	SDFLoader sdfLoader{};
+	auto scene = sdfLoader.loadScene("../scene.sdf");
 	return Catch::Session().run(argc, argv);
 }
