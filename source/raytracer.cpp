@@ -18,14 +18,17 @@ int main(int argc, char* argv[])
 
 	unsigned const width = 600;
 	unsigned const height = 600;
-	std::string const filename = "/home/manuel/Medieninformatik/Programmiersprachen/Aufgaben/Aufgabenblatt8/raytracer/scene.sdf";
+	std::string const filename = "../scene.sdf";
 
 	SDFLoader loader{};
 
 	Scene scene = loader.loadScene(filename);
+	
+	//auto t1 = std::make_tuple( width, height);
+	//scene._resolution = t1;
 
+	
 	Renderer app{scene};
-
 
 	std::thread thr([&app]() { app.render(); });
 
@@ -40,6 +43,8 @@ int main(int argc, char* argv[])
 
 		glDrawPixels( width, height, GL_RGB, GL_FLOAT, app.colorbuffer().data());
 
+	std::cout << "X: " << std::get<0>(scene._resolution) << "Y: " << std::get<1>(scene._resolution);
+		
 		win.update();
 	}
 
