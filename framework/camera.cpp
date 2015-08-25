@@ -3,7 +3,7 @@
 //constructors
 Camera::Camera() :
 _position{0.0},
-_direction{1.0,0.0,0.0},
+_direction{0.0,0.0,-1.0},
 _aperture{40.0}
 {}
 
@@ -14,6 +14,7 @@ _aperture{aperture}
 
 Camera::Camera(std::string const& name, float aperture) :
 _name{name},
+_direction{0.0,0.0,-1.0},
 _aperture{aperture}
 {}
 

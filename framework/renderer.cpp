@@ -9,95 +9,142 @@
 
 #include "renderer.hpp"
 
-Renderer::Renderer(unsigned w, unsigned h, std::string const& file)
-  : width_(w)
-  , height_(h)
-  , colorbuffer_(w*h, Color(0.0, 0.0, 0.0))
-  , filename_(file)
-  , ppm_(width_, height_)
+Renderer::Renderer() :
+_scene{},
+_colorbuffer{},
+_ppm{}
+{}
+
+Renderer::Renderer(Scene const& scene) :
+_scene{scene},
+_colorbuffer{},
+_ppm{}
 {}
 
 void Renderer::render()
 {
-	/*
-	//NOTE: MIGHT BE OUTSIDE
-	SDFloader loader{};
-	loader.readSdf(filename_);
+	reserveColorbuffer(_scene._resolution);
+	_ppm.setResolution(_scene._resolution);
 
-	//retrieving the scene from the loader
-	Scene scene = loader.scene();
-	//////////////////////////////////////////
+	raycast();
 
-	raycast(colorbuffer_, scene.camera);
-
-	Pixel p(300,300);
-	p.color = Color(1.0, 1.0, 1.0);
-	write(p);
-
-	ppm_.save(filename_);
-	
-	*/
+	_ppm.save("test");
 }
 
-void Renderer::raycast(std::vector<Color> &colorbuffer, Camera &camera)
+void Renderer::setScene(Scene const& scene)
 {
-	/*
-	float distance = camera.getDistance(width_);
-	for(auto pixel : colorbuffer)
-	{
-		pixel = trace(camera.getEyeRay( (pixel.x)-960, (pixel.y)-960, distance));
-	}
-	*/
+	_scene = scene;
 }
 
+void Renderer::reserveColorbuffer(std::tuple<int,int> const& resolution)
+{
+	float size = std::get<0>(resolution) * std::get<1>(resolution);
+	_colorbuffer.resize(size, Color(0.0, 0.0, 0.0));
+}
+
+//Idea: std::vector<Color> Renderer::raycast();
+void Renderer::raycast()
+{	
+	float distance = _scene._camera.getDistance(std::get<0>(_scene._resolution));
+
+	//float distance = 0.0;
+
+	Color white{1.0,1.0,1.0};
+	Color black{0.0,0.0,0.0};
+
+	//float distance{0.0};
+
+	//might be a member variable for class App
+	float counter = 0;
+
+	std::vector<Color>::iterator i = _colorbuffer.begin();
+
+	for( i; i != _colorbuffer.end(); ++i)
+	{
+		int x = (i - _colorbuffer.begin()) % std::get<0>(_scene._resolution);
+		int y =	floor((i - _colorbuffer.begin()) / std::get<0>(_scene._resolution)); 
+
+		*i = trace(_scene._camera.getEyeRay( x, y, distance));
+		
+		++counter;
+
+		//std::cout << getPercentage(counter);
+		
+	}
+}
 
 Color Renderer::trace(Ray r)
 {
+	float distance = 0.0;
 
-	return ;
+	float nearestDistance = 0.0;
+
+	std::shared_ptr<Shape> nearestObject;
+
+	for(std::map<std::string, std::shared_ptr<Shape>>::iterator i = _scene._shapes.begin(); i != _scene._shapes.end(); ++i)
+	{
+		bool hit = i->second->intersect(r, distance);
+		OptionalHit tmp{};
+
+		tmp._hit = hit;
+
+		if(hit)
+		{
+			if(distance < nearestDistance || nearestDistance == 0.0)
+			{
+				nearestDistance = distance;
+				nearestObject = i->second;
+				tmp._shape = i->second;
+			}
+			else
+			{
+				tmp._shape = nullptr;
+				tmp._t = INFINITY;
+			}
+		}
+		return shade(tmp);
+	}
 }
 
-Color Renderer::shade(std::shared_ptr<Shape> s, Ray r, double t)
+Color Renderer::shade(OptionalHit hit)
 {
+	Color backgroundColor{1.0, 1.0, 0.0};
+	Color testColor{ 0.5, 0.5, 0.5};
 
-	return ;
+	if(hit._hit)
+	{
+		//return hit._shape->material().ka();
+		return testColor;
+	}
+	else
+	{
+		return backgroundColor;
+	}
+}
+
+std::string Renderer::getPercentage(int counter) const
+{	
+	float result = 100 * (counter/(float)_colorbuffer.size());
+	return std::to_string(result) + " Prozent \n";
 }
 
 void Renderer::write(Pixel const& p)
 {
-  // flip pixels, because of opengl glDrawPixels
-  size_t buf_pos = (width_*p.y + p.x);
-  if (buf_pos >= colorbuffer_.size() || (int)buf_pos < 0) {
-    std::cerr << "Fatal Error Renderer::write(Pixel p) : "
-      << "pixel out of ppm_ : "
-      << (int)p.x << "," << (int)p.y
-      << std::endl;
-  } else {
-    colorbuffer_[buf_pos] = p.color;
-  }
+	// flip pixels, because of opengl glDrawPixels
+	size_t position = (std::get<0>(_resolution)*p.y + p.x);
 
-  ppm_.write(p);
-}
-
-/*
-const std::size_t checkersize = 20;
-
-for (unsigned y = 0; y < height_; ++y)
-{
-	for (unsigned x = 0; x < width_; ++x)
+	if (position >= _colorbuffer.size() || (int)position < 0)
 	{
-		Pixel p(x,y);
-		if ( ((x/checkersize)%2) != ((y/checkersize)%2))
-		{
-		p.color = Color(0.0, 1.0, float(x)/height_);
-		}
-		else
-		{
-		p.color = Color(1.0, 0.0, float(y)/width_);
-		}
-
-		write(p);
+		std::cerr << "Fatal Error Renderer::write(Pixel p) : "
+		<< "pixel out of ppm_ : "
+		<< (int)p.x << "," << (int)p.y
+		<< std::endl;
 	}
+	else
+	{
+		_colorbuffer[position] = p.color;
+	}
+
+	//extra for the image-file output
+	_ppm.write(p);
 }
-ppm_.save(filename_);
-*/

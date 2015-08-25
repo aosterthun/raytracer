@@ -1,6 +1,8 @@
 #ifndef BUW_SPHERE_HPP
 #define BUW_SPHERE_HPP
 #include "shape.hpp"
+#include "ray.hpp"
+
 #include <cmath>
 #include <glm/vec3.hpp>
 
@@ -15,6 +17,7 @@ class Sphere : public Shape
 		bool intersect(Ray const& ray, float& distance) const override;
 		std::ostream& print(std::ostream& os) const override;
 		glm::vec3 center() const;
+		glm::vec3 normal(Ray const& ray) const;
 		double radius() const;
 		~Sphere() override; 
 	private:

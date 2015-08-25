@@ -1,31 +1,40 @@
 #include <thread>
 #include <renderer.hpp>
+#include <scene.hpp>
 #include <fensterchen.hpp>
 
 int main(int argc, char* argv[])
-{
-  unsigned const width = 600;
-  unsigned const height = 600;
-  std::string const filename = "./checkerboard.ppm";
+{	
+	std::string const filename = "../scene.sdf";
 
-  Renderer app(width, height, filename);
+	SDFLoader loader{};
 
-  std::thread thr([&app](){app.render();});
+	Scene scene = loader.loadScene(filename);
+	
+	Renderer app{scene};
 
-  Window win(glm::ivec2(width,height));
+	unsigned const width = std::get<0>(scene._resolution);
+	unsigned const height = std::get<1>(scene._resolution);
+	
+	std::thread thr([&app]() { app.render(); });
 
-  while (!win.shouldClose()) {
-    if (win.isKeyPressed(GLFW_KEY_ESCAPE)) {
-      win.stop();
-    }
+	Window win(glm::ivec2( width ,height));
 
-    glDrawPixels( width, height, GL_RGB, GL_FLOAT
-                , app.colorbuffer().data());
+	while (!win.shouldClose())
+	{
+		if (win.isKeyPressed(GLFW_KEY_ESCAPE))
+		{
+			win.stop();
+		}
 
-    win.update();
-  }
+		glDrawPixels( width, height, GL_RGB, GL_FLOAT, app.colorbuffer().data());
 
-  thr.join();
+		std::cout << "X: " << width << "Y: " << height;
+		
+		win.update();
+	}
 
-  return 0;
+	thr.join();
+
+	return 0;
 }

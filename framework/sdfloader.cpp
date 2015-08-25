@@ -95,8 +95,7 @@ std::shared_ptr<Shape> SDFLoader::createSphere(std::istringstream& textStream)
 	float x,y,z,rad;
 	textStream >> name >> x >> y >> z >> rad >> materialName;
 	//std::cout << name << x << y << z << rad <<materialName; 
-	Material material = _materials.find(materialName)->second;
-	return std::make_shared<Sphere>(glm::vec3(x,y,z),(double)rad,name,material);
+	return std::make_shared<Sphere>(glm::vec3(x,y,z),(double)rad,name,_materials.find(materialName)->second);
 }
 
 std::shared_ptr<Shape> SDFLoader::createBox(std::istringstream& textStream)
@@ -105,8 +104,7 @@ std::shared_ptr<Shape> SDFLoader::createBox(std::istringstream& textStream)
 	float x0,y0,z0,x1,y1,z1;
 	textStream >> name >> x0 >> y0 >> z0 >> x1 >> y1 >> z1 >> materialName;
 	//std::cout << name << x0 << y0 << z0 << x1 << y1 << z1 << materialName;
-	Material material = _materials.find(materialName)->second;
-	return std::make_shared<Box>(glm::vec3(x0,y0,z0),glm::vec3(x1,y1,z1),name,material);
+	return std::make_shared<Box>(glm::vec3(x0,y0,z0),glm::vec3(x1,y1,z1),name,_materials.find(materialName)->second);
 }
 
 std::shared_ptr<Shape> SDFLoader::createShapeComposite(std::istringstream& textStream, std::map<std::string,std::shared_ptr<Shape>> const& shapes)
