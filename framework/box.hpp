@@ -1,6 +1,7 @@
 #ifndef BUW_BOX_HPP
 #define BUW_BOX_HPP
 #include "shape.hpp"
+#include "optionalhit.hpp"
 #include <glm/vec3.hpp>
 
 class Box : public Shape
@@ -16,7 +17,7 @@ class Box : public Shape
 		glm::vec3 max() const;
 
 		std::ostream& print(std::ostream& os) const override;
-		bool intersect(Ray const& ray, float& distance) const override;
+		OptionalHit intersect(Ray const& ray, float& distance) const override;
 
 	private:
 		glm::vec3 _min;

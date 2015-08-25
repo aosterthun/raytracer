@@ -68,22 +68,22 @@ std::ostream& ShapeComposite::print(std::ostream& os) const
 	return os;
 }
 
-bool ShapeComposite::intersect(Ray const& ray, float& distance) const
+OptionalHit ShapeComposite::intersect(Ray const& ray, float& distance) const
 {
-	float tmpDist;
+	OptionalHit tmpHit{};
 	for(auto shapePair : _shapes)
 	{
-		if(shapePair.second->intersect(ray, distance)){
-			if(distance <= tmpDist && distance != 0)
+		auto optHit = shapePair.second->intersect(ray, distance)
+		if(optHit._hit){
+			if(optHit._t <= tmpHit._t && optHit._t != 0)
 			{
-				tmpDist = distance;
+				tmpHit = optHit;
 			}
 		}
-
 	}
 	if(distance != 0)
 	{
-		return true;
+		return tmpHit;
 	}
-	return false;
+	return OptionalHit{false,nullptr,INFINITY};
 }

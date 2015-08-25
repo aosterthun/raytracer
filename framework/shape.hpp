@@ -1,7 +1,6 @@
 #ifndef BUW_SHAPE_HPP
 #define BUW_SHAPE_HPP
 #define GLM_FORCE_RADIANS
-
 #include "material.hpp"
 #include <string>
 #include <ray.hpp>
@@ -11,13 +10,14 @@
 #include <stdexcept>
 #include <memory>
 #include "sceneobject.hpp"
+#include "optionalhit.hpp"
 
 class Shape : public SceneObject
 {
 	public: 
 		Shape();
 		Shape(std::string const& name, Material const& material);
-		virtual bool intersect(Ray const& ray, float& distance) const = 0;
+		virtual OptionalHit intersect(Ray const& ray, float& distance) const = 0;
 		virtual std::ostream& print(std::ostream& os) const;
 		Material material() const;
 		std::string name() const;

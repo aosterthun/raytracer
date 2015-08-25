@@ -18,7 +18,7 @@
 #include "shape.hpp"
 #include "camera.hpp"
 #include "scene.hpp"
-#include "optionalHit.hpp"
+#include "optionalhit.hpp"
 
 #include <memory>
 #include <string>

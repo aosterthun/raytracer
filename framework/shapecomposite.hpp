@@ -5,6 +5,8 @@
 #include <utility>
 #include "shape.hpp"
 #include "material.hpp"
+#include "optionalhit.hpp"
+
 class ShapeComposite : public Shape
 {
 	public:
@@ -19,7 +21,7 @@ class ShapeComposite : public Shape
 		void remove(std::string const& name);
 		std::map<std::string,std::shared_ptr<Shape>> getChilds() const;
 		std::shared_ptr<Shape> getShape(std::string const& name);
-		bool intersect(Ray const& ray, float& distance) const override;
+		OptionalHit intersect(Ray const& ray, float& distance) const override;
 		~ShapeComposite();
 
 	private:

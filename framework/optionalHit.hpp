@@ -2,6 +2,11 @@
 #define BUW_OPTIONALHIT_HPP
 
 #include <iostream>
+#include <memory>
+
+#include "shape.hpp"
+
+class Shape;
 
 struct OptionalHit
 {
@@ -22,6 +27,7 @@ struct OptionalHit
 	bool _hit;
 	std::shared_ptr<Shape> _shape;
 	double _t;
+	Ray _r;
 };
 
 #endif //#define BUW_OPTIONALHIT_HPP

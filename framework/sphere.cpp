@@ -30,11 +30,16 @@ _center{center},
 _radius{radius}
 {}
 
-bool Sphere::intersect(Ray const& ray, float& distance) const
+OptionalHit Sphere::intersect(Ray const& ray, float& distance) const
 {
-	return glm::intersectRaySphere(
-					ray.origin,glm::normalize(ray.direction),
-					_center,_radius,distance);
+	if (glm::intersectRaySphere(ray.origin,glm::normalize(ray.direction),_center,_radius,distance))
+	{
+		return OptionalHit{true,std::make_shared<Sphere>(*this),distance};
+	}
+	else
+	{
+		return OptionalHit{false,nullptr,INFINITY};
+	}
 }
 
 std::ostream& Sphere::print(std::ostream& os) const

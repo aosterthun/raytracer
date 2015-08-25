@@ -33,7 +33,7 @@ std::ostream& Box::print(std::ostream& os) const
 	return os;
 }
 
-bool Box::intersect(Ray const& r, float& distance) const
+OptionalHit Box::intersect(Ray const& r, float& distance) const
 {
 	double tx1 = (_min.x - r.origin.x)/glm::normalize(r.direction).x;
 	double tx2 = (_max.x - r.origin.x)/glm::normalize(r.direction).x;
@@ -53,7 +53,14 @@ bool Box::intersect(Ray const& r, float& distance) const
 	tnear = std::max(tnear, std::min(tz1, tz2));
 	tfar = std::min(tfar, std::max(tz1, tz2));
 
-	return tfar >= std::max(0.0, tnear);
+	if(tfar >= std::max(0.0, tnear))
+	{
+		return OptionalHit{true,std::make_shared<Box>(*this),sqrt(tnear*tnear*(r.direction.x*r.direction.x +r.direction.y*r.direction.y +r.direction.z*r.direction.z))};
+	}
+	else
+	{
+		return OptionalHit{false,nullptr,INFINITY};
+	}
 }
 
 glm::vec3 Box::min() const
