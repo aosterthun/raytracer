@@ -48,7 +48,7 @@ Ray Camera::getEyeRay(int x, int y, float &distance) const
 
 float Camera::getDistance(int width) const
 {
-	return (width/2)/tan(_aperture/2);
+	return -(width/2)/tan(_aperture/2);
 }
 
 std::ostream& Camera::print(std::ostream& os) const
