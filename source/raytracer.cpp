@@ -4,35 +4,21 @@
 #include <fensterchen.hpp>
 
 int main(int argc, char* argv[])
-{
-	/*
-	SDFloader loader{};
-
-	loader.readSdf(filename_);
-
-	//retrieving the scene from the loader
-	Scene scene = loader.scene();
-
-	Renderer app{scene.widht(), scene.height()};
-	*/
-
-	unsigned const width = 600;
-	unsigned const height = 600;
+{	
 	std::string const filename = "../scene.sdf";
 
 	SDFLoader loader{};
 
 	Scene scene = loader.loadScene(filename);
 	
-	//auto t1 = std::make_tuple( width, height);
-	//scene._resolution = t1;
-
-	
 	Renderer app{scene};
 
+	unsigned const width = std::get<0>(scene._resolution);
+	unsigned const height = std::get<1>(scene._resolution);
+	
 	std::thread thr([&app]() { app.render(); });
 
-	Window win(glm::ivec2(width,height));
+	Window win(glm::ivec2( width ,height));
 
 	while (!win.shouldClose())
 	{
@@ -43,7 +29,7 @@ int main(int argc, char* argv[])
 
 		glDrawPixels( width, height, GL_RGB, GL_FLOAT, app.colorbuffer().data());
 
-	std::cout << "X: " << std::get<0>(scene._resolution) << "Y: " << std::get<1>(scene._resolution);
+		std::cout << "X: " << width << "Y: " << height;
 		
 		win.update();
 	}
