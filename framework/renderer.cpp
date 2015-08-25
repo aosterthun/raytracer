@@ -44,9 +44,10 @@ void Renderer::reserveColorbuffer(std::tuple<int,int> const& resolution)
 
 //Idea: std::vector<Color> Renderer::raycast();
 void Renderer::raycast()
-{
-	
+{	
 	float distance = _scene._camera.getDistance(std::get<0>(_scene._resolution));
+
+	//float distance = 0.0;
 
 	Color white{1.0,1.0,1.0};
 	Color black{0.0,0.0,0.0};
@@ -56,8 +57,6 @@ void Renderer::raycast()
 	//might be a member variable for class App
 	float counter = 0;
 
-	Color test{0.01960784313, 1.0, 1.0};
-
 	std::vector<Color>::iterator i = _colorbuffer.begin();
 
 	for( i; i != _colorbuffer.end(); ++i)
@@ -65,21 +64,13 @@ void Renderer::raycast()
 		int x = (i - _colorbuffer.begin()) % std::get<0>(_scene._resolution);
 		int y =	floor((i - _colorbuffer.begin()) / std::get<0>(_scene._resolution)); 
 
-
-		//*i = trace(_scene._camera.getEyeRay( x, y, distance));
+		*i = trace(_scene._camera.getEyeRay( x, y, distance));
 		
-		*i = test;
 		++counter;
 
 		//std::cout << getPercentage(counter);
 		
 	}
-}
-
-std::string Renderer::getPercentage(int counter) const
-{	
-	float result = 100 * (counter/(float)_colorbuffer.size());
-	return std::to_string(result) + " Prozent \n";
 }
 
 Color Renderer::trace(Ray r)
@@ -129,6 +120,12 @@ Color Renderer::shade(OptionalHit hit)
 	{
 		return backgroundColor;
 	}
+}
+
+std::string Renderer::getPercentage(int counter) const
+{	
+	float result = 100 * (counter/(float)_colorbuffer.size());
+	return std::to_string(result) + " Prozent \n";
 }
 
 void Renderer::write(Pixel const& p)
