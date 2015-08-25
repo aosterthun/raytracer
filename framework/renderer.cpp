@@ -73,15 +73,22 @@ void Renderer::raycast()
 }
 
 Color Renderer::trace(Ray r)
-{
-	float distance = 0.0;
+{	
+	float distance{0.0};
 
-	float nearestDistance = 0.0;
-
-	std::shared_ptr<Shape> nearestObject;
+	OptionalHit nearestHit{};
 
 	for(std::map<std::string, std::shared_ptr<Shape>>::iterator i = _scene._shapes.begin(); i != _scene._shapes.end(); ++i)
 	{
+		OptionalHit optHit = i->second->intersect(r, distance);
+
+		
+		if(optHit._t <= nearestHit._t || nearestHit._t == 0.0)
+		{
+			nearestHit = optHit;
+		}
+
+		/*
 		bool hit = i->second->intersect(r, distance);
 		OptionalHit tmp{};
 
@@ -102,7 +109,9 @@ Color Renderer::trace(Ray r)
 			}
 		}
 		return shade(tmp);
+		*/
 	}
+	return shade(nearestHit);
 }
 
 Color Renderer::shade(OptionalHit hit)
@@ -112,8 +121,7 @@ Color Renderer::shade(OptionalHit hit)
 
 	if(hit._hit)
 	{
-		//return hit._shape->material().ka();
-		return testColor;
+		return hit._shape->material().ka();
 	}
 	else
 	{

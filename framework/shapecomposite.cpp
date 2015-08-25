@@ -73,9 +73,10 @@ OptionalHit ShapeComposite::intersect(Ray const& ray, float& distance) const
 	OptionalHit tmpHit{};
 	for(auto shapePair : _shapes)
 	{
-		auto optHit = shapePair.second->intersect(ray, distance)
-		if(optHit._hit){
-			if(optHit._t <= tmpHit._t && optHit._t != 0)
+		auto optHit = shapePair.second->intersect(ray, distance);
+		if(optHit._hit)
+		{
+			if(optHit._t <= tmpHit._t || tmpHit._t == 0.0)
 			{
 				tmpHit = optHit;
 			}

@@ -21,16 +21,6 @@ namespace glm
 	}
 }
 
-//ShapeComposite TestCase
-TEST_CASE("shapecompositeIntersect","[ShapeComposite]")
-{
-	Ray ray{glm::vec3{6.0,6.0,6.0},glm::vec3{-1.0,-1.0,-1.0}};
-	auto sphere = std::make_shared<Sphere>(glm::vec3{0.0,0.0,0.0}, 7.0);
-	ShapeComposite sc{sphere};
-	float d;
-	REQUIRE(sphere->intersect(ray,d));
-	REQUIRE(sc.intersect(ray,d));
-}
 
 int main(int argc, char *argv[])
 {

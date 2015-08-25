@@ -14,7 +14,7 @@ struct OptionalHit
 	OptionalHit() :
 	_hit{},
 	_shape{},
-	_t{}
+	_t{0.0}
 	{}
 	
 	OptionalHit(bool hit, std::shared_ptr<Shape> shape, double t) :
