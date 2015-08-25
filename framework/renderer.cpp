@@ -42,6 +42,7 @@ void Renderer::reserveColorbuffer(std::tuple<int,int> const& resolution)
 	_colorbuffer.resize(size, Color(0.0, 0.0, 0.0));
 }
 
+//Idea: std::vector<Color> Renderer::raycast();
 void Renderer::raycast()
 {
 	
@@ -51,24 +52,34 @@ void Renderer::raycast()
 	Color black{0.0,0.0,0.0};
 
 	//float distance{0.0};
-	int c1, c2;
-	c1 = _colorbuffer.size();
-	c2 = 0;
 
-	for (std::vector<Color>::iterator i = _colorbuffer.begin(); i != _colorbuffer.end(); ++i)
+	//might be a member variable for class App
+	float counter = 0;
+
+	Color test{0.01960784313, 1.0, 1.0};
+
+	std::vector<Color>::iterator i = _colorbuffer.begin();
+
+	for( i; i != _colorbuffer.end(); ++i)
 	{
-		std::cout << "Test";
-
 		int x = (i - _colorbuffer.begin()) % std::get<0>(_scene._resolution);
 		int y =	floor((i - _colorbuffer.begin()) / std::get<0>(_scene._resolution)); 
 
-		*i = trace(_scene._camera.getEyeRay( x, y, distance));
 
-		++c2;
+		//*i = trace(_scene._camera.getEyeRay( x, y, distance));
+		
+		*i = test;
+		++counter;
 
-		std::cout << "Percentage: " << c2/c1;
+		//std::cout << getPercentage(counter);
+		
 	}
+}
 
+std::string Renderer::getPercentage(int counter) const
+{	
+	float result = 100 * (counter/(float)_colorbuffer.size());
+	return std::to_string(result) + " Prozent \n";
 }
 
 Color Renderer::trace(Ray r)
@@ -106,11 +117,13 @@ Color Renderer::trace(Ray r)
 
 Color Renderer::shade(OptionalHit hit)
 {
-	Color backgroundColor{0.0, 0.0, 0.0};
+	Color backgroundColor{1.0, 1.0, 0.0};
+	Color testColor{ 0.5, 0.5, 0.5};
 
 	if(hit._hit)
 	{
-		return hit._shape->material().ka();
+		//return hit._shape->material().ka();
+		return testColor;
 	}
 	else
 	{

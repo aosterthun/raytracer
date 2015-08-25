@@ -61,6 +61,8 @@ private:
 
 	//methods
 
+	std::string getPercentage(int counter) const;
+
 	void reserveColorbuffer(std::tuple<int,int> const& resolution);
 
 	void raycast();
