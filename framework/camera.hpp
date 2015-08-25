@@ -6,6 +6,8 @@
 #include "sceneobject.hpp"
 #include "ray.hpp"
 
+#include <tuple>
+
 #include <iostream>
 #include <stdexcept>
 #include <glm/glm.hpp>
@@ -18,7 +20,7 @@ public:
 
 	//constructors
 	Camera();
-	Camera(glm::vec3 const& diection, float aperture);
+	Camera(glm::vec3 const& direction, float aperture);
 	Camera(std::string const& name, float aperture);
 
 	//destructors
@@ -32,6 +34,8 @@ public:
 	//non-member functions
 	Ray getEyeRay(int x, int y, float &distance) const;
 	float getDistance(int width) const;
+	void setResolution(int width, int height);
+	std::tuple<int,int> getResolution() const;
 
 	//outstream methods
 	std::ostream& print(std::ostream&) const;
@@ -41,6 +45,7 @@ private:
 	glm::vec3 _direction;
 	std::string _name;
 	float _aperture;
+	std::tuple<int,int> _resolution;
 };
 
 //operators
