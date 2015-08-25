@@ -8,6 +8,7 @@
 #include <shapecomposite.hpp>
 #include <light.hpp>
 #include <camera.hpp>
+#include <sdfloader.hpp>
 #include <iostream>
 
 namespace glm
