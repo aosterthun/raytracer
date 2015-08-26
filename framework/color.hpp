@@ -59,7 +59,7 @@ struct Color
 		return *this;
 	}
 
-	/*
+	
 	Color& operator*=(float val)
 	{
 		r *= val;
@@ -67,7 +67,7 @@ struct Color
 		b *= val;
 		return *this;
 	}
-	*/
+	
 	bool operator==(Color const& other)
 	{
 		if( r == other.r &&
@@ -79,14 +79,13 @@ struct Color
 		return false;
 	}
 
-	/*
 	friend Color operator*(Color const& a,float val)
 	{
 		auto tmp(a);
 		tmp *= val;
 		return tmp;
 	}
-	*/
+	
 
 	friend Color operator+(Color const& a, Color const& b)
 	{
@@ -102,12 +101,25 @@ struct Color
 		return tmp;
 	}
 
+	friend Color operator*(Color const& a, double val)
+	{
+		Color tmp{a};
+		tmp.r = tmp.r * val;
+		tmp.g = tmp.g * val;
+		tmp.b = tmp.b * val;
+		return tmp;
+	}
+
 	friend Color operator*(Color const& a, Color const& b)
 	{
-		auto tmp(a);
-		tmp *= b;
+		Color tmp{a};
+		Color tmp2{b};
+		tmp.r = tmp.r * tmp2.r;
+		tmp.g = tmp.g * tmp2.g;
+		tmp.b = tmp.b * tmp2.b;
 		return tmp;
 	}
 	};
+
 
 #endif //#define BUW_COLOR_HPP

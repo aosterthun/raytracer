@@ -22,17 +22,17 @@ std::string const& Material::name() const
 	return _name;
 }
 
-Color const& Material::ka() const
+Color& Material::ka()
 {
 	return _ka;
 }
 
-Color const& Material::kd() const
+Color& Material::kd()
 {
 	return _kd;
 }
 
-Color const& Material::ks() const
+Color& Material::ks()
 {
 	return _ks;
 }
