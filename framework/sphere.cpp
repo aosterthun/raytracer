@@ -32,9 +32,10 @@ _radius{radius}
 
 OptionalHit Sphere::intersect(Ray const& ray, float& distance) const
 {
-	if (glm::intersectRaySphere(ray.origin,glm::normalize(ray.direction),_center,_radius,distance))
+	glm::vec3 norm,intersect;
+	if (glm::intersectRaySphere(ray.origin,glm::normalize(ray.direction),_center,_radius,intersect,norm))
 	{
-		return OptionalHit{true,std::make_shared<Sphere>(*this),distance};
+		return OptionalHit{true,std::make_shared<Sphere>(*this),glm::distance(ray.origin,intersect),intersect,norm};
 	}
 	else
 	{
@@ -50,11 +51,6 @@ std::ostream& Sphere::print(std::ostream& os) const
  				"Center: " << glm::to_string(_center) << "\n" <<
  				"Radius: " << _radius << "\n\n";
 	return os;
-}
-
-glm::vec3 Sphere::normal(Ray const& ray) const
-{
-
 }
 
 glm::vec3 Sphere::center() const
