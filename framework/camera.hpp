@@ -7,7 +7,7 @@
 #include "ray.hpp"
 
 #include <tuple>
-
+#include <cmath>
 #include <iostream>
 #include <stdexcept>
 #include <glm/glm.hpp>
