@@ -69,5 +69,5 @@ double Sphere::radius() const
 
 Sphere::~Sphere()
 {
-	std::cout << "Sphere destruct \n";
+	//std::cout << "Sphere destruct \n";
 }

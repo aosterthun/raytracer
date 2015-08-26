@@ -30,7 +30,7 @@ std::string Shape::name() const
 
 Shape::~Shape()
 {
-	std::cout << "Shape destruct \n";
+	//std::cout << "Shape destruct \n";
 }
 
 std::ostream& operator<<(std::ostream& os , std::shared_ptr<Shape> const& s)

@@ -20,7 +20,7 @@ _max{max}
 
 Box::~Box()
 {
-	std::cout << "Box destruct \n";
+	//std::cout << "Box destruct \n";
 }
 
 std::ostream& Box::print(std::ostream& os) const
