@@ -24,7 +24,6 @@ public:
 	PpmWriter(std::size_t w, std::size_t h, std::string const& file);
 	PpmWriter(std::size_t w, std::size_t h);
 
-public:
 	void write(Pixel const& p);
 	void save(std::string const& file);
 	void save();
