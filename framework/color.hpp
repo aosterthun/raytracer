@@ -51,14 +51,23 @@ struct Color
 		return *this;
 	}
 
-	Color& operator*=(float val)
+	Color& operator*=(Color const& other)
 	{
-		r -= val;
-		g -= val;
-		b -= val;
+		r *= other.r;
+		g *= other.g;
+		b *= other.b;
 		return *this;
 	}
 
+	/*
+	Color& operator*=(float val)
+	{
+		r *= val;
+		g *= val;
+		b *= val;
+		return *this;
+	}
+	*/
 	bool operator==(Color const& other)
 	{
 		if( r == other.r &&
@@ -70,15 +79,14 @@ struct Color
 		return false;
 	}
 
-
+	/*
 	friend Color operator*(Color const& a,float val)
 	{
 		auto tmp(a);
-		tmp.r *= val;
-		tmp.g *= val;
-		tmp.b *= val;
+		tmp *= val;
 		return tmp;
 	}
+	*/
 
 	friend Color operator+(Color const& a, Color const& b)
 	{
@@ -91,6 +99,13 @@ struct Color
 	{
 		auto tmp(a);
 		tmp -= b;
+		return tmp;
+	}
+
+	friend Color operator*(Color const& a, Color const& b)
+	{
+		auto tmp(a);
+		tmp *= b;
 		return tmp;
 	}
 	};

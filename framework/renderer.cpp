@@ -9,6 +9,8 @@
 
 #include "renderer.hpp"
 
+const int RECURSION_DEPTH = 2;
+
 Renderer::Renderer() :
 _scene{},
 _colorbuffer{},
@@ -98,10 +100,31 @@ Color Renderer::shade(OptionalHit hit)
 	Color backgroundColor{0.0, 0.0, 0.0};
 	Color testColor{ 1.0, 1.0, 1.0};
 
+	glm::vec3 light_pos{0.0, 0.0, -20.0};
+
+	glm::vec3 intersect{hit._intersect};
+
+	glm::vec3 test = light_pos - intersect;
+
 	if(hit._hit)
 	{
-		Color ambient = getAmbient() + hit._shape->material().ka();
-		Color diffuse = hit._t * hit._shape->material().kd() * getDiffuse() * cos(glm::dot(hit._intersect, hit._normal));
+		Color ambient = getAmbient() * hit._shape->material().ka();
+		
+		Color diffuse = glm::distance(hit._intersect, light_pos) * hit._shape->material().kd() *  getDiffuse() * glm::dot(glm::normalize(hit._normal), glm::normalize(test));
+
+		std::cout << "distance: " << glm::distance(hit._intersect, light_pos) << "\n";
+		std::cout << "shape_material_kd: " << hit._shape->material().kd() << "\n";
+		std::cout << "light_diffuse" << getDiffuse() << "\n";
+		std::cout << "dot: " << glm::dot(glm::normalize(hit._normal), glm::normalize(test)) << "\n";
+
+		std::cout << "normal: " << glm::to_string(hit._normal) << "\n" << "test: " << glm::to_string(test) <<"\n";
+
+		std::cout << "ambient: " << ambient << "\n";
+
+		std::cout << "diffuse: " << diffuse << "\n";
+
+		std::cout << "################################\n";
+
 		return ambient + diffuse;
 		//return hit._shape->material().ka();
 	}
@@ -130,7 +153,7 @@ Color Renderer::getDiffuse()
 	{
 		tmp = tmp + i->second.ld();
 	}
-	return tmp;	
+	return tmp;
 }
 
 std::string Renderer::getPercentage(int counter) const
