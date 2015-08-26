@@ -144,11 +144,11 @@ Material SDFLoader::createMaterial(std::istringstream& textStream)
 Light SDFLoader::createLight(std::istringstream& textStream)
 {
 	std::string name;
-	double la,ld;
+	float lar,lag,lab,ldr,ldg,ldb;
 	float x,y,z;
-	textStream >> name >> x >> y >> z >> la >> ld;
+	textStream >> name >> x >> y >> z >> lar >> lag >> lab >> ldr >> ldg >> ldb;
 	//std::cout << name << x << y << z << la << ld;
-	return Light(name,glm::vec3{x,y,z},la,ld);
+	return Light(name,glm::vec3{x,y,z},Color{lar,lag,lab},Color{ldr,ldg,ldb});
 }
 
 Camera SDFLoader::createCamera(std::istringstream& textStream)

@@ -5,11 +5,11 @@
 Light::Light() :
 _name{"untitledLight"},
 _position{0.0},
-_ld{0.0},
-_la{0.0}
+_ld{Color{}},
+_la{Color{}}
 {}
 
-Light::Light(std::string const& name, glm::vec3 const& position, double ld, double la) :
+Light::Light(std::string const& name, glm::vec3 const& position, Color const& ld, Color const& la) :
 _name{name},
 _position{position},
 _ld{ld},
@@ -32,12 +32,12 @@ glm::vec3 const& Light::position() const
 	return _position;
 }
 
-double Light::ld() const
+Color Light::ld() const
 {
 	return _ld;
 }
 
-double Light::la() const
+Color Light::la() const
 {
 	return _la;
 }
