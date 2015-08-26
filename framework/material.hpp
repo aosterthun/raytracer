@@ -20,11 +20,11 @@ public:
 	//get-methods
 	std::string const& name() const;
 
-	Color const& ka() const;
+	Color& ka();
 
-	Color const& kd() const;
+	Color& kd();
 
-	Color const& ks() const;
+	Color& ks();
 
 	float m() const;
 

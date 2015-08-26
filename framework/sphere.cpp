@@ -49,7 +49,7 @@ std::ostream& Sphere::print(std::ostream& os) const
 				"Name: " << _name << "\n" <<
  				"Material: " << _material <<
  				"Center: " << glm::to_string(_center) << "\n" <<
- 				"Radius: " << _radius << "\n\n";
+ 				"Radius: " << _radius << "\n";
 	return os;
 }
 
