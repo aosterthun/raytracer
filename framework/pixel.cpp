@@ -16,6 +16,12 @@ Pixel::Pixel(unsigned int a, unsigned int b)
     color(0,0,0)
 {}
 
+Pixel::Pixel(unsigned int x, unsigned int y, Color col):
+    x(x),
+    y(y),
+    color(col)
+{}
+
 void Pixel::print(std::ostream& os) const
 {
   os << "Pixel[" << (int)x << ',' << (int)y << "]("
