@@ -30,8 +30,6 @@ int main(int argc, char* argv[])
 		}
 
 		glDrawPixels( width, height, GL_RGB, GL_FLOAT, app.colorbuffer().data());
-
-		//std::cout << "X: " << width << "Y: " << height;
 		
 		win.update();
 	}

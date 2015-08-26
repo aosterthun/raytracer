@@ -24,6 +24,7 @@ _ppm{}
 void Renderer::render()
 {
 	reserveColorbuffer(_scene._camera.getResolution());
+
 	_ppm.setResolution(_scene._camera.getResolution());
 
 	raycast();
@@ -52,23 +53,25 @@ void Renderer::raycast()
 
 	Ray eyeRay{};
 
-	std::vector<Color>::iterator i = _colorbuffer.begin();
-
-	for( i; i != _colorbuffer.end(); ++i)
+	//normal integer for loop?
+	for( std::vector<Color>::iterator i = _colorbuffer.begin(); i != _colorbuffer.end(); ++i)
 	{
-		int x = 1 + (i - _colorbuffer.begin()) % std::get<0>(_scene._camera.getResolution());
-		int y =	1 + floor((i - _colorbuffer.begin()) / std::get<0>(_scene._camera.getResolution())); 
+		int x = (i - _colorbuffer.begin()) % std::get<0>(_scene._camera.getResolution());
+		int y =	floor((i - _colorbuffer.begin()) / std::get<0>(_scene._camera.getResolution())); 
 
 		eyeRay = _scene._camera.getEyeRay( x, y, distance);
 
-		//std::cout << "X: " << x << "Y: " << y << "\n" << "EyeRay: " << eyeRay << "###########";
+		Color col = trace(eyeRay);
 
-		*i = trace(eyeRay);
-		
-		++counter;
+		Pixel p;
+		p.x = x;
+		p.y = y;
+		p.color = col;
 
+		write(p);
+
+		//++counter;
 		//std::cout << getPercentage(counter);
-		
 	}
 }
 
@@ -116,7 +119,7 @@ Color Renderer::trace(Ray r)
 
 Color Renderer::shade(OptionalHit hit)
 {
-	Color backgroundColor{1.0, 0.25, 1.0};
+	Color backgroundColor{0.0, 0.0, 0.0};
 	Color testColor{ 1.0, 1.0, 1.0};
 
 	if(hit._hit)
@@ -138,7 +141,7 @@ std::string Renderer::getPercentage(int counter) const
 void Renderer::write(Pixel const& p)
 {
 	// flip pixels, because of opengl glDrawPixels
-	size_t position = (std::get<0>(_resolution)*p.y + p.x);
+	size_t position = (std::get<0>(_scene._camera.getResolution())*p.y + p.x);
 
 	if (position >= _colorbuffer.size() || (int)position < 0)
 	{
