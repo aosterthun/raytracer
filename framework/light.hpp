@@ -4,7 +4,7 @@
 #define GLM_FORCE_RADIANS
 
 #include "sceneobject.hpp"
-
+#include "color.hpp"
 #include <iostream>
 #include <stdexcept>
 #include <glm/glm.hpp>
@@ -18,7 +18,7 @@ public:
 	//constructors
 	Light();
 
-	Light(std::string const& name, glm::vec3 const& position, double ld, double la);
+	Light(std::string const& name, glm::vec3 const& position, Color const& ld, Color const& la);
 
 	//destructors
 	~Light();
@@ -30,9 +30,9 @@ public:
 
 	glm::vec3 const& position() const;
 
-	double ld() const;
+	Color ld() const;
 
-	double la() const;
+	Color la() const;
 
 	//non-member functions
 
@@ -45,9 +45,9 @@ private:
 
 	glm::vec3 _position;
 
-	double _ld;
+	Color _ld;
 
-	double _la;
+	Color _la;
 
 };
 
