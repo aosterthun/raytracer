@@ -101,7 +101,7 @@ Color Renderer::shade(OptionalHit hit)
 	if(hit._hit)
 	{
 		Color ambient = getAmbient() + hit._shape->material().ka();
-		Color diffuse;
+		Color diffuse = hit._t * hit._shape->material().kd() * getDiffuse() * cos(glm::dot(hit._intersect, hit._normal));
 		return ambient + diffuse;
 		//return hit._shape->material().ka();
 	}
@@ -119,6 +119,18 @@ Color Renderer::getAmbient()
 		tmp = tmp + i->second.la();
 	}
 	return tmp;
+}
+
+Color Renderer::getDiffuse()
+{
+	//THIS IS NOT RIGHT, GO LEFT...lel
+
+	Color tmp{};
+	for(std::map<std::string, Light>::iterator i = _scene._lights.begin(); i != _scene._lights.end(); ++i)
+	{
+		tmp = tmp + i->second.ld();
+	}
+	return tmp;	
 }
 
 std::string Renderer::getPercentage(int counter) const

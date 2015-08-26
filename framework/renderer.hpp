@@ -72,6 +72,8 @@ private:
 	Color shade(OptionalHit hit);
 
 	Color getAmbient();
+
+	Color getDiffuse();
 };
 
 #endif // #ifndef BUW_RENDERER_HPP
