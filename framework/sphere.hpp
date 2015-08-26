@@ -18,7 +18,6 @@ class Sphere : public Shape
 		OptionalHit intersect(Ray const& ray, float& distance) const override;
 		std::ostream& print(std::ostream& os) const override;
 		glm::vec3 center() const;
-		glm::vec3 normal(Ray const& ray) const;
 		double radius() const;
 		~Sphere() override; 
 	private:
