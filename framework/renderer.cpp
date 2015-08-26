@@ -85,34 +85,10 @@ Color Renderer::trace(Ray r)
 	{
 		OptionalHit optHit = i->second->intersect(r, distance);
 
-		
 		if(optHit._t <= nearestHit._t || nearestHit._t == 0.0)
 		{
 			nearestHit = optHit;
 		}
-
-		/*
-		bool hit = i->second->intersect(r, distance);
-		OptionalHit tmp{};
-
-		tmp._hit = hit;
-
-		if(hit)
-		{
-			if(distance < nearestDistance || nearestDistance == 0.0)
-			{
-				nearestDistance = distance;
-				nearestObject = i->second;
-				tmp._shape = i->second;
-			}
-			else
-			{
-				tmp._shape = nullptr;
-				tmp._t = INFINITY;
-			}
-		}
-		return shade(tmp);
-		*/
 	}
 	return shade(nearestHit);
 }
@@ -124,12 +100,25 @@ Color Renderer::shade(OptionalHit hit)
 
 	if(hit._hit)
 	{
-		return hit._shape->material().ka();
+		Color ambient = getAmbient() + hit._shape->material().ka();
+		Color diffuse;
+		return ambient + diffuse;
+		//return hit._shape->material().ka();
 	}
 	else
 	{
 		return backgroundColor;
 	}
+}
+
+Color Renderer::getAmbient()
+{
+	Color tmp{};
+	for(std::map<std::string, Light>::iterator i = _scene._lights.begin(); i != _scene._lights.end(); ++i)
+	{
+		tmp = tmp + i->second.la();
+	}
+	return tmp;
 }
 
 std::string Renderer::getPercentage(int counter) const

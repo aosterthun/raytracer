@@ -71,6 +71,7 @@ private:
 
 	Color shade(OptionalHit hit);
 
+	Color getAmbient();
 };
 
 #endif // #ifndef BUW_RENDERER_HPP

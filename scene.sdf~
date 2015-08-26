@@ -2,5 +2,5 @@ define material red 1 0 0 1 0 0 1 0 0 1
 define shape box testBox -6 -6 -10 -2 -2 -12 red
 define shape sphere test2 5 0 -25 5 red
 define light sun 0 6 -5 0.2 0.2 0.2 0.8 0.8 0.8
-camera eye 65.0
+camera eye 120.0
 render eye image.ppm 601 601
