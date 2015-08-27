@@ -9,11 +9,11 @@ _ld{Color{}},
 _la{Color{}}
 {}
 
-Light::Light(std::string const& name, glm::vec3 const& position, Color const& ld, Color const& la) :
+Light::Light(std::string const& name, glm::vec3 const& position, Color const& la, Color const& ld) :
 _name{name},
 _position{position},
-_ld{ld},
-_la{la}
+_la{la},
+_ld{ld}
 {}
 
 //destructors
