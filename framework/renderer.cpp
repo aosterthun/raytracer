@@ -65,12 +65,8 @@ void Renderer::raycast()
 
 		eyeRay = _scene._camera.getEyeRay( x, y, distance);
 
-		Color col = trace(eyeRay);
-
-		Pixel p;
-		p.x = x;
-		p.y = y;
-		p.color = col;
+		Color color = trace(eyeRay);
+		Pixel p{x, y, color};
 
 		write(p);
 
@@ -140,8 +136,6 @@ Color Renderer::shade(OptionalHit hit)
 
 Color Renderer::shade(OptionalHit hit)
 {
-	Color backgroundColor{1.0, 1.0, 1.0};
-	Color diffuse_whole{};
 	if(hit._hit)
 	{
 		Color shade;
@@ -168,7 +162,7 @@ Color Renderer::shade(OptionalHit hit)
 	}
 	else
 	{
-		return backgroundColor;
+		return BACKGROUND_COLOR;
 	}
 }
 
