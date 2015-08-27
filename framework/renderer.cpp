@@ -152,12 +152,12 @@ Color Renderer::shade(OptionalHit hit)
 				
 				if(inShadow._hit && (inShadow._shape->name() == hit._shape->name()))
 				{
-					shade += light.second.ld()*(calcDiffuse(light.second,hit));
+					shade += light.second.ld()*(calcSpecular(light.second,hit));
 				}
 				tmpDist = 0.0;
 			}
 		}
-		shade += calcAmbient(hit);
+		//shade += calcAmbient(hit);
 		return shade;
 	}
 	else
@@ -183,7 +183,7 @@ glm::vec3 Renderer::getLightVec(OptionalHit const& optHit, Light const& light)
 glm::vec3 Renderer::getLightReflectionVec(OptionalHit const& optHit, Light const& light)
 {
 	//Calculates thr reflection vector of the given light
-	glm::vec3 lightReflectionVec{getLightVec(optHit,light)-2*glm::dot(getLightVec(optHit,light),glm::normalize(optHit._normal))*glm::normalize(optHit._normal)};
+	glm::vec3 lightReflectionVec{2*glm::dot(glm::normalize(getLightVec(optHit,light)),glm::normalize(optHit._normal))*glm::normalize(optHit._normal)-getLightVec(optHit,light)};
 	return lightReflectionVec;
 }
 
