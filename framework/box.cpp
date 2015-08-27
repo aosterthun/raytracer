@@ -33,33 +33,30 @@ std::ostream& Box::print(std::ostream& os) const
 	return os;
 }
 
-OptionalHit Box::intersect(Ray const& r, float& distance) const
+OptionalHit Box::intersect(Ray const& ray, float& distance) const
 {
-	double tx1 = (_min.x - r.origin.x)/glm::normalize(r.direction).x;
-	double tx2 = (_max.x - r.origin.x)/glm::normalize(r.direction).x;
+	double t1 = -(_min.x - ray.origin.x)*ray.direction.x;
+    double t2 = -(_max.x - ray.origin.x)*ray.direction.x;
+    double tnear = std::min(t1, t2);
+    double tfar = std::max(t1, t2);
 
-	double tnear = std::min(tx1, tx2);
-	double tfar = std::max(tx1, tx2);
+    t1 = -(_min.y - ray.origin.y)*ray.direction.y;
+    t2 = -(_max.y - ray.origin.y)*ray.direction.y;
+    tnear = std::max(tnear, std::min(t1, t2));
+    tfar = std::min(tfar, std::max(t1, t2));
 
-	double ty1 = (_min.y - r.origin.y)/glm::normalize(r.direction).y;
-	double ty2 = (_max.y - r.origin.y)/glm::normalize(r.direction).y;
-
-	tnear = std::max(tnear, std::min(ty1, ty2));
-	tfar = std::min(tfar, std::max(ty1, ty2));
-
-	double tz1 = (_min.z - r.origin.z)/glm::normalize(r.direction).z;
-	double tz2 = (_max.z - r.origin.z)/glm::normalize(r.direction).z;
-
-	tnear = std::max(tnear, std::min(tz1, tz2));
-	tfar = std::min(tfar, std::max(tz1, tz2));
+    t1 = -(_min.z - ray.origin.z)*ray.direction.z;
+    t2 = -(_max.z - ray.origin.z)*ray.direction.z;
+    tnear = std::max(tnear, std::min(t1, t2));
+    tfar = std::min(tfar, std::max(t1, t2));
 
 	if(tfar >= std::max(0.0, tnear))
 	{
 		OptionalHit intersection;
 		intersection._hit = true;
 		intersection._shape = std::make_shared<Box>(*this);
-		intersection._t = sqrt(tnear*tnear*(r.direction.x*r.direction.x +r.direction.y*r.direction.y +r.direction.z*r.direction.z));
-		intersection._intersect = glm::vec3{tnear*r.direction.x, tnear*r.direction.y, tnear*r.direction.z};
+		intersection._t = sqrt(tnear*tnear*(ray.direction.x*ray.direction.x +ray.direction.y*ray.direction.y +ray.direction.z*ray.direction.z));
+		intersection._intersect = glm::vec3{tnear*ray.direction.x, tnear*ray.direction.y, tnear*ray.direction.z};
 		intersection._normal = normal(intersection._intersect);
 		return intersection;
 	}
