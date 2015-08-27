@@ -5,7 +5,7 @@
 
 int main(int argc, char* argv[])
 {	
-	std::string const filename = "../scene.sdf";
+	std::string const filename = "../scene1.sdf";
 
 	SDFLoader loader{};
 
