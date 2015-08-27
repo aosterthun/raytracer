@@ -144,17 +144,12 @@ Color Renderer::shade(OptionalHit hit)
 	Color diffuse_whole{};
 	if(hit._hit)
 	{
-		Color ambient, diffuse;
+		Color shade;
 
 		for(auto light : _scene._lights)
 		{
-			//second vector to compute the angle
-			glm::vec3 lightVec = hit._intersect - light.second.position();
-
-			glm::vec3 lightVec2 = light.second.position() - hit._intersect;
-
 			//ray for intersect() method
-			Ray lightRay{light.second.position(),lightVec};
+			Ray lightRay{light.second.position(),getLightVec(hit,light.second)};
 
 			for(auto shape : _scene._shapes)
 			{
@@ -163,15 +158,13 @@ Color Renderer::shade(OptionalHit hit)
 				
 				if(inShadow._hit && (inShadow._shape->name() == hit._shape->name()))
 				{
-					diffuse += hit._shape->material().kd() * light.second.ld() * glm::dot(glm::normalize(hit._normal),glm::normalize(lightVec2));
-					calcSpecular(light.second,hit);
+					shade += light.second.ld()*(calcDiffuse(light.second,hit));
 				}
 				tmpDist = 0.0;
-
 			}
 		}
-		ambient = calcAmbient() * hit._shape->material().ka();
-		return ambient + diffuse;
+		shade += calcAmbient(hit);
+		return shade;
 	}
 	else
 	{
@@ -206,20 +199,21 @@ Color Renderer::calcSpecular(Light const& light, OptionalHit const& optHit)
 	return specularLight;
 }
 
-Color Renderer::calcDeffuse()
+Color Renderer::calcDiffuse(Light const& light, OptionalHit const& optHit)
 {
-
+	Color diffuseLight{optHit._shape->material().kd() * glm::dot(glm::normalize(optHit._normal),glm::normalize(light.position()-optHit._intersect))};
+	return diffuseLight;
 }
 
 
-Color Renderer::calcAmbient()
+Color Renderer::calcAmbient(OptionalHit const& optHit)
 {
 	Color tmp{};
 	for(std::map<std::string, Light>::iterator i = _scene._lights.begin(); i != _scene._lights.end(); ++i)
 	{
 		tmp = tmp + i->second.la();
 	}
-	return tmp;
+	return tmp * optHit._shape->material().ka();
 }
 
 std::string Renderer::getPercentage(int counter) const
