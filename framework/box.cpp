@@ -55,12 +55,51 @@ OptionalHit Box::intersect(Ray const& r, float& distance) const
 
 	if(tfar >= std::max(0.0, tnear))
 	{
-		return OptionalHit{true,std::make_shared<Box>(*this),sqrt(tnear*tnear*(r.direction.x*r.direction.x +r.direction.y*r.direction.y +r.direction.z*r.direction.z))};
+		OptionalHit intersection;
+		intersection._hit = true;
+		intersection._shape = std::make_shared<Box>(*this);
+		intersection._t = sqrt(tnear*tnear*(r.direction.x*r.direction.x +r.direction.y*r.direction.y +r.direction.z*r.direction.z));
+		intersection._intersect = glm::vec3{tnear*r.direction.x, tnear*r.direction.y, tnear*r.direction.z};
+		intersection._normal = normal(intersection._intersect);
+		return intersection;
 	}
 	else
 	{
 		return OptionalHit{false,nullptr,INFINITY};
 	}
+}
+
+glm::vec3 Box::normal(glm::vec3 const& intersect) const {
+
+	glm::vec3 tmp_normal{ INFINITY, INFINITY, INFINITY };
+	const double epsilon = 5.97e-5;
+
+	if (abs(_min.x - intersect.x) < epsilon)
+	{
+		tmp_normal = glm::vec3{ -1.0, 0.0, 0.0 };
+	}
+	else if (abs(_min.y - intersect.y) < epsilon)
+	{
+		tmp_normal = glm::vec3{ 0.0, -1.0, 0.0 };
+	}
+	else if (abs(_min.z - intersect.z) < epsilon)
+	{
+		tmp_normal = glm::vec3{ 0.0, 0.0, 1.0 };
+	}
+	else if (abs(_max.x - intersect.x) < epsilon)
+	{
+		tmp_normal = glm::vec3{ 1.0, 0.0, 0.0 };
+	}
+	else if (abs(_max.y - intersect.y) < epsilon)
+	{
+		tmp_normal = glm::vec3{ 0.0, 1.0, 0.0 };
+	}
+	else if (abs(_max.z - intersect.z) < epsilon)
+	{
+		tmp_normal = glm::vec3{ 0.0, 0.0, -1.0 };
+	}
+
+	return tmp_normal;
 }
 
 glm::vec3 Box::min() const

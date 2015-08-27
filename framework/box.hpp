@@ -22,5 +22,7 @@ class Box : public Shape
 	private:
 		glm::vec3 _min;
 		glm::vec3 _max;
+
+		glm::vec3 normal(glm::vec3 const& intersect) const;
 };
 #endif
