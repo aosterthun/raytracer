@@ -66,7 +66,7 @@ void Renderer::raycast()
 		eyeRay = _scene._camera.getEyeRay( x, y, distance);
 
 		Color color = trace(eyeRay);
-		Pixel p{x, y, color};
+		Pixel p{static_cast<unsigned int>(x), static_cast<unsigned int>(y), color};
 
 		write(p);
 

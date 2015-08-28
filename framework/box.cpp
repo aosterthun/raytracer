@@ -58,21 +58,21 @@ OptionalHit Box::intersect(Ray const& r, float& distance) const
     if(tfar > std::max(0.0, tnear))
     {
     	//freaking important
-    	r.direction = glm::normalize(r.direction);
+    	Ray tmpR{r.origin,glm::normalize(r.direction)};
 
 
     	//std::cout << "Ray origin: " << glm::to_string(r.origin) << "\n";
 		//std::cout << "Ray direction: " << glm::to_string(r.direction) << "\n";
     	//std::cout << "tnear:" << tnear << "DirectionvVec" << glm::to_string(r.direction) << "\n";
 		
-		intersection._intersect = glm::vec3{tnear*r.direction.x, tnear*r.direction.y, tnear*r.direction.z};
+		intersection._intersect = glm::vec3{tnear*tmpR.direction.x, tnear*tmpR.direction.y, tnear*tmpR.direction.z};
 
 		//this vector "shows" the normal method where the intersection is and the exact distance
 		Ray test{r.origin, intersection._intersect};
 
 		intersection._normal = normal(test);
 
-		intersection._t = sqrt(tnear*tnear*(r.direction.x*r.direction.x + r.direction.y*r.direction.y + r.direction.z*r.direction.z));
+		intersection._t = sqrt(tnear*tnear*(tmpR.direction.x*tmpR.direction.x + tmpR.direction.y*tmpR.direction.y + tmpR.direction.z*tmpR.direction.z));
 
 		//std::cout << "_t: " << intersection._t << "\n";
 

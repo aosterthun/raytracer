@@ -73,10 +73,10 @@ private:
 
 	Color calcAmbient(OptionalHit const& optHit);
 	Color calcSpecular(Light const& light, OptionalHit const& optHit);
-	Color Renderer::calcDiffuse(Light const& light, OptionalHit const& optHit);
-	glm::vec3 Renderer::getCamVec(OptionalHit const& optHit);
-	glm::vec3 Renderer::getLightVec(OptionalHit const& optHit, Light const& light);
-	glm::vec3 Renderer::getLightReflectionVec(OptionalHit const& optHit, Light const& light);
+	Color calcDiffuse(Light const& light, OptionalHit const& optHit);
+	glm::vec3 getCamVec(OptionalHit const& optHit);
+	glm::vec3 getLightVec(OptionalHit const& optHit, Light const& light);
+	glm::vec3 getLightReflectionVec(OptionalHit const& optHit, Light const& light);
 };
 
 #endif // #ifndef BUW_RENDERER_HPP
