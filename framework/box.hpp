@@ -2,6 +2,7 @@
 #define BUW_BOX_HPP
 #include "shape.hpp"
 #include "optionalhit.hpp"
+#include <glm/gtx/intersect.hpp>
 #include <glm/vec3.hpp>
 
 class Box : public Shape
@@ -23,6 +24,6 @@ class Box : public Shape
 		glm::vec3 _min;
 		glm::vec3 _max;
 
-		glm::vec3 normal(glm::vec3 const& intersect) const;
+		glm::vec3 normal(Ray const& ray) const;
 };
 #endif

@@ -33,71 +33,220 @@ std::ostream& Box::print(std::ostream& os) const
 	return os;
 }
 
-OptionalHit Box::intersect(Ray const& ray, float& distance) const
-{
-	double t1 = -(_min.x - ray.origin.x)*ray.direction.x;
-    double t2 = -(_max.x - ray.origin.x)*ray.direction.x;
-    double tnear = std::min(t1, t2);
-    double tfar = std::max(t1, t2);
+OptionalHit Box::intersect(Ray const& r, float& distance) const
+{	
+	double tx1 = (_min.x - r.origin.x)/glm::normalize(r.direction).x;
+	double tx2 = (_max.x - r.origin.x)/glm::normalize(r.direction).x;
 
-    t1 = -(_min.y - ray.origin.y)*ray.direction.y;
-    t2 = -(_max.y - ray.origin.y)*ray.direction.y;
-    tnear = std::max(tnear, std::min(t1, t2));
-    tfar = std::min(tfar, std::max(t1, t2));
+	double tnear = std::min(tx1, tx2);
+	double tfar = std::max(tx1, tx2);
 
-    t1 = -(_min.z - ray.origin.z)*ray.direction.z;
-    t2 = -(_max.z - ray.origin.z)*ray.direction.z;
-    tnear = std::max(tnear, std::min(t1, t2));
-    tfar = std::min(tfar, std::max(t1, t2));
+	double ty1 = (_min.y - r.origin.y)/glm::normalize(r.direction).y;
+	double ty2 = (_max.y - r.origin.y)/glm::normalize(r.direction).y;
 
-	if(tfar >= std::max(0.0, tnear))
-	{
-		OptionalHit intersection;
-		intersection._hit = true;
+	tnear = std::max(tnear, std::min(ty1, ty2));
+	tfar = std::min(tfar, std::max(ty1, ty2));
+
+	double tz1 = (_min.z - r.origin.z)/glm::normalize(r.direction).z;
+	double tz2 = (_max.z - r.origin.z)/glm::normalize(r.direction).z;
+
+	tnear = std::max(tnear, std::min(tz1, tz2));
+	tfar = std::min(tfar, std::max(tz1, tz2));
+
+	OptionalHit intersection;
+
+    if(tfar > std::max(0.0, tnear))
+    {
+    	//freaking important
+    	r.direction = glm::normalize(r.direction);
+
+
+    	//std::cout << "Ray origin: " << glm::to_string(r.origin) << "\n";
+		//std::cout << "Ray direction: " << glm::to_string(r.direction) << "\n";
+    	//std::cout << "tnear:" << tnear << "DirectionvVec" << glm::to_string(r.direction) << "\n";
+		
+		intersection._intersect = glm::vec3{tnear*r.direction.x, tnear*r.direction.y, tnear*r.direction.z};
+
+		//this vector "shows" the normal method where the intersection is and the exact distance
+		Ray test{r.origin, intersection._intersect};
+
+		intersection._normal = normal(test);
+
+		intersection._t = sqrt(tnear*tnear*(r.direction.x*r.direction.x + r.direction.y*r.direction.y + r.direction.z*r.direction.z));
+
+		//std::cout << "_t: " << intersection._t << "\n";
+
 		intersection._shape = std::make_shared<Box>(*this);
-		intersection._t = sqrt(tnear*tnear*(ray.direction.x*ray.direction.x +ray.direction.y*ray.direction.y +ray.direction.z*ray.direction.z));
-		intersection._intersect = glm::vec3{tnear*ray.direction.x, tnear*ray.direction.y, tnear*ray.direction.z};
-		intersection._normal = normal(intersection._intersect);
-		return intersection;
-	}
+		intersection._hit = true;
+    }
 	else
 	{
-		return OptionalHit{false,nullptr,INFINITY};
+		intersection._t = INFINITY;
+		intersection._intersect = glm::vec3{INFINITY,INFINITY,INFINITY};
+		intersection._normal = glm::vec3{INFINITY,INFINITY,INFINITY};
+		intersection._shape = nullptr;
+		intersection._hit = false;
 	}
+    return intersection;
 }
 
-glm::vec3 Box::normal(glm::vec3 const& intersect) const {
+glm::vec3 Box::normal(Ray const& ray) const
+{
+	//getting the important vectors
+	glm::vec3 vecDir = ray.direction;
+	glm::vec3 origin = ray.origin;
 
-	glm::vec3 tmp_normal{ INFINITY, INFINITY, INFINITY };
-	const double epsilon = 5.97e-5;
+	//float sucks
+	const double epsilon = 5.97e-4;
 
-	if (abs(_min.x - intersect.x) < epsilon)
+	float intersectionDis = 0.0;
+
+	float realDis = sqrt(vecDir.x*vecDir.x + vecDir.y*vecDir.y + vecDir.z*vecDir.z);
+	//does now also work, we'll keep it here for later improvements
+	//float mightSuck = glm::distance(vecDir, {0.0,0.0,0.0});
+
+	glm::vec3 planeNormal;
+	
+	//these if statements check wether the intersection with the plane is the intersection with the right plane!
+
+	//front
+	glm::intersectRayPlane(origin, vecDir, _min, { 0.0, 0.0, 1.0}, intersectionDis);
+	if(fabs(intersectionDis - realDis) < epsilon) 
+	{
+		planeNormal = glm::vec3{ 0.0, 0.0, 1.0};
+	}
+	//std::cout << "intersectionDis: " << intersectionDis << "\n";
+	intersectionDis = 0.0;
+	//bottom
+	glm::intersectRayPlane(origin, vecDir, _min, { 0.0, -1.0, 0.0}, intersectionDis);
+	if(fabs(intersectionDis - realDis) < epsilon) 
+	{
+		planeNormal = glm::vec3{ 0.0, -1.0, 0.0};
+	}
+	//std::cout << "intersectionDis: " << intersectionDis << "\n";
+	intersectionDis = 0.0;
+	//left
+	glm::intersectRayPlane(origin, vecDir, _min, { -1.0, 0.0, 0.0}, intersectionDis);
+	if(fabs(intersectionDis - realDis) < epsilon) 
+	{
+		planeNormal = glm::vec3{ -1.0, 0.0, 0.0};
+	}
+	//std::cout << "intersectionDis: " << intersectionDis << "\n";
+	intersectionDis = 0.0;
+	//back
+	glm::intersectRayPlane(origin, vecDir, _max, { 0.0, 0.0, -1.0}, intersectionDis);
+	if(fabs(intersectionDis - realDis) < epsilon) 
+	{
+		planeNormal = glm::vec3{ 0.0, 0.0, -1.0};
+	}
+	//std::cout << "intersectionDis: " << intersectionDis << "\n";
+	intersectionDis = 0.0;
+	//top
+	glm::intersectRayPlane(origin, vecDir, _max, { 0.0, 1.0, 0.0}, intersectionDis);
+	if(fabs(intersectionDis - realDis) < epsilon) 
+	{
+		planeNormal = glm::vec3{ 0.0, 1.0, 0.0};
+	}
+	//std::cout << "intersectionDis: " << intersectionDis << "\n";
+	intersectionDis = 0.0;
+	//right
+	glm::intersectRayPlane(origin, vecDir, _max, { 1.0, 0.0, 0.0}, intersectionDis);
+	if(fabs(intersectionDis - realDis) < epsilon) 
+	{
+		//std::cout << "intDis: " << intersectionDis << "realDis: " << realDis << "\n";
+		planeNormal = glm::vec3{ 1.0, 0.0, 0.0};
+	}
+	//std::cout << "intersectionDis: " << intersectionDis << "\n";
+	intersectionDis = 0.0;
+	
+	return glm::normalize(planeNormal);
+}
+
+/*
+glm::vec3 Box::normal(glm::vec3 const& vecDir) const {
+    // Use `INFINITY` vector instead of origin for when the detection doesn’t
+    // work. This prevents division by zero when using glm::normalize().
+    glm::vec3 tmp_normal{ INFINITY, INFINITY, INFINITY };
+    const double epsilon = 5.97e-4;
+    //const double epsilon = 5.97e-5;
+
+	if (abs(_min.x - vecDir.x) < epsilon)
 	{
 		tmp_normal = glm::vec3{ -1.0, 0.0, 0.0 };
 	}
-	else if (abs(_min.y - intersect.y) < epsilon)
+	else if (abs(_min.y - vecDir.y) < epsilon)
 	{
 		tmp_normal = glm::vec3{ 0.0, -1.0, 0.0 };
 	}
-	else if (abs(_min.z - intersect.z) < epsilon)
+	else if (abs(_min.z - vecDir.z) < epsilon)
 	{
 		tmp_normal = glm::vec3{ 0.0, 0.0, 1.0 };
 	}
-	else if (abs(_max.x - intersect.x) < epsilon)
+	else if (abs(_max.x - vecDir.x) < epsilon)
 	{
 		tmp_normal = glm::vec3{ 1.0, 0.0, 0.0 };
 	}
-	else if (abs(_max.y - intersect.y) < epsilon)
+	else if (abs(_max.y - vecDir.y) < epsilon)
 	{
 		tmp_normal = glm::vec3{ 0.0, 1.0, 0.0 };
 	}
-	else if (abs(_max.z - intersect.z) < epsilon)
+	else if (abs(_max.z - vecDir.z) < epsilon)
 	{
 		tmp_normal = glm::vec3{ 0.0, 0.0, -1.0 };
 	}
 
-	return tmp_normal;
+    return tmp_normal;
 }
+*/
+/*
+OptionalHit Box::intersect(Ray const& r, float& distance) const
+ {
+	double tx1 = (_min.x - r.origin.x)/glm::normalize(r.direction).x;
+	double tx2 = (_max.x - r.origin.x)/glm::normalize(r.direction).x;
+
+	double tnear = std::min(tx1, tx2);
+	double tfar = std::max(tx1, tx2);
+
+	double ty1 = (_min.y - r.origin.y)/glm::normalize(r.direction).y;
+	double ty2 = (_max.y - r.origin.y)/glm::normalize(r.direction).y;
+
+	tnear = std::max(tnear, std::min(ty1, ty2));
+	tfar = std::min(tfar, std::max(ty1, ty2));
+
+	double tz1 = (_min.z - r.origin.z)/glm::normalize(r.direction).z;
+	double tz2 = (_max.z - r.origin.z)/glm::normalize(r.direction).z;
+
+	tnear = std::max(tnear, std::min(tz1, tz2));
+	tfar = std::min(tfar, std::max(tz1, tz2));
+
+	OptionalHit intersection;
+
+    if(tfar > std::max(0.0, tnear))
+    {
+    	//freaking important
+    	r.direction = glm::normalize(r.direction);
+
+		intersection._t = sqrt(tnear*tnear*(r.direction.x*r.direction.x + r.direction.y*r.direction.y + r.direction.z*r.direction.z));
+		intersection._intersect = glm::vec3{tnear*r.direction.x, tnear*r.direction.y, tnear*r.direction.z};
+		intersection._normal = normal(intersection._intersect);
+
+		std::cout << glm::to_string(intersection._intersect) << "\n";
+
+		intersection._shape = std::make_shared<Box>(*this);
+		intersection._hit = true;
+    }
+	else
+	{
+		intersection._t = INFINITY;
+		intersection._intersect = glm::vec3{INFINITY,INFINITY,INFINITY};
+		intersection._normal = glm::vec3{INFINITY,INFINITY,INFINITY};
+		intersection._shape = nullptr;
+		intersection._hit = false;
+	}
+    return intersection;
+ }
+*/
+
 
 glm::vec3 Box::min() const
 {
