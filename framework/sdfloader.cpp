@@ -89,25 +89,31 @@ Scene SDFLoader::loadScene(std::string const& filePath)
 		{
 			textStream >> word;
 			//Get object
-			auto shape = shapes.find(newName)->second;
+			auto shape = scene._shapes.find(word)->second;
 
 
 			textStream >> word;
 			if(word == "translate")
 			{
-				auto vec{textStream >> word,textStream >> word,textStream >> word}
-				shape.translate(vec);
+				float x,y,z;
+				textStream >> x >> y >> z;
+				glm::vec3 vec{x,y,z};
+				shape->translate(vec);
 			}
 			if(word == "rotate")
 			{
-				auto angle = textStream >> word;
-				auto vec{textStream >> word,textStream >> word,textStream >> word}
-				shape.rotate(angle,vec);	
+				float angle;
+				float x,y,z;
+				textStream >> angle >> x >> y >> z;
+				glm::vec3 vec{x,y,z};
+				shape->rotate(angle,vec);	
 			}
 			if(word == "scale")
 			{
-				auto vec{textStream >> word,textStream >> word,textStream >> word}
-				shape.scale(vec);
+				float x,y,z;
+				textStream >> x >> y >> z;
+				glm::vec3 vec{x,y,z};
+				shape->scale(vec);
 			}
 		}
 	}
