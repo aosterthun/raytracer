@@ -106,19 +106,12 @@ Color Renderer::shade(OptionalHit hit)
 
 		for(auto light : _scene._lights)
 		{
-			//ray for intersect() method
 			Ray lightRay{light.second.position(),getLightVec(hit,light.second)};
 
 			for(auto shape : _scene._shapes)
 			{
 				float tmpDist;
 				OptionalHit inShadow = shape.second->intersect(lightRay,tmpDist);
-
-				//std::cout <<  "Normale: " << glm::to_string(hit._normal) << "\n";
-				//std::cout <<  "Intersect: " << glm::to_string(hit._intersect) << "\n";
-				//std::cout <<  "Name Hit: " << hit._shape->name() << "\n";
-				//std::cout << "Hit: " << inShadow._hit << "\n";
-				//std::cout <<  "Name Shape: " << inShadow._shape->name() << "\n";
 
 				if(inShadow._hit && (inShadow._shape->name() == hit._shape->name()))
 				{

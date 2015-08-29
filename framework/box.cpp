@@ -89,11 +89,8 @@ OptionalHit Box::intersect(Ray const& r, float& distance) const
 
 glm::vec3 Box::normal(glm::vec3 const& intersection) const
 {
-
-	//float sucks
 	const double epsilon = 5.97e-4;
 
-	glm::vec3 planeNormal;
 	glm::vec3 front{0.0, 0.0, 1.0};
 	glm::vec3 right{1.0, 0.0, 0.0};
 	glm::vec3 back{0.0, 0.0, -1.0};
@@ -125,59 +122,6 @@ glm::vec3 Box::normal(glm::vec3 const& intersection) const
 	{
 		return back;
 	}
-	/*
-	//these if statements check wether the intersection with the plane is the intersection with the right plane!
-
-	//front
-	glm::intersectRayPlane(origin, vecDir, _min, { 0.0, 0.0, 1.0}, intersectionDis);
-	if(fabs(intersectionDis - realDis) < epsilon) 
-	{
-		planeNormal = glm::vec3{ 0.0, 0.0, 1.0};
-	}
-	//std::cout << "intersectionDis: " << intersectionDis << "\n";
-	intersectionDis = 0.0;
-	//bottom
-	glm::intersectRayPlane(origin, vecDir, _min, { 0.0, -1.0, 0.0}, intersectionDis);
-	if(fabs(intersectionDis - realDis) < epsilon) 
-	{
-		planeNormal = glm::vec3{ 0.0, -1.0, 0.0};
-	}
-	//std::cout << "intersectionDis: " << intersectionDis << "\n";
-	intersectionDis = 0.0;
-	//left
-	glm::intersectRayPlane(origin, vecDir, _min, { -1.0, 0.0, 0.0}, intersectionDis);
-	if(fabs(intersectionDis - realDis) < epsilon) 
-	{
-		planeNormal = glm::vec3{ -1.0, 0.0, 0.0};
-	}
-	//std::cout << "intersectionDis: " << intersectionDis << "\n";
-	intersectionDis = 0.0;
-	//back
-	glm::intersectRayPlane(origin, vecDir, _max, { 0.0, 0.0, -1.0}, intersectionDis);
-	if(fabs(intersectionDis - realDis) < epsilon) 
-	{
-		planeNormal = glm::vec3{ 0.0, 0.0, -1.0};
-	}
-	//std::cout << "intersectionDis: " << intersectionDis << "\n";
-	intersectionDis = 0.0;
-	//top
-	glm::intersectRayPlane(origin, vecDir, _max, { 0.0, 1.0, 0.0}, intersectionDis);
-	if(fabs(intersectionDis - realDis) < epsilon) 
-	{
-		planeNormal = glm::vec3{ 0.0, 1.0, 0.0};
-	}
-	//std::cout << "intersectionDis: " << intersectionDis << "\n";
-	intersectionDis = 0.0;
-	//right
-	glm::intersectRayPlane(origin, vecDir, _max, { 1.0, 0.0, 0.0}, intersectionDis);
-	if(fabs(intersectionDis - realDis) < epsilon) 
-	{
-		//std::cout << "intDis: " << intersectionDis << "realDis: " << realDis << "\n";
-		planeNormal = glm::vec3{ 1.0, 0.0, 0.0};
-	}
-	//std::cout << "intersectionDis: " << intersectionDis << "\n";
-	intersectionDis = 0.0;
-	*/
 }
 
 /*
