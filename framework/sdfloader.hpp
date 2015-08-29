@@ -22,7 +22,7 @@ private:
 	Material createMaterial(std::istringstream& textStream);
 	std::shared_ptr<Shape> createSphere(std::istringstream& textStream);
 	std::shared_ptr<Shape> createBox(std::istringstream& textStream);
-	std::shared_ptr<Shape> createShapeComposite(std::istringstream& textStream, std::map<std::string,std::shared_ptr<Shape>> const& shapes);
+	std::shared_ptr<Shape> createShapeComposite(std::istringstream& textStream, std::map<std::string,std::shared_ptr<Shape>>& shapes);
 	Light createLight(std::istringstream& textStream);
 	Camera createCamera(std::istringstream& textStream);
 	void setRenderData(std::istringstream& textStream, Scene& scene);

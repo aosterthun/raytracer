@@ -11,12 +11,9 @@ class SceneObject
 	public:
 		SceneObject();
 		SceneObject(glm::mat4 const& transfomrMatrix);
-		/*
-			Maybe void methods 
-		*/
-		glm::mat4 rotate(float angle, glm::vec3 const& axis);
-		glm::mat4 scale(glm::vec3 const& scaleVector);
-		glm::mat4 translate(glm::vec3 const& translateVector);
+		void rotate(float angle, glm::vec3 const& axis);
+		void scale(glm::vec3 const& scaleVector);
+		void translate(glm::vec3 const& translateVector);
 		glm::mat4 inverseTransformMatrix() const;
 		glm::mat4 transformMatrix() const;
 

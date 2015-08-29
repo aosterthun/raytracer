@@ -25,20 +25,17 @@ SceneObject::SceneObject(){
 SceneObject::SceneObject(glm::mat4 const& transfomrMatrix){
 	_transformMatrix = transfomrMatrix;
 }
-glm::mat4 SceneObject::rotate(float angle, glm::vec3 const& axis)
+void SceneObject::rotate(float angle, glm::vec3 const& axis)
 {
 	_transformMatrix = glm::rotate(_transformMatrix,angle,axis);
-	return _transformMatrix;
 }
-glm::mat4 SceneObject::scale(glm::vec3 const& scaleVector)
+void SceneObject::scale(glm::vec3 const& scaleVector)
 {
 	_transformMatrix = glm::scale(_transformMatrix,scaleVector);
-	return _transformMatrix;
 }
-glm::mat4 SceneObject::translate(glm::vec3 const& translateVector)
+void SceneObject::translate(glm::vec3 const& translateVector)
 {
 	_transformMatrix = glm::translate(_transformMatrix,translateVector);
-	return _transformMatrix;
 }
 glm::mat4 SceneObject::inverseTransformMatrix() const
 {

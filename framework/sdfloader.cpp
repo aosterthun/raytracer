@@ -85,6 +85,31 @@ Scene SDFLoader::loadScene(std::string const& filePath)
 				}
 			}
 		}
+		if(word == "transform")
+		{
+			textStream >> word;
+			//Get object
+			auto shape = shapes.find(newName)->second;
+
+
+			textStream >> word;
+			if(word == "translate")
+			{
+				auto vec{textStream >> word,textStream >> word,textStream >> word}
+				shape.translate(vec);
+			}
+			if(word == "rotate")
+			{
+				auto angle = textStream >> word;
+				auto vec{textStream >> word,textStream >> word,textStream >> word}
+				shape.rotate(angle,vec);	
+			}
+			if(word == "scale")
+			{
+				auto vec{textStream >> word,textStream >> word,textStream >> word}
+				shape.scale(vec);
+			}
+		}
 	}
 	return scene;
 }
@@ -107,12 +132,13 @@ std::shared_ptr<Shape> SDFLoader::createBox(std::istringstream& textStream)
 	return std::make_shared<Box>(glm::vec3(x0,y0,z0),glm::vec3(x1,y1,z1),name,_materials.find(materialName)->second);
 }
 
-std::shared_ptr<Shape> SDFLoader::createShapeComposite(std::istringstream& textStream, std::map<std::string,std::shared_ptr<Shape>> const& shapes)
+std::shared_ptr<Shape> SDFLoader::createShapeComposite(std::istringstream& textStream, std::map<std::string,std::shared_ptr<Shape>>& shapes)
 {
 	std::string name;
 	std::string newName;
 	textStream >> name;
 	auto sc = std::make_shared<ShapeComposite>(name);
+	//To edit
 	while(textStream)
 	{
 		textStream >> newName;
