@@ -67,10 +67,7 @@ OptionalHit Box::intersect(Ray const& r, float& distance) const
 		
 		intersection._intersect = glm::vec3{tnear*tmpR.direction.x, tnear*tmpR.direction.y, tnear*tmpR.direction.z};
 
-		//this vector "shows" the normal method where the intersection is and the exact distance
-		Ray test{r.origin, intersection._intersect};
-
-		intersection._normal = normal(test);
+		intersection._normal = normal(intersection._intersect);
 
 		intersection._t = sqrt(tnear*tnear*(tmpR.direction.x*tmpR.direction.x + tmpR.direction.y*tmpR.direction.y + tmpR.direction.z*tmpR.direction.z));
 
@@ -90,23 +87,45 @@ OptionalHit Box::intersect(Ray const& r, float& distance) const
     return intersection;
 }
 
-glm::vec3 Box::normal(Ray const& ray) const
+glm::vec3 Box::normal(glm::vec3 const& intersection) const
 {
-	//getting the important vectors
-	glm::vec3 vecDir = ray.direction;
-	glm::vec3 origin = ray.origin;
 
 	//float sucks
 	const double epsilon = 5.97e-4;
 
-	float intersectionDis = 0.0;
-
-	float realDis = sqrt(vecDir.x*vecDir.x + vecDir.y*vecDir.y + vecDir.z*vecDir.z);
-	//does now also work, we'll keep it here for later improvements
-	//float mightSuck = glm::distance(vecDir, {0.0,0.0,0.0});
-
 	glm::vec3 planeNormal;
-	
+	glm::vec3 front{0.0, 0.0, 1.0};
+	glm::vec3 right{1.0, 0.0, 0.0};
+	glm::vec3 back{0.0, 0.0, -1.0};
+	glm::vec3 left{-1.0, 0.0, 0.0};
+	glm::vec3 top{0.0, 1.0, 0.0};
+	glm::vec3 down{0.0, -1.0, 0.0};
+
+	if(glm::dot(front,(intersection-_min)) == 0.0)
+	{
+		return front;
+	}
+	else if(glm::dot(left,(intersection-_min)) == 0.0)
+	{
+		return left;
+	}
+	else if(glm::dot(down,(intersection-_min)) == 0.0)
+	{
+		return down;
+	}
+	else if(glm::dot(top,(intersection-_max)) == 0.0)
+	{
+		return top;
+	}
+	else if(glm::dot(right,(intersection-_max)) == 0.0)
+	{
+		return right;
+	}
+	else if(glm::dot(back,(intersection-_max)) == 0.0)
+	{
+		return back;
+	}
+	/*
 	//these if statements check wether the intersection with the plane is the intersection with the right plane!
 
 	//front
@@ -158,8 +177,7 @@ glm::vec3 Box::normal(Ray const& ray) const
 	}
 	//std::cout << "intersectionDis: " << intersectionDis << "\n";
 	intersectionDis = 0.0;
-	
-	return glm::normalize(planeNormal);
+	*/
 }
 
 /*

@@ -24,6 +24,6 @@ class Box : public Shape
 		glm::vec3 _min;
 		glm::vec3 _max;
 
-		glm::vec3 normal(Ray const& ray) const;
+		glm::vec3 normal(glm::vec3 const& intersection) const;
 };
 #endif
