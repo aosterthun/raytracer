@@ -57,19 +57,13 @@ OptionalHit Box::intersect(Ray const& r, float& distance) const
 
     if(tfar > std::max(0.0, tnear))
     {
-    	//freaking important
-    	r.direction = glm::normalize(r.direction);
-
-
-    	//std::cout << "Ray origin: " << glm::to_string(r.origin) << "\n";
-		//std::cout << "Ray direction: " << glm::to_string(r.direction) << "\n";
-    	//std::cout << "tnear:" << tnear << "DirectionvVec" << glm::to_string(r.direction) << "\n";
+    	Ray tmpR{r.origin,glm::normalize(r.direction)};
 		
-		intersection._intersect = glm::vec3{tnear*r.direction.x, tnear*r.direction.y, tnear*r.direction.z};
+		intersection._intersect = glm::vec3{tnear*tmpR.direction.x, tnear*tmpR.direction.y, tnear*tmpR.direction.z};
 
 		intersection._normal = normal(intersection._intersect);
 
-		intersection._t = sqrt(tnear*tnear*(r.direction.x*r.direction.x + r.direction.y*r.direction.y + r.direction.z*r.direction.z));
+		intersection._t = sqrt(tnear*tnear*(tmpR.direction.x*tmpR.direction.x + tmpR.direction.y*tmpR.direction.y + tmpR.direction.z*tmpR.direction.z));
 
 		//std::cout << "_t: " << intersection._t << "\n";
 
@@ -89,9 +83,6 @@ OptionalHit Box::intersect(Ray const& r, float& distance) const
 
 glm::vec3 Box::normal(glm::vec3 const& intersection) const
 {
-
-    const double epsilon = 5.97e-5;
-    
 	glm::vec3 front{0.0, 0.0, 1.0};
 	glm::vec3 right{1.0, 0.0, 0.0};
 	glm::vec3 back{0.0, 0.0, -1.0};
@@ -123,7 +114,6 @@ glm::vec3 Box::normal(glm::vec3 const& intersection) const
 	{
 		return back;
 	}
-	
 }
 
 glm::vec3 Box::min() const

@@ -116,10 +116,10 @@ Color Renderer::shade(OptionalHit hit)
 				if(inShadow._hit && (inShadow._shape->name() == hit._shape->name()))
 				{
 
-					//diffuse += light.second.ld()*calcDiffuse(light.second,hit);
-					//specular += light.second.ld()*calcSpecular(light.second,hit);
+					diffuse += light.second.ld()*calcDiffuse(light.second,hit);
+					specular += light.second.ld()*calcSpecular(light.second,hit);
 
-					
+					/*
 					//DEBUG SECTION		
 					if(hit._normal == glm::vec3{ -1.0, 0.0, 0.0 })
 					{
@@ -145,7 +145,7 @@ Color Renderer::shade(OptionalHit hit)
 					{
 						return Color{1.0,1.0,0.0};
 					}
-					
+					*/
 				}
 				tmpDist = 0.0;
 			}
@@ -176,10 +176,10 @@ Color Renderer::calcDiffuse(Light const& light, OptionalHit const& optHit)
 {
 	
 
-	Color ks = optHit._shape->material().kd();
-	double angle = glm::dot(glm::normalize(optHit._normal),glm::normalize(light.position()-optHit._intersect));
+	Color kd = optHit._shape->material().kd();
+	double angle = glm::dot(glm::normalize(optHit._normal), glm::normalize(light.position()-optHit._intersect));
 
-	Color diffuseLight = ks * std::max(angle, 0.0);
+	Color diffuseLight = kd * std::max(angle, 0.0);
 
 	return diffuseLight;
 }
