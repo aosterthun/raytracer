@@ -90,7 +90,6 @@ Color Renderer::trace(Ray r)
 			nearestHit = optHit;
 		}
 	}
-
 	return shade(nearestHit);
 }
 
@@ -146,12 +145,13 @@ Color Renderer::shade(OptionalHit hit)
 						return Color{1.0,1.0,0.0};
 					}
 					*/
+					
 				}
 				tmpDist = 0.0;
 			}
 		}
 
-		Color shade = ambient + diffuse + specular;
+		Color shade =  ambient + diffuse + specular;
 
 		return shade;
 	}
@@ -174,13 +174,9 @@ Color Renderer::calcAmbient(OptionalHit const& optHit)
 
 Color Renderer::calcDiffuse(Light const& light, OptionalHit const& optHit)
 {
-	
-
 	Color kd = optHit._shape->material().kd();
 	double angle = glm::dot(glm::normalize(optHit._normal), glm::normalize(light.position()-optHit._intersect));
-
 	Color diffuseLight = kd * std::max(angle, 0.0);
-
 	return diffuseLight;
 }
 

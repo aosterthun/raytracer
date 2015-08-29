@@ -37,7 +37,7 @@ ShapeComposite::~ShapeComposite()
 {}
 
 void ShapeComposite::add(std::shared_ptr<Shape> shape)
-{
+{ 
 	_shapes.insert(std::make_pair(shape->name(),shape));
 }
 
@@ -82,9 +82,12 @@ OptionalHit ShapeComposite::intersect(Ray const& ray, float& distance) const
 			}
 		}
 	}
-	if(distance != 0)
+	if(tmpHit._hit)
 	{
 		return tmpHit;
 	}
-	return OptionalHit{false,nullptr,INFINITY};
+	else
+	{
+		return OptionalHit{false,nullptr,INFINITY};
+	}
 }

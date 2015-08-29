@@ -16,7 +16,7 @@ int main(int argc, char* argv[])
 	unsigned const width = std::get<0>(scene._camera.getResolution());
 	unsigned const height = std::get<1>(scene._camera.getResolution());
 	
-	std::cout << scene;
+	//std::cout << scene;
 
 	std::thread thr([&app]() { app.render(); });
 

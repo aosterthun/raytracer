@@ -145,10 +145,12 @@ std::shared_ptr<Shape> SDFLoader::createShapeComposite(std::istringstream& textS
 	textStream >> name;
 	auto sc = std::make_shared<ShapeComposite>(name);
 	//To edit
+	textStream >> newName;
 	while(textStream)
 	{
-		textStream >> newName;
 		sc->add(shapes.find(newName)->second);
+		shapes.erase(shapes.find(newName));
+		textStream >> newName;
 	}
 	
 	return sc;
