@@ -9,7 +9,7 @@
 
 #include "renderer.hpp"
 
-const int RECURSION_DEPTH = 5;
+const int RECURSION_DEPTH = 25;
 
 const Color BACKGROUND_COLOR = Color{0.0, 0.0, 0.0};
 

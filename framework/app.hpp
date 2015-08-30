@@ -1,7 +1,8 @@
-#ifndef BUW_RAYTRACER_HPP
-#define BUW_RAYTRACER_HPP
+#ifndef BUW_APP_HPP
+#define BUW_APP_HPP
 
 #include "renderer.hpp"
+#include "material.hpp"
 
 class App
 {
@@ -11,6 +12,7 @@ public:
 	~App();
 
 	void run();
+
 private:
 	Renderer _renderEngine;
 	SDFLoader _sdfLoader;

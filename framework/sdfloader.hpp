@@ -16,6 +16,10 @@ public:
 	~SDFLoader();
 
 	Scene loadScene(std::string const& filePath);
+
+	//bool createSDF();
+	//void saveSDF(Scene const& scene, std::string const filename);
+
 private:
 	std::map<std::string,Material> _materials;
 	std::map<std::string,Camera> _cameras;

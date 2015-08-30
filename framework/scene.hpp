@@ -12,7 +12,6 @@
 struct Scene
 {
 	Scene() :
-	_ambientLight{},
 	_camera{},
 	_shapes{},
 	_lights{}
@@ -21,7 +20,6 @@ struct Scene
 	~Scene()
 	{}
 
-	float _ambientLight;
 	Camera _camera;
 	std::map<std::string,std::shared_ptr<Shape>> _shapes;
 	std::map<std::string,Light> _lights;
@@ -38,7 +36,6 @@ struct Scene
 			os << light.second << "\n";
 		}
 		os << s._camera;
-		os << "AmbientLight: " << s._ambientLight << "\n"; 
 		os << "RenderFilename: " << s._renderFilename << "\n";
 		
 		return os;

@@ -20,7 +20,7 @@ App::App(std::string const& sceneFilenameWithoutIndex, int minIndex, int maxInde
 	for (int i = minIndex; i <= maxIndex; ++i)
 	{
 		std::ostringstream os;
-		os << sceneFilenameWithoutIndex << i << ".sdf"; 
+		os << sceneFilenameWithoutIndex << i << ".sdf";
 		std::string sceneFilenameWithIndex = os.str();
 		_scenes.push_back(_sdfLoader.loadScene(sceneFilenameWithIndex));
 	}
@@ -55,6 +55,4 @@ void App::run()
 		}
 		thr.join();
 	}
-
 }
-
