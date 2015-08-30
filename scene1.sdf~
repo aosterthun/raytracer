@@ -1,7 +1,10 @@
 define material red 1 0 0 1 0 0 1 0 0 810
-define material blue 1 0 0 0 0 1 1 1 0 5
-define shape box box1 -10 -10 -25 0 0 -30 red
-define light sun1 0 0 20 0.2 0.2 0.2 0.8 0.8 0.8
-define light sun2 30 0 -20 0.2 0.2 0.2 0.8 0.8 0.8
+define material blue 0 0 1 0 0 1 1 1 0 5
+define material yellow 1 1 0 1 1 0 1 1 0 10
+define shape box box1 -10 -10 -25 -5 -5 -30 blue
+define shape box box2 10 -10 -25 5 -5 -30 yellow
+define shape sphere sphere1 10 10 -25 4 yellow
+define shape sphere sphere2 -10 10 -25 4 blue
+define light sun1 30 50 -20 0.2 0.2 0.2 0.8 0.8 0.8
 camera eye 65.0
 render eye image.ppm 800 800

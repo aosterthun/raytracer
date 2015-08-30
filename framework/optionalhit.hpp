@@ -33,6 +33,7 @@ struct OptionalHit
 
 	//variables
 	bool _hit;
+	int _depth;
 	std::shared_ptr<Shape> _shape;
 	double _t;
 	glm::vec3 _intersect;

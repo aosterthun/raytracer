@@ -79,10 +79,16 @@ Color Renderer::trace(Ray r)
 {	
 	float distance{0.0};
 
+
 	OptionalHit nearestHit{};
 
 	for(std::map<std::string, std::shared_ptr<Shape>>::iterator i = _scene._shapes.begin(); i != _scene._shapes.end(); ++i)
 	{
+
+		//Ray ray;
+		//glm::vec4 origin = i->second->inverseTransformMatrix() * r.origin;
+		//glm::vec4 direction = i->second->inverseTransformMatrix() * r.direction;
+
 		OptionalHit optHit = i->second->intersect(r, distance);
 
 		if(optHit._t <= nearestHit._t || nearestHit._t == 0.0)
@@ -96,6 +102,7 @@ Color Renderer::trace(Ray r)
 
 Color Renderer::shade(OptionalHit hit)
 {
+	//if an object was hit, the following algorithm computes ambient, diffuse, specular lightning and reflection
 	if(hit._hit)
 	{
 		Color ambient = calcAmbient(hit);
@@ -115,11 +122,20 @@ Color Renderer::shade(OptionalHit hit)
 
 				if(inShadow._hit && (inShadow._shape->name() == hit._shape->name()))
 				{
+					//std::cout << "Matrix: " << glm::to_string(inShadow._shape->transformMatrix()) << "\n";
 
+					// calculate diffuse
 					diffuse += light.second.ld()*calcDiffuse(light.second,hit);
-					specular += light.second.ld()*calcSpecular(light.second,hit);
 
+					// calculate specular
+					specular += light.second.ld()*calcSpecular(light.second,hit);
+					
 					/*
+					if(hit._normal == glm::vec3{0.0, 1.0, 0.0} || hit._normal == glm::vec3{1.0, 1.0, 1.0})
+					{
+						std::cout << "normale: " << glm::to_string(hit._normal) << "\n intersect: " << glm::to_string(hit._intersect) << "\n";
+					}
+					
 					//DEBUG SECTION		
 					if(hit._normal == glm::vec3{ -1.0, 0.0, 0.0 })
 					{
@@ -145,14 +161,19 @@ Color Renderer::shade(OptionalHit hit)
 					{
 						return Color{1.0,1.0,0.0};
 					}
+					else if (hit._normal == glm::vec3{1.0, 1.0, 1.0})
+					{
+						return Color{1.0, 1.0, 1.0};
+					}
 					*/
 				}
 				tmpDist = 0.0;
 			}
 		}
 
-		Color shade = ambient + diffuse + specular;
+		
 
+		Color shade = ambient + diffuse + specular;
 		return shade;
 	}
 	else
@@ -174,8 +195,6 @@ Color Renderer::calcAmbient(OptionalHit const& optHit)
 
 Color Renderer::calcDiffuse(Light const& light, OptionalHit const& optHit)
 {
-	
-
 	Color kd = optHit._shape->material().kd();
 	double angle = glm::dot(glm::normalize(optHit._normal), glm::normalize(light.position()-optHit._intersect));
 
@@ -220,7 +239,7 @@ glm::vec3 Renderer::getLightVec(OptionalHit const& optHit, Light const& light)
 //Specular
 glm::vec3 Renderer::getLightReflectionVec(OptionalHit const& optHit, Light const& light)
 {
-	//Calculates thr reflection vector of the given light
+	//Calculates the reflection vector of the given light
 
 	glm::vec3 lightVec =  glm::normalize(light.position()-optHit._intersect);
 

@@ -10,7 +10,7 @@ class SceneObject
 {
 	public:
 		SceneObject();
-		SceneObject(glm::mat4 const& transfomrMatrix);
+		SceneObject(glm::mat4 const& transformMatrix);
 		void rotate(float angle, glm::vec3 const& axis);
 		void scale(glm::vec3 const& scaleVector);
 		void translate(glm::vec3 const& translateVector);

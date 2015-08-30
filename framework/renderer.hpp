@@ -20,6 +20,7 @@
 #include "scene.hpp"
 #include "optionalhit.hpp"
 
+//#include <glm/gtc/swizzle.hpp>
 #include <memory>
 #include <string>
 #include <glm/glm.hpp>
@@ -77,6 +78,8 @@ private:
 	glm::vec3 getCamVec(OptionalHit const& optHit);
 	glm::vec3 getLightVec(OptionalHit const& optHit, Light const& light);
 	glm::vec3 getLightReflectionVec(OptionalHit const& optHit, Light const& light);
+	glm::vec3 getCamReflectionVec(OptionalHit const& optHit, Camera const& cam);
+
 };
 
 #endif // #ifndef BUW_RENDERER_HPP
