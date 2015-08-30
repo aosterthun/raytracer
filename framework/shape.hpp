@@ -5,6 +5,7 @@
 #include <string>
 #include <ray.hpp>
 #include <glm/glm.hpp>
+#include <map>
 #include <iostream>
 #include <glm/ext.hpp>
 #include <stdexcept>

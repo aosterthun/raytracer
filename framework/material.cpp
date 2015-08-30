@@ -6,8 +6,8 @@ Material::Material() :
 	_name{"untitledMaterial"}, _ka{}, _kd{}, _ks{}, _m{0.0}
 {}
 
-Material::Material(std::string const& name, Color const& ka, Color const& kd, Color const& ks, float m) :
-	_name{name}, _ka{ka}, _kd{kd}, _ks{ks}, _m{m}
+Material::Material(std::string const& name, Color const& ka, Color const& kd, Color const& ks, float m, float l) :
+	_name{name}, _ka{ka}, _kd{kd}, _ks{ks}, _m{m}, _l{l}
 {}
 
 //destructors
@@ -40,6 +40,11 @@ Color& Material::ks()
 float Material::m() const
 {
 	return _m;
+}
+
+float Material::l() const
+{
+	return _l;
 }
 
 //outstream methods
