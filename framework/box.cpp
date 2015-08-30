@@ -63,6 +63,7 @@ OptionalHit Box::intersect(Ray const& r, float& distance) const
 		intersection._hit = true;
 		intersection._intersect = glm::vec3{tnear*tmpR.direction.x, tnear*tmpR.direction.y, tnear*tmpR.direction.z};
 		intersection._normal = normal(intersection._intersect);
+		intersection._ray = r;
 		intersection._t = sqrt(tnear*tnear*(tmpR.direction.x*tmpR.direction.x + tmpR.direction.y*tmpR.direction.y + tmpR.direction.z*tmpR.direction.z));
 		intersection._shape = std::make_shared<Box>(*this);
 	}

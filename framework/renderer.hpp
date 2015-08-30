@@ -68,16 +68,16 @@ private:
 
 	void raycast();
 
-	Color trace(Ray r);
+	Color trace(Ray r, int depth);
 
-	Color shade(OptionalHit hit);
+	Color shade(OptionalHit& hit, int depth);
 
 	Color calcAmbient(OptionalHit const& optHit);
 	Color calcSpecular(Light const& light, OptionalHit const& optHit);
 	Color calcDiffuse(Light const& light, OptionalHit const& optHit);
 	glm::vec3 getCamVec(OptionalHit const& optHit);
 	glm::vec3 getLightVec(OptionalHit const& optHit, Light const& light);
-	glm::vec3 getLightReflectionVec(OptionalHit const& optHit, Light const& light);
+	glm::vec3 getReflectionVec(OptionalHit const& optHit, glm::vec3 const& origin);
 	glm::vec3 getCamReflectionVec(OptionalHit const& optHit, Camera const& cam);
 
 };

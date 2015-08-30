@@ -9,7 +9,7 @@
 
 #include "renderer.hpp"
 
-const int RECURSION_DEPTH = 2;
+const int RECURSION_DEPTH = 5;
 
 const Color BACKGROUND_COLOR = Color{0.0, 0.0, 0.0};
 
@@ -52,8 +52,7 @@ void Renderer::raycast()
 {	
 	float distance = _scene._camera.getDistance(std::get<0>(_scene._camera.getResolution()));
 
-	//might be a member variable for class App
-	float counter = 0;
+	int depth = 0;
 
 	Ray eyeRay{};
 
@@ -65,7 +64,7 @@ void Renderer::raycast()
 
 		eyeRay = _scene._camera.getEyeRay( x, y, distance);
 
-		Color color = trace(eyeRay);
+		Color color = trace(eyeRay, depth);
 		Pixel p{static_cast<unsigned int>(x), static_cast<unsigned int>(y), color};
 
 		write(p);
@@ -75,7 +74,7 @@ void Renderer::raycast()
 	}
 }
 
-Color Renderer::trace(Ray r)
+Color Renderer::trace(Ray r, int depth)
 {	
 	float distance{0.0};
 
@@ -84,11 +83,6 @@ Color Renderer::trace(Ray r)
 
 	for(std::map<std::string, std::shared_ptr<Shape>>::iterator i = _scene._shapes.begin(); i != _scene._shapes.end(); ++i)
 	{
-
-		//Ray ray;
-		//glm::vec4 origin = i->second->inverseTransformMatrix() * r.origin;
-		//glm::vec4 direction = i->second->inverseTransformMatrix() * r.direction;
-
 		OptionalHit optHit = i->second->intersect(r, distance);
 
 		if(optHit._t <= nearestHit._t || nearestHit._t == 0.0)
@@ -97,24 +91,38 @@ Color Renderer::trace(Ray r)
 		}
 	}
 
-	return shade(nearestHit);
+	return shade(nearestHit, depth);
 }
 
-Color Renderer::shade(OptionalHit hit)
+//per reference!!!
+Color Renderer::shade(OptionalHit& hit, int depth)
 {
 	//if an object was hit, the following algorithm computes ambient, diffuse, specular lightning and reflection
 	if(hit._hit)
 	{
 		Color ambient = calcAmbient(hit);
 
-		Color diffuse;
+		Color diffuse, specular, reflection;
 
-		Color specular;
+		if(depth <= RECURSION_DEPTH)
+		{
+			depth++;
+
+			glm::vec3 direction = getReflectionVec(hit, hit._ray.origin);
+			Ray test{hit._ray.origin,direction};
+
+			//preventing useless recursion
+			if(hit._shape->material().m() != 0.0)
+			{
+			reflection += hit._shape->material().m() * trace(test, depth);
+			}
+		}
 
 		for(auto light : _scene._lights)
 		{
 			Ray lightRay{light.second.position(),getLightVec(hit,light.second)};
 
+			//detects if the light has a "direct" view to the intersection point
 			for(auto shape : _scene._shapes)
 			{
 				float tmpDist;
@@ -129,7 +137,7 @@ Color Renderer::shade(OptionalHit hit)
 
 					// calculate specular
 					specular += light.second.ld()*calcSpecular(light.second,hit);
-					
+
 					/*
 					if(hit._normal == glm::vec3{0.0, 1.0, 0.0} || hit._normal == glm::vec3{1.0, 1.0, 1.0})
 					{
@@ -167,13 +175,14 @@ Color Renderer::shade(OptionalHit hit)
 					}
 					*/
 				}
+
 				tmpDist = 0.0;
 			}
 		}
 
-		
 
-		Color shade = ambient + diffuse + specular;
+
+		Color shade = ambient + diffuse + specular + reflection;
 		return shade;
 	}
 	else
@@ -205,12 +214,18 @@ Color Renderer::calcDiffuse(Light const& light, OptionalHit const& optHit)
 
 Color Renderer::calcSpecular(Light const& light, OptionalHit const& optHit)
 {
+
+	//specific material value for specular light
 	Color ks = optHit._shape->material().ks();
+
+	//reflectation value
 	float m = optHit._shape->material().m();
 
+	//vector from intersection -> camera position
 	glm::vec3 camVec = glm::normalize(_scene._camera.position() - optHit._intersect);
 
-	glm::vec3 lightReflectionVec = glm::normalize(getLightReflectionVec(optHit, light));
+	//reflection vector of light position -> intersection
+	glm::vec3 lightReflectionVec = glm::normalize(getReflectionVec(optHit, light.position()));
 
 	double angle = glm::dot( lightReflectionVec, camVec);
 
@@ -236,20 +251,21 @@ glm::vec3 Renderer::getLightVec(OptionalHit const& optHit, Light const& light)
 	return lightVec;
 }
 
-//Specular
-glm::vec3 Renderer::getLightReflectionVec(OptionalHit const& optHit, Light const& light)
+//takes the optionalHit and the origin of the position of the incoming vectors
+glm::vec3 Renderer::getReflectionVec(OptionalHit const& optHit, glm::vec3 const& origin)
 {
 	//Calculates the reflection vector of the given light
 
-	glm::vec3 lightVec =  glm::normalize(light.position()-optHit._intersect);
+	//vector needs to point intersect -> origin to compute the angle correctly
+	glm::vec3 incomingVec =  glm::normalize(origin - optHit._intersect);
 
 	glm::vec3 normal = glm::normalize(optHit._normal);
 
-	double lightAngle = glm::dot(normal, lightVec);
+	double vecAngle = glm::dot(normal, incomingVec);
 
-	lightAngle = std::max(lightAngle, 0.0);
+	vecAngle = std::max(vecAngle, 0.0);
 	
-	return { 2*lightAngle*normal.x - lightVec.x, 2*lightAngle*normal.y - lightVec.y, 2*lightAngle*normal.z - lightVec.z};
+	return { 2*vecAngle*normal.x - incomingVec.x, 2*vecAngle*normal.y - incomingVec.y, 2*vecAngle*normal.z - incomingVec.z};
 }
 
 std::string Renderer::getPercentage(int counter) const
