@@ -24,8 +24,8 @@ namespace glm
 
 int main(int argc, char *argv[])
 {
-	SDFLoader sdfLoader{};
-	auto scene = sdfLoader.loadScene("../scene.sdf");
-	std::cout << scene;
-	return Catch::Session().run(argc, argv);
+	//SDFLoader sdfLoader{};
+	//auto scene = sdfLoader.loadScene("../scene.sdf");
+	//std::cout << scene;
+	//return Catch::Session().run(argc, argv);
 }

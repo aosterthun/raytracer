@@ -33,7 +33,7 @@ void Renderer::render()
 
 	raycast();
 
-	_ppm.save("test1");
+	_ppm.save(_scene._renderFilename);
 }
 
 void Renderer::setScene(Scene const& scene)
@@ -64,7 +64,7 @@ void Renderer::raycast()
 		int y =	floor((i - _colorbuffer.begin()) / std::get<0>(_scene._camera.getResolution())); 
 
 		eyeRay = _scene._camera.getEyeRay( x, y, distance);
-
+		//Convert eyeRay into vec4
 		Color color = trace(eyeRay);
 		Pixel p{static_cast<unsigned int>(x), static_cast<unsigned int>(y), color};
 
@@ -83,6 +83,7 @@ Color Renderer::trace(Ray r)
 
 	for(std::map<std::string, std::shared_ptr<Shape>>::iterator i = _scene._shapes.begin(); i != _scene._shapes.end(); ++i)
 	{
+		//Add invMat form shape to Ray in the intersect add shape matrix to all points
 		OptionalHit optHit = i->second->intersect(r, distance);
 
 		if(optHit._t <= nearestHit._t || nearestHit._t == 0.0)
@@ -114,38 +115,8 @@ Color Renderer::shade(OptionalHit hit)
 
 				if(inShadow._hit && (inShadow._shape->name() == hit._shape->name()))
 				{
-
 					diffuse += light.second.ld()*calcDiffuse(light.second,hit);
 					specular += light.second.ld()*calcSpecular(light.second,hit);
-
-					/*
-					//DEBUG SECTION		
-					if(hit._normal == glm::vec3{ -1.0, 0.0, 0.0 })
-					{
-						return Color{0.0,0.0,1.0};
-					}
-					else if (hit._normal == glm::vec3{ 0.0, -1.0, 0.0 })
-					{
-						return Color{0.0,1.0,0.0};
-					}
-					else if (hit._normal == glm::vec3{ 0.0, 0.0, 1.0 })
-					{
-						return Color{0.0,1.0,1.0};
-					}
-					else if (hit._normal == glm::vec3{ 1.0, 0.0, 0.0 })
-					{
-						return Color{1.0,0.0,0.0};
-					}
-					else if (hit._normal == glm::vec3{ 0.0, 1.0, 0.0 })
-					{
-						return Color{1.0,0.0,1.0};
-					}
-					else if (hit._normal == glm::vec3{ 0.0, 0.0, -1.0 })
-					{
-						return Color{1.0,1.0,0.0};
-					}
-					*/
-					
 				}
 				tmpDist = 0.0;
 			}
