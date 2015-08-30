@@ -6,7 +6,7 @@
 
 int main(int argc, char* argv[])
 {	
-	App raytracer{"../scene",1,2};
+	App raytracer{"../scene1.sdf"};
 	raytracer.run();
 	return 0;
 }

@@ -9,7 +9,11 @@
 
 #include "renderer.hpp"
 
+<<<<<<< HEAD
 const int RECURSION_DEPTH = 25;
+=======
+const int RECURSION_DEPTH = 30;
+>>>>>>> 7714d4460429eab53e0b4594db0e4948711a1036
 
 const Color BACKGROUND_COLOR = Color{0.0, 0.0, 0.0};
 
@@ -56,23 +60,17 @@ void Renderer::raycast()
 
 	Ray eyeRay{};
 
-	//normal integer for loop?
-	for( std::vector<Color>::iterator i = _colorbuffer.begin(); i != _colorbuffer.end(); ++i)
-	{
-		int x = (i - _colorbuffer.begin()) % std::get<0>(_scene._camera.getResolution());
-		int y =	floor((i - _colorbuffer.begin()) / std::get<0>(_scene._camera.getResolution())); 
+	for (unsigned y = 0; y < std::get<1>(_scene._camera.getResolution()); ++y) {
+		for (unsigned x = 0; x < std::get<0>(_scene._camera.getResolution()); ++x) {
 
-		eyeRay = _scene._camera.getEyeRay( x, y, distance);
-		//Convert eyeRay into vec4
+			int x_pos = x - (std::get<1>(_scene._camera.getResolution())/2);
+			int y_pos = y - (std::get<0>(_scene._camera.getResolution())/2);
 
-
-		Color color = trace(eyeRay, depth);
-		Pixel p{static_cast<unsigned int>(x), static_cast<unsigned int>(y), color};
-
-		write(p);
-
-		//++counter;
-		//std::cout << getPercentage(counter);
+			Ray ray{{0.0, 0.0, 0.0}, {x_pos, y_pos, distance}};
+			Pixel p(x,y);
+			p.color = trace(ray,depth);
+			write(p);
+		}
 	}
 }
 
@@ -83,10 +81,10 @@ Color Renderer::trace(Ray r, int depth)
 
 	OptionalHit nearestHit{};
 
-	for(std::map<std::string, std::shared_ptr<Shape>>::iterator i = _scene._shapes.begin(); i != _scene._shapes.end(); ++i)
+	for(auto shape : _scene._shapes)
 	{
 		//Add invMat form shape to Ray in the intersect add shape matrix to all points
-		OptionalHit optHit = i->second->intersect(r, distance);
+		OptionalHit optHit = shape.second->intersect(r, distance);
 
 		if(optHit._t <= nearestHit._t || nearestHit._t == 0.0)
 		{
@@ -98,8 +96,7 @@ Color Renderer::trace(Ray r, int depth)
 
 }
 
-//per reference!!!
-Color Renderer::shade(OptionalHit& hit, int depth)
+Color Renderer::shade(OptionalHit hit, int depth)
 {
 	//if an object was hit, the following algorithm computes ambient, diffuse, specular lightning and reflection
 	if(hit._hit)
@@ -110,15 +107,21 @@ Color Renderer::shade(OptionalHit& hit, int depth)
 
 		if(depth <= RECURSION_DEPTH)
 		{
-			depth++;
+			++depth;
 
 			glm::vec3 direction = getReflectionVec(hit, hit._ray.origin);
 			Ray test{hit._ray.origin,direction};
 
 			//preventing useless recursion
-			if(hit._shape->material().m() != 0.0)
+			if(hit._shape->material().l() != 0.0)
 			{
-			reflection += hit._shape->material().m() * trace(test, depth);
+				reflection += hit._shape->material().l() * trace(test, depth);
+			}
+			if(!(reflection == Color{0}))
+			{
+				std::cout << "Reflection Ray direction: " << glm::to_string(hit._ray.origin) << std::endl;
+				std::cout << reflection;
+				std::cout << test;
 			}
 		}
 
@@ -144,8 +147,8 @@ Color Renderer::shade(OptionalHit& hit, int depth)
 					if(hit._normal == glm::vec3{0.0, 1.0, 0.0} || hit._normal == glm::vec3{1.0, 1.0, 1.0})
 					{
 						std::cout << "normale: " << glm::to_string(hit._normal) << "\n intersect: " << glm::to_string(hit._intersect) << "\n";
-					}
-					
+					}*/
+					/*
 					//DEBUG SECTION		
 					if(hit._normal == glm::vec3{ -1.0, 0.0, 0.0 })
 					{
@@ -174,14 +177,13 @@ Color Renderer::shade(OptionalHit& hit, int depth)
 					else if (hit._normal == glm::vec3{1.0, 1.0, 1.0})
 					{
 						return Color{1.0, 1.0, 1.0};
-					}
-					*/
+					}*/
+					
 				}
 
 				tmpDist = 0.0;
 			}
 		}
-
 
 		Color shade = ambient + diffuse + specular + reflection;
 		return shade;

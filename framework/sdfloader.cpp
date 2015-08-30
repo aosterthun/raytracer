@@ -159,7 +159,7 @@ std::shared_ptr<Shape> SDFLoader::createShapeComposite(std::istringstream& textS
 Material SDFLoader::createMaterial(std::istringstream& textStream)
 {
 	std::string name;
-	float r,g,b,m;
+	float r,g,b,m,l;
 
 	textStream >> name >> r >> g >> b;
 	Color ka{r,g,b};
@@ -172,7 +172,9 @@ Material SDFLoader::createMaterial(std::istringstream& textStream)
 
 	textStream >> m;
 
-	return Material(name,ka,kd,ks,m);
+	textStream >> l;
+
+	return Material(name,ka,kd,ks,m,l);
 }
 
 Light SDFLoader::createLight(std::istringstream& textStream)

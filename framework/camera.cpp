@@ -79,7 +79,7 @@ std::ostream& Camera::print(std::ostream& os) const
 				"aperture: " << _aperture << "\n" <<
  				"position: " << glm::to_string(_position) << "\n" <<
  				"direction: " << glm::to_string(_direction) << "\n" <<
- 				"Resolution: X:" << std::get<0>(_resolution) << "Y:" << std::get<0>(_resolution) << "\n";
+ 				"Resolution: X:" << std::get<0>(_resolution) << "Y:" << std::get<1>(_resolution) << "\n";
 
 	return os;
 }

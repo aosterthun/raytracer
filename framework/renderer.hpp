@@ -70,7 +70,7 @@ private:
 
 	Color trace(Ray r, int depth);
 
-	Color shade(OptionalHit& hit, int depth);
+	Color shade(OptionalHit hit, int depth);
 
 	Color calcAmbient(OptionalHit const& optHit);
 	Color calcSpecular(Light const& light, OptionalHit const& optHit);

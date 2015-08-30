@@ -88,6 +88,6 @@ OptionalHit ShapeComposite::intersect(Ray const& ray, float& distance) const
 	}
 	else
 	{
-		return OptionalHit{false,nullptr,INFINITY};
+		//return OptionalHit{false,nullptr,INFINITY};
 	}
 }
