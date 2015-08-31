@@ -22,6 +22,7 @@ class ShapeComposite : public Shape
 		std::map<std::string,std::shared_ptr<Shape>> getChilds() const;
 		std::shared_ptr<Shape> getShape(std::string const& name);
 		OptionalHit intersect(Ray const& ray, float& distance) const override;
+		std::string className() const override;
 		~ShapeComposite();
 
 	private:

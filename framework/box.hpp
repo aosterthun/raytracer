@@ -20,6 +20,8 @@ class Box : public Shape
 		std::ostream& print(std::ostream& os) const override;
 		OptionalHit intersect(Ray const& ray, float& distance) const override;
 
+		std::string className() const override;
+
 	private:
 		glm::vec3 _min;
 		glm::vec3 _max;

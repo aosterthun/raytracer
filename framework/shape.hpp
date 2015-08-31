@@ -24,6 +24,8 @@ class Shape : public SceneObject
 		std::string name() const;
 		virtual ~Shape();
 
+		virtual std::string className() const = 0;
+
 	protected:
 		std::string _name;
 		Material _material;

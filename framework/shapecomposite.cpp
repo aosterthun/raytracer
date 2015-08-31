@@ -91,3 +91,8 @@ OptionalHit ShapeComposite::intersect(Ray const& ray, float& distance) const
 		//return OptionalHit{false,nullptr,INFINITY};
 	}
 }
+
+std::string ShapeComposite::className() const
+{
+	return "composite";
+}

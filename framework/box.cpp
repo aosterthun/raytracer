@@ -117,35 +117,35 @@ OptionalHit Box::intersect(Ray const& r, float& distance) const
 	 }
 }*/
 
-	 glm::vec3 Box::normal(glm::vec3 const& intersection) const
+glm::vec3 Box::normal(glm::vec3 const& intersection) const
 {
- glm::vec3 front{0.0, 0.0, 1.0};
- glm::vec3 right{1.0, 0.0, 0.0};
- glm::vec3 back{0.0, 0.0, -1.0};
- glm::vec3 left{-1.0, 0.0, 0.0};
- glm::vec3 top{0.0, 1.0, 0.0};
- glm::vec3 down{0.0, -1.0, 0.0};
+	glm::vec3 front{0.0, 0.0, 1.0};
+	glm::vec3 right{1.0, 0.0, 0.0};
+	glm::vec3 back{0.0, 0.0, -1.0};
+	glm::vec3 left{-1.0, 0.0, 0.0};
+	glm::vec3 top{0.0, 1.0, 0.0};
+	glm::vec3 down{0.0, -1.0, 0.0};
 
- std::map<float, glm::vec3> dotMin;
+	std::map<float, glm::vec3> dotMin;
 
- dotMin.insert(std::make_pair((glm::dot(front,(intersection-_min))), front));
- dotMin.insert(std::make_pair((glm::dot(left,(intersection-_min))), left));
- dotMin.insert(std::make_pair((glm::dot(down,(intersection-_min))), down));
- dotMin.insert(std::make_pair((glm::dot(top,(intersection-_max))), top));
- dotMin.insert(std::make_pair((glm::dot(right,(intersection-_max))), right));
- dotMin.insert(std::make_pair((glm::dot(back,(intersection-_max))), back));
+	dotMin.insert(std::make_pair((glm::dot(front,(intersection-_min))), front));
+	dotMin.insert(std::make_pair((glm::dot(left,(intersection-_min))), left));
+	dotMin.insert(std::make_pair((glm::dot(down,(intersection-_min))), down));
+	dotMin.insert(std::make_pair((glm::dot(top,(intersection-_max))), top));
+	dotMin.insert(std::make_pair((glm::dot(right,(intersection-_max))), right));
+	dotMin.insert(std::make_pair((glm::dot(back,(intersection-_max))), back));
 
- float closest = INFINITY;
- glm::vec3 closestTemp{};
- 
- for(auto dot : dotMin)
- {
- if(dot.first < closest) 
- {
- closestTemp = dot.second;
- }
- }
- return closestTemp; 
+	float closest = INFINITY;
+	glm::vec3 closestTemp{};
+
+	for(auto dot : dotMin)
+	{
+		if(dot.first < closest) 
+		{
+			closestTemp = dot.second;
+		}
+	}
+	return closestTemp; 
 }
 
 glm::vec3 Box::min() const
@@ -156,4 +156,9 @@ glm::vec3 Box::min() const
 glm::vec3 Box::max() const
 {
 	return _max;
+}
+
+std::string Box::className() const
+{
+	return "box";
 }

@@ -67,3 +67,8 @@ Sphere::~Sphere()
 {
 	//std::cout << "Sphere destruct \n";
 }
+
+std::string Sphere::className() const
+{
+	return "sphere";
+}
