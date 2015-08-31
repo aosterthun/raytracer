@@ -122,7 +122,7 @@ void App::saveSDF(Scene const& scene, std::string const filename)
 									<< material.second.r() << " "
 									<< material.second.l() << "\n";
 	}
-
+	
 	//shapes
 	for(auto shape : scene._shapes)
 	{
@@ -190,11 +190,7 @@ void App::saveSDF(Scene const& scene, std::string const filename)
 								<< light.second.ld().g << " "
 								<< light.second.ld().b << "\n"; 
 	}
+	
 
-	//cam
-	file << "camera " << scene._camera.name() << " " << scene._camera.aperture() << "\n";
-
-	//render
-	file << "render " << scene._camera.name() << " " << scene._renderFilename << " " << std::get<0>(scene._camera.getResolution()) << " " << std::get<1>(scene._camera.getResolution());
 	file.close();
 }
