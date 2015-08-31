@@ -17,8 +17,7 @@ public:
 
 	Scene loadScene(std::string const& filePath);
 
-	//bool createSDF();
-	//void saveSDF(Scene const& scene, std::string const filename);
+	std::map<std::string,Material> materials();
 
 private:
 	std::map<std::string,Material> _materials;

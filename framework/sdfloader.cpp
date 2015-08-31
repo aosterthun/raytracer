@@ -206,38 +206,8 @@ void SDFLoader::setRenderData(std::istringstream& textStream, Scene& scene)
 	textStream >> width >> height;
 	scene._camera.setResolution(width, height);
 }
-/*
-bool SDFLoader::createSDF()
+
+std::map<std::string,Material> SDFLoader::materials()
 {
-	std::string stdName = "scene";
-	std::fstream file(file_.c_str(), std::ios::out);
-	file.clear();
-
-	std::string red = "define material red 1 0 0 0.5 0 0 1 1 1 800\n";
-	std::string blue = "define material blue 0 0 1 0 0 1 0 0 1 800\n";
-
-	std::string file;
-
-	int frames = 24;
-	int seconds = 5;
-
-	std::vector<Scene> scenes(frames*seconds);
-
-	for(int i = 0 , i < frames*seconds, ++i)
-	{	
-		tmpScene{};
-		tmpScene._camera = createCamera
-		scene[0] = Scene{};
-		sceneToSDF("scene" + string(i+1) + ".sdf");
-	}
-
+	return _materials;
 }
-
-void SDFLoader::saveSDF(Scene const& scene, std::string const filename)
-{
-	std::fstream file(filename, std::ios::out);
-	file.clear();
-
-	for
-}
-*/
