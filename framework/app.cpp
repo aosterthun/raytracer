@@ -123,7 +123,7 @@ void App::saveSDF(Scene const& scene, std::string const filename)
 									<< material.second.ks().b << " "
 									<< material.second.l() << "\n";
 	}
-
+	/*
 	//shapes
 	for(ShapeComposite composites : scene._shapes)
 	{
@@ -156,6 +156,6 @@ void App::saveSDF(Scene const& scene, std::string const filename)
 		file << "define composite " << composites.second->className() << " "
 									<< composites.second->name() << " ";
 	}
-
+	*/
 	file.close();
 }

@@ -11,6 +11,7 @@ _aperture{40.0}
 }
 
 Camera::Camera(glm::vec3 const& direction, float aperture) :
+_position{0.0},
 _direction{direction},
 _aperture{aperture}
 {
@@ -19,6 +20,7 @@ _aperture{aperture}
 }
 
 Camera::Camera(std::string const& name, float aperture) :
+_position{0.0},
 _name{name},
 _direction{0.0,0.0,-1.0},
 _aperture{aperture}
@@ -55,12 +57,18 @@ void Camera::setResolution(int width, int height)
 	std::get<1>(_resolution) = height;
 }
 
+void Camera::setPosition(glm::vec3 const& position)
+{
+	_position = position;
+}
+
+
 std::tuple<int,int> Camera::getResolution() const
 {
 	return _resolution;
 }
 
-Ray Camera::getEyeRay(int x, int y, float &distance) const
+Ray Camera::getCameraRay(int x, int y, float &distance) const
 {
 	int width = x - (std::get<0>(_resolution)/2);
 	int height = y - (std::get<1>(_resolution)/2);

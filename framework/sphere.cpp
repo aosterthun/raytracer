@@ -33,7 +33,7 @@ _radius{radius}
 OptionalHit Sphere::intersect(Ray const& ray, float& distance) const
 {
 	glm::vec3 norm,intersect;
-	if (glm::intersectRaySphere(ray.origin,glm::normalize(ray.direction),_center,_radius,intersect,norm))
+	if(glm::intersectRaySphere(ray.origin,glm::normalize(ray.direction),_center,_radius,intersect,norm))
 	{
 		return OptionalHit{true,std::make_shared<Sphere>(*this),glm::distance(ray.origin,intersect),intersect,ray,norm};
 	}

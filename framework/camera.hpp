@@ -32,9 +32,10 @@ public:
 	glm::vec3 const& direction() const;
 
 	//non-member functions
-	Ray getEyeRay(int x, int y, float &distance) const;
+	Ray getCameraRay(int x, int y, float &distance) const;
 	float getDistance(int width) const;
 	void setResolution(int width, int height);
+	void setPosition(glm::vec3 const& position);
 	std::tuple<int,int> getResolution() const;
 
 	//outstream methods
