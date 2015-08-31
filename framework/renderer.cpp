@@ -9,7 +9,7 @@
 
 #include "renderer.hpp"
 
-const int RECURSION_DEPTH = 30;
+const int RECURSION_DEPTH = 5;
 
 const Color BACKGROUND_COLOR = Color{0.0, 0.0, 0.0};
 
@@ -99,26 +99,28 @@ Color Renderer::shade(OptionalHit hit, int depth)
 	{
 		Color ambient = calcAmbient(hit);
 
-		Color diffuse, specular, reflection;
+		Color diffuse, specular, reflection, refraction;
 
 		if(depth <= RECURSION_DEPTH)
 		{
 			++depth;
-
-			glm::vec3 direction = getReflectionVec(hit, hit._ray.origin);
-			Ray test{hit._ray.origin,direction};
-
-			//preventing useless recursion
 			if(hit._shape->material().l() != 0.0)
+		    {
+				glm::vec3 camVec = glm::normalize(hit._ray.direction);
+		   		glm::vec3 N = glm::normalize(hit._normal);
+		    	glm::vec3 R = camVec - (2.0f* glm::dot(camVec, N) * N);
+		    	reflection += hit._shape->material().l() * trace(Ray{hit._intersect+ R, R}, depth);
+		    }
+		    float refr = hit._shape->material().r();
+			if (refr > 0)
 			{
-				reflection += hit._shape->material().l() * trace(test, depth);
+				glm::vec3 incomingVec = glm::normalize(hit._intersect-hit._ray.origin);
+  				glm::vec3 hitNormal = glm::normalize(hit._normal);
+
+  				glm::vec3 refractionVec = (1/refr)*((incomingVec-hitNormal)*glm::dot(incomingVec,hitNormal))-hitNormal*(float)sqrt(1-((1*1)*(1-(glm::dot(incomingVec,hitNormal)*glm::dot(incomingVec,hitNormal))/(refr*refr))));
+  				refraction = hit._shape->material().r() * trace(Ray{hit._intersect+ refractionVec, refractionVec}, depth);
 			}
-			if(!(reflection == Color{0}))
-			{
-				//std::cout << "Reflection Ray direction: " << glm::to_string(hit._ray.origin) << std::endl;
-				//std::cout << reflection;
-				//std::cout << test;
-			}
+
 		}
 
 		for(auto light : _scene._lights)
@@ -181,7 +183,7 @@ Color Renderer::shade(OptionalHit hit, int depth)
 			}
 		}
 
-		Color shade = ambient + diffuse + specular + reflection;
+		Color shade = ambient + diffuse + specular + reflection + refraction;
 		return shade;
 	}
 	else

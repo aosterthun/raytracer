@@ -10,7 +10,7 @@ public:
 	//constructors
 	Material();
 
-	Material(std::string const& name, Color const& ka, Color const& kd, Color const& ks, float l, float m);
+	Material(std::string const& name, Color const& ka, Color const& kd, Color const& ks, float l, float m, float r);
 
 	//destructors
 	~Material();
@@ -30,6 +30,8 @@ public:
 
 	float m() const;
 
+	float r() const;
+
 	std::ostream& print(std::ostream&) const;
 
 private:
@@ -39,7 +41,7 @@ private:
 	Color _ks;
 	float _m;
 	float _l;
-
+	float _r;
 };
 
 //operators
