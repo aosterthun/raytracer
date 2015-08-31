@@ -42,6 +42,12 @@ Color Light::la() const
 	return _la;
 }
 
+glm::vec3 const& Light::setPosition(glm::vec3 const& position)
+{
+	_position = position;
+}
+
+
 //outstream methods
 std::ostream& Light::print(std::ostream& os) const
 {

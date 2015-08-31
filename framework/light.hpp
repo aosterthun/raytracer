@@ -36,6 +36,8 @@ public:
 
 	//non-member functions
 
+	glm::vec3 const& setPosition(glm::vec3 const& position);
+
 	//outstream methods
 	std::ostream& print(std::ostream&) const;
 
