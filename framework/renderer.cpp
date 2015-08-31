@@ -9,7 +9,7 @@
 
 #include "renderer.hpp"
 
-const int RECURSION_DEPTH = 30;
+const int RECURSION_DEPTH = 5;
 
 const Color BACKGROUND_COLOR = Color{0.0, 0.0, 0.0};
 
@@ -105,20 +105,16 @@ Color Renderer::shade(OptionalHit hit, int depth)
 		{
 			++depth;
 
-			glm::vec3 direction = getReflectionVec(hit, hit._ray.origin);
-			Ray test{hit._ray.origin,direction};
+			glm::vec3 camVec = glm::normalize(hit._ray.direction);
 
-			//preventing useless recursion
-			if(hit._shape->material().l() != 0.0)
-			{
-				reflection += hit._shape->material().l() * trace(test, depth);
-			}
-			if(!(reflection == Color{0}))
-			{
-				std::cout << "Reflection Ray direction: " << glm::to_string(hit._ray.origin) << std::endl;
-				std::cout << reflection;
-				std::cout << test;
-			}
+		    glm::vec3 N = glm::normalize(hit._normal);
+		    glm::vec3 R = camVec - (2.0f* glm::dot(camVec, N) * N);
+
+		    if(hit._shape->material().l() != 0.0)
+		    {
+		    	reflection += hit._shape->material().l() * trace(Ray{hit._intersect+ R, R}, depth);
+		    }
+
 		}
 
 		for(auto light : _scene._lights)
