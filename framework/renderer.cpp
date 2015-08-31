@@ -9,11 +9,7 @@
 
 #include "renderer.hpp"
 
-<<<<<<< HEAD
-const int RECURSION_DEPTH = 25;
-=======
 const int RECURSION_DEPTH = 30;
->>>>>>> 7714d4460429eab53e0b4594db0e4948711a1036
 
 const Color BACKGROUND_COLOR = Color{0.0, 0.0, 0.0};
 
@@ -119,9 +115,9 @@ Color Renderer::shade(OptionalHit hit, int depth)
 			}
 			if(!(reflection == Color{0}))
 			{
-				std::cout << "Reflection Ray direction: " << glm::to_string(hit._ray.origin) << std::endl;
-				std::cout << reflection;
-				std::cout << test;
+				//std::cout << "Reflection Ray direction: " << glm::to_string(hit._ray.origin) << std::endl;
+				//std::cout << reflection;
+				//std::cout << test;
 			}
 		}
 
