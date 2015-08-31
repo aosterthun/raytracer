@@ -48,6 +48,12 @@ glm::vec3 const& Camera::direction() const
 	return _direction;
 }
 
+float const& Camera::aperture() const
+{
+	return _aperture;
+}
+
+
 //non-member functions
 void Camera::setResolution(int width, int height)
 {

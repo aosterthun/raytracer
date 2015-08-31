@@ -30,6 +30,7 @@ public:
 	std::string const& name() const;
 	glm::vec3 const& position() const;
 	glm::vec3 const& direction() const;
+	float const& aperture() const;
 
 	//non-member functions
 	Ray getEyeRay(int x, int y, float &distance) const;

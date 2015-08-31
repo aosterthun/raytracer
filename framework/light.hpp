@@ -30,6 +30,8 @@ public:
 
 	glm::vec3 const& position() const;
 
+	void position(glm::vec3 const& newPos);
+
 	Color ld() const;
 
 	Color la() const;

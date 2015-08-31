@@ -6,6 +6,8 @@
 
 #include "renderer.hpp"
 #include "shapecomposite.hpp"
+#include "box.hpp"
+#include "sphere.hpp"
 #include "material.hpp"
 
 class App
@@ -19,15 +21,13 @@ public:
 	void run();
 
 	//NEEDS TO BE std::vector<Scene> createScenes();
-	bool createScenes();
+	bool createScenes(std::string const& sceneFilenameWithoutIndex);
 	void saveSDF(Scene const& scene, std::string const filename);
-
+	void loadScenes(std::string const& sceneFilenameWithoutIndex, int minIndex, int maxIndex);
 private:
 	Renderer _renderEngine;
 	SDFLoader _sdfLoader;
 	std::vector<Scene> _scenes;
-
-	void loadScenes(std::string const& sceneFilenameWithoutIndex, int minIndex, int maxIndex);
 
 };
 

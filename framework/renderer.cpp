@@ -111,15 +111,15 @@ Color Renderer::shade(OptionalHit hit, int depth)
 		    	glm::vec3 R = camVec - (2.0f* glm::dot(camVec, N) * N);
 		    	reflection += hit._shape->material().l() * trace(Ray{hit._intersect+ R, R}, depth);
 		    }
-		    float refr = hit._shape->material().r();
+		    /*float refr = hit._shape->material().r();
 			if (refr > 0)
 			{
 				glm::vec3 incomingVec = glm::normalize(hit._intersect-hit._ray.origin);
   				glm::vec3 hitNormal = glm::normalize(hit._normal);
 
   				glm::vec3 refractionVec = (1/refr)*((incomingVec-hitNormal)*glm::dot(incomingVec,hitNormal))-hitNormal*(float)sqrt(1-((1*1)*(1-(glm::dot(incomingVec,hitNormal)*glm::dot(incomingVec,hitNormal))/(refr*refr))));
-  				refraction = hit._shape->material().r() * trace(Ray{hit._intersect+ refractionVec, refractionVec}, depth);
-			}
+  				//refraction = hit._shape->material().r() * trace(Ray{hit._intersect+ refractionVec, refractionVec}, depth);
+			}*/
 
 		}
 
@@ -183,7 +183,7 @@ Color Renderer::shade(OptionalHit hit, int depth)
 			}
 		}
 
-		Color shade = ambient + diffuse + specular + reflection + refraction;
+		Color shade = ambient + diffuse + specular ;
 		return shade;
 	}
 	else
