@@ -103,7 +103,7 @@ Color Renderer::shade(OptionalHit hit, int depth)
 
 		Color ambient = calcAmbient(hit);
 
-		Color diffuse, specular, reflection, refraction;
+		Color diffuse, specular, reflection, refractation;
 
 		//calculation of diffuse and specular
 		for(auto light : _scene._lights)
@@ -149,7 +149,58 @@ Color Renderer::shade(OptionalHit hit, int depth)
 			}
 		}
 
-		Color whole = ambient + shade * (diffuse + specular + reflection + reflectation);
+		if(depth <= RECURSION_DEPTH)
+		{	
+			++depth;
+			//refractation
+			float rindex = hit._shape->material().r();
+
+			Color refr(0.0, 0.0, 0.0);
+			if(rindex > 0.0f)
+			{
+			//physical index
+			rindex = (1.0f/rindex);
+
+			//reflectation index (not implemented by us)
+			//float opacity = hit.shape_->material()->opacity();
+
+			glm::vec3 camVec = glm::normalize((hit._intersect-hit._ray.origin));
+
+
+			glm::vec3 normal = glm::normalize(hit._normal);
+
+			//negation of the angle
+			float cosI = -glm::dot(normal, glm::normalize(hit._ray.direction));
+
+			//output
+			float cosT2 = 1.0f - rindex * rindex * (1.0f - cosI * cosI);
+			
+			if(cosI < 0)
+			{
+				glm::vec3 T = ( camVec - 2*-(cosI) * normal);
+
+				T = T * (float)(rindex * rindex * cosI - sqrt(cosT2));
+
+				refr = trace(Ray{(hit._intersect + T * 0.1f), (camVec)}, depth);
+				refr += (refr);
+			}
+			else
+			{
+				glm::vec3 T = ((camVec - 2*(cosI)*normal));
+
+				T = T * float((rindex * rindex * cosI - sqrt(cosT2)));
+
+				refr = trace(Ray{(hit._intersect + T * 0.1f), T}, depth);
+				refr += (refr);
+			}
+			refractation += refr*0.5f;
+			}
+			else
+			{
+				refractation += refr;
+			}
+		}
+		Color whole = ambient + shade * (diffuse + specular + reflection + refractation);
 		return whole;
 	}
 	else
