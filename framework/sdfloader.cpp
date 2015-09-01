@@ -17,11 +17,12 @@ SDFLoader::~SDFLoader()
 
 Scene SDFLoader::loadScene(std::string const& filePath)
 {
+	//std::cout << "loadScene: " << filePath << std::endl;
 	std::ifstream file;
 	std::string text;
 	Scene scene;
 	file.open(filePath, std::ios::in);
-
+	//std::cout << "loadScene (openFile): " << filePath << std::endl;
 	while(!file.eof())
 	{
 		std::getline(file, text);
@@ -29,64 +30,72 @@ Scene SDFLoader::loadScene(std::string const& filePath)
 		std::string word;
 		
 		textStream >> word;
-		//std::cout << "Word:" << word << "\n";
-		
+		////std::cout << "Word:" << word << "\n";
+		//std::cout << "loadScene (start): " << filePath << "Word:" << word << std::endl;
 		if(word == "camera")
 		{
-			//std::cout << "Is Camera \n";
+			////std::cout << "Is Camera \n";
 			auto tmpCamera = createCamera(textStream);
 			_cameras.insert(std::make_pair(tmpCamera.name(),tmpCamera));
 		}
 
 		if(word == "render")
 		{
-			//std::cout << "Is Render \n";
+			////std::cout << "Is Render \n";
 			setRenderData(textStream,scene);
 		}
+		//std::cout << "loadScene (preDefine): " << filePath << "Word:" << word << std::endl;
 		if(word == "define")
 		{
-			//std::cout << "Is Define \n";
+			//std::cout << "loadScene (Define): " << filePath << std::endl;
+			////std::cout << "Is Define \n";
 			textStream >> word;
+			//std::cout << "loadScene (preLight): " << filePath << std::endl;
 			if(word == "light")
 			{
-				//std::cout << "Is Light \n";
+				//std::cout << "loadScene (Light): " << filePath << std::endl;
+				////std::cout << "Is Light \n";
 				auto tmpLight = createLight(textStream);
 				scene._lights.insert(std::make_pair(tmpLight.name(),tmpLight));
 			}
-
+			//std::cout << "loadScene (preMaterial): " << filePath << std::endl;
 			if(word == "material")
 			{
-				//std::cout << "Is Material \n";
+				//std::cout << "loadScene (Material): " << filePath << std::endl;
+				////std::cout << "Is Material \n";
 				auto tmpMaterial = createMaterial(textStream);
 				_materials.insert(std::make_pair(tmpMaterial.name(),tmpMaterial));
 			}
-			
+			//std::cout << "loadScene (preShape): " << filePath << std::endl;
 			if (word == "shape")
 			{
-				//std::cout << "Is Shape \n";
+				//std::cout << "loadScene (Shape): " << filePath << std::endl;
+				////std::cout << "Is Shape \n";
 				textStream >> word;
 				if(word == "sphere")
 				{
-					//std::cout << "Is Sphere \n";
+					////std::cout << "Is Sphere \n";
 					auto tmpSphere = createSphere(textStream);
 					scene._shapes.insert(std::make_pair(tmpSphere->name(),tmpSphere));
 				}
 				if(word == "box")
 				{
-					//std::cout << "Is Box \n";
+					////std::cout << "Is Box \n";
 					auto tmpBox = createBox(textStream);
 					scene._shapes.insert(std::make_pair(tmpBox->name(),tmpBox));
 				}
 				if(word == "composite")
 				{
-					//std::cout << "Is Compsite \n";
+					////std::cout << "Is Compsite \n";
 					auto tmpShapeComposite = createShapeComposite(textStream,scene._shapes);
 					scene._shapes.insert(std::make_pair(tmpShapeComposite->name(),tmpShapeComposite));	
 				}
 			}
 		}
+		//std::cout << "loadScene (preTransform): " << filePath << std::endl;
 		if(word == "transform")
 		{
+			std::cout << "loadScene (Transform): " << filePath << std::endl;
 			textStream >> word;
 			//Get object
 			auto shape = scene._shapes.find(word)->second;
@@ -117,6 +126,7 @@ Scene SDFLoader::loadScene(std::string const& filePath)
 			}
 		}
 	}
+	std::cout << "loadScene (end): " << filePath << std::endl;
 	return scene;
 }
 

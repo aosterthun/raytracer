@@ -23,17 +23,18 @@ App::App(std::string const& sceneFilename)
 
 void App::run()
 {
-	std::cout << "App started";
+	//std::cout << "App started" << std::endl;
 	for(auto scene : _scenes)
 	{
-		std::cout << scene;
+		
 		unsigned const width = std::get<0>(scene._camera.getResolution());
 		unsigned const height = std::get<1>(scene._camera.getResolution());
 		_renderEngine.setScene(scene);
-
+		_renderEngine.render();
+		//std::cout << "after Render" << std::endl;
 		//bool as return value for render()
 		std::thread thr([this]() { _renderEngine.render(); });
-
+		
 		Window win(glm::ivec2( width ,height));
 
 		while (!win.shouldClose())
@@ -51,7 +52,7 @@ void App::run()
 	}
 }
 
-bool App::createScenes()
+bool App::createScenes(std::string const& sceneFilenameWithoutIndex)
 {
 	//might be a input parameter
 	Scene scene = _sdfLoader.loadScene("../default_scene.sdf");
@@ -59,35 +60,28 @@ bool App::createScenes()
 	int frames = 24;
 	int seconds = 5;
 
-	std::vector<Scene> scenes{(int)frames*seconds};
+	std::vector<Scene> scenes(static_cast<int>(frames*seconds));
 
-	//Variables to be modified
-	float x = -100, y = 5, z = 10;
-
-	//Modificators
-
-	float xMod = 100;
-
-	glm::vec3 pos{ x, y, z};
-
-	saveSDF(scene, "test.sdf");
-	/*
-	for(int i = 0; i < (frames*seconds); ++i)
-	{	
-		Scene tmpScene = scene;
-		tmpScene._lights.begin()->second.setPosition(pos);
+	for (int i = 0; i < (seconds*frames); ++i)
+	{
+		std::ostringstream osPPM,osSDF;
 		
-		//extra just for testing
-		_scenes.push_back(tmpScene);
+		osSDF << sceneFilenameWithoutIndex << i << ".sdf";
+		std::string sceneFilenameWithIndex = osSDF.str();
+		
+		osPPM << sceneFilenameWithoutIndex << i << ".ppm";
+		std::string renderFilenameWithIndex = osPPM.str();
 
-		scenes[i] = tmpScene;
-
-
-		x += xMod;
-
-		//sceneToSDF("scene" + string(i+1) + ".sdf");
+		//sphere1 moving
+		auto lightToMove = scene._lights.find("sun2");
+		auto curLightToMovePos = lightToMove->second.position();
+		lightToMove->second.position({curLightToMovePos.x + 1,curLightToMovePos.y,curLightToMovePos.z});
+		
+		scene._renderFilename = renderFilenameWithIndex;
+		saveSDF(scene, sceneFilenameWithIndex);	
 	}
-	*/
+	
+	
 	return true;
 }
 
@@ -98,8 +92,11 @@ void App::loadScenes(std::string const& sceneFilenameWithoutIndex, int minIndex,
 		std::ostringstream os;
 		os << sceneFilenameWithoutIndex << i << ".sdf";
 		std::string sceneFilenameWithIndex = os.str();
+		//std::cout << sceneFilenameWithIndex << std::endl;
 		_scenes.push_back(_sdfLoader.loadScene(sceneFilenameWithIndex));
+		//std::cout << "After scene load<" << std::endl;
 	}
+
 }
 
 void App::saveSDF(Scene const& scene, std::string const filename)
@@ -111,7 +108,7 @@ void App::saveSDF(Scene const& scene, std::string const filename)
 	//materials
 	for(auto material : materials)
 	{
-		file << "define material "  << material.second.m() << " "
+		file << "define material "  << material.second.name() << " "
 									<< material.second.ka().r << " "
 									<< material.second.ka().g << " "
 									<< material.second.ka().b << " "
@@ -121,41 +118,79 @@ void App::saveSDF(Scene const& scene, std::string const filename)
 									<< material.second.ks().r << " "
 									<< material.second.ks().g << " "
 									<< material.second.ks().b << " "
+									<< material.second.m() << " "
+									<< material.second.r() << " "
 									<< material.second.l() << "\n";
 	}
-	/*
+	
 	//shapes
-	for(ShapeComposite composites : scene._shapes)
+	for(auto shape : scene._shapes)
 	{
-		if(composites.second->className() == "composites")
+		if(shape.second->className() == "composite")
 		{
-			std::map<std::string, std::shared_ptr<Shape>> childs = composites.second->getChilds();
-			
-			for(std::map<std::string, std::shared_ptr<Shape>>::iterator i = childs.begin(); i != childs.end(); ++i)
+			ShapeComposite* comp = dynamic_cast<ShapeComposite*>(shape.second.get());
+			for(auto compShape : comp->getChilds())
 			{
 
-				if(i->second.className() == "box")
+				if(compShape.second->className() == "box")
 				{
-					file << "define shape"  << i->second.className() << " "
-											<< i->second.name() << " ";
+					Box* box = dynamic_cast<Box*>(compShape.second.get());
+					file << "define shape "  << box->className() << " "
+											<< box->name() << " "
+											<< box->min().x << " "
+											<< box->min().y << " "
+											<< box->min().z << " "
+											<< box->max().x << " "
+											<< box->max().y << " "
+											<< box->max().z << " "
+											<< box->material().name() << "\n";
 				}
-				if(i->second.className() == "sphere")
+				if(compShape.second->className() == "sphere")
 				{
-					file << "define shape"  << i->second.className() << " "
-											<< i->second.name() << " "
-											<< i->second.position();
+					Sphere* sphere = dynamic_cast<Sphere*>(compShape.second.get());
+					file << "define shape "  << sphere->className() << " "
+											<< sphere->name() << " "
+											<< sphere->center().x << " "
+											<< sphere->center().y << " "
+											<< sphere->center().z << " "
+											<< sphere->radius() << " "
+											<< sphere->material().name() << "\n";
 				}	
 			}
 		}
+		
+	}
+
+	//composites
+	for(auto shape : scene._shapes)
+	{
+		if(shape.second->className() == "composite")
+		{
+			ShapeComposite* comp = dynamic_cast<ShapeComposite*>(shape.second.get());
+			file << "define shape "  << comp->className() << " " << comp->name() << " ";
+			for(auto compShape : comp->getChilds())
+			{
+				file << compShape.second->name() << " ";
+			}
+			file << "\n";
+		}
+	}
+
+	//lights
+	for(auto light : scene._lights)
+	{
+		file << "define light " << light.second.name() << " "
+								<< light.second.position().x << " "
+								<< light.second.position().y << " "
+								<< light.second.position().z << " "
+								<< light.second.la().r << " "
+								<< light.second.la().g << " "
+								<< light.second.la().b << " "
+								<< light.second.ld().r << " "
+								<< light.second.ld().g << " "
+								<< light.second.ld().b << "\n"; 
 	}
 	
-	//composites
-	for(auto composites : scene._shapes)
-	{
-		if
-		file << "define composite " << composites.second->className() << " "
-									<< composites.second->name() << " ";
-	}
-	*/
+
 	file.close();
 }

@@ -32,6 +32,11 @@ glm::vec3 const& Light::position() const
 	return _position;
 }
 
+void Light::position(glm::vec3 const& newPos)
+{
+	_position = newPos;
+}
+
 Color Light::ld() const
 {
 	return _ld;
