@@ -139,43 +139,7 @@ Color Renderer::shade(OptionalHit hit, int depth)
 					diffuse += light.second.ld()*calcDiffuse(light.second,hit);
 
 					// calculate specular
-					specular += light.second.ld()*calcSpecular(light.second,hit);
-
-					/*
-					if(hit._normal == glm::vec3{0.0, 1.0, 0.0} || hit._normal == glm::vec3{1.0, 1.0, 1.0})
-					{
-						std::cout << "normale: " << glm::to_string(hit._normal) << "\n intersect: " << glm::to_string(hit._intersect) << "\n";
-					}*/
-					/*
-					//DEBUG SECTION		
-					if(hit._normal == glm::vec3{ -1.0, 0.0, 0.0 })
-					{
-						return Color{0.0,0.0,1.0};
-					}
-					else if (hit._normal == glm::vec3{ 0.0, -1.0, 0.0 })
-					{
-						return Color{0.0,1.0,0.0};
-					}
-					else if (hit._normal == glm::vec3{ 0.0, 0.0, 1.0 })
-					{
-						return Color{0.0,1.0,1.0};
-					}
-					else if (hit._normal == glm::vec3{ 1.0, 0.0, 0.0 })
-					{
-						return Color{1.0,0.0,0.0};
-					}
-					else if (hit._normal == glm::vec3{ 0.0, 1.0, 0.0 })
-					{
-						return Color{1.0,0.0,1.0};
-					}
-					else if (hit._normal == glm::vec3{ 0.0, 0.0, -1.0 })
-					{
-						return Color{1.0,1.0,0.0};
-					}
-					else if (hit._normal == glm::vec3{1.0, 1.0, 1.0})
-					{
-						return Color{1.0, 1.0, 1.0};
-					}*/
+					specular += calcSpecular(light.second,hit);
 					
 				}
 
@@ -183,7 +147,7 @@ Color Renderer::shade(OptionalHit hit, int depth)
 			}
 		}
 
-		Color shade = ambient + diffuse + specular ;
+		Color shade = ambient + diffuse + specular + reflection;
 		return shade;
 	}
 	else
@@ -207,7 +171,7 @@ Color Renderer::calcDiffuse(Light const& light, OptionalHit const& optHit)
 {
 	Color kd = optHit._shape->material().kd();
 	double angle = glm::dot(glm::normalize(optHit._normal), glm::normalize(light.position()-optHit._intersect));
-	Color diffuseLight = kd * std::max(angle, 0.0);
+	Color diffuseLight = light.ld() * kd * std::max(angle, 0.0);
 	return diffuseLight;
 }
 
@@ -230,7 +194,7 @@ Color Renderer::calcSpecular(Light const& light, OptionalHit const& optHit)
 
 	double value = std::pow(angle, m);
 
-	Color specularLight = ks * std::max(value, 0.0);
+	Color specularLight = light.ld() * ks * std::max(value, 0.0);
 
 	return specularLight;
 }

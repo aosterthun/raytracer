@@ -19,6 +19,7 @@ class Sphere : public Shape
 		std::ostream& print(std::ostream& os) const override;
 		glm::vec3 center() const;
 		double radius() const;
+		void center(glm::vec3 const& newCenter);
 
 		std::string className() const override;
 

@@ -35,7 +35,7 @@ void App::run()
 		//bool as return value for render()
 		std::thread thr([this]() { _renderEngine.render(); });
 		
-		Window win(glm::ivec2( width ,height));
+		/*Window win(glm::ivec2( width ,height));
 
 		while (!win.shouldClose())
 		{
@@ -47,7 +47,7 @@ void App::run()
 			glDrawPixels( width, height, GL_RGB, GL_FLOAT, _renderEngine.colorbuffer().data());
 			
 			win.update();
-		}
+		}*/
 		thr.join();
 	}
 }
@@ -72,7 +72,12 @@ bool App::createScenes(std::string const& sceneFilenameWithoutIndex)
 		osPPM << sceneFilenameWithoutIndex << i << ".ppm";
 		std::string renderFilenameWithIndex = osPPM.str();
 
-		//sphere1 moving
+		auto sphereToMoveIt = scene._shapes.find("sphere1");
+		Sphere* sphereToMove = dynamic_cast<Sphere*>(sphereToMoveIt->second.get());
+		auto curSphereToMovePos = sphereToMove->center();
+		sphereToMove->center({curSphereToMovePos.x + 0.16,curSphereToMovePos.y,curSphereToMovePos.z});
+
+
 		auto lightToMove = scene._lights.find("sun2");
 		auto curLightToMovePos = lightToMove->second.position();
 		lightToMove->second.position({curLightToMovePos.x + 1,curLightToMovePos.y,curLightToMovePos.z});
@@ -126,15 +131,15 @@ void App::saveSDF(Scene const& scene, std::string const filename)
 	//shapes
 	for(auto shape : scene._shapes)
 	{
-		if(shape.second->className() == "composite")
+		/*if(shape.second->className() == "composite")
 		{
 			ShapeComposite* comp = dynamic_cast<ShapeComposite*>(shape.second.get());
 			for(auto compShape : comp->getChilds())
 			{
-
-				if(compShape.second->className() == "box")
+*/
+				if(shape.second->className() == "box")
 				{
-					Box* box = dynamic_cast<Box*>(compShape.second.get());
+					Box* box = dynamic_cast<Box*>(shape.second.get());
 					file << "define shape "  << box->className() << " "
 											<< box->name() << " "
 											<< box->min().x << " "
@@ -145,9 +150,9 @@ void App::saveSDF(Scene const& scene, std::string const filename)
 											<< box->max().z << " "
 											<< box->material().name() << "\n";
 				}
-				if(compShape.second->className() == "sphere")
+				if(shape.second->className() == "sphere")
 				{
-					Sphere* sphere = dynamic_cast<Sphere*>(compShape.second.get());
+					Sphere* sphere = dynamic_cast<Sphere*>(shape.second.get());
 					file << "define shape "  << sphere->className() << " "
 											<< sphere->name() << " "
 											<< sphere->center().x << " "
@@ -156,8 +161,8 @@ void App::saveSDF(Scene const& scene, std::string const filename)
 											<< sphere->radius() << " "
 											<< sphere->material().name() << "\n";
 				}	
-			}
-		}
+			/*}
+		}*/
 		
 	}
 
@@ -190,6 +195,12 @@ void App::saveSDF(Scene const& scene, std::string const filename)
 								<< light.second.ld().g << " "
 								<< light.second.ld().b << "\n"; 
 	}
+
+	//cam
+	file << "camera " << scene._camera.name() << " " << scene._camera.aperture() << "\n";
+
+	//render
+	file << "render " << scene._camera.name() << " " << scene._renderFilename << " " << std::get<0>(scene._camera.getResolution()) << " " << std::get<1>(scene._camera.getResolution());
 	
 
 	file.close();

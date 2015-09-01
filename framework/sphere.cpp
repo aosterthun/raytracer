@@ -63,6 +63,11 @@ double Sphere::radius() const
 	return _radius;
 }
 
+void Sphere::center(glm::vec3 const& newCenter)
+{
+	_center = newCenter;
+}
+
 Sphere::~Sphere()
 {
 	//std::cout << "Sphere destruct \n";

@@ -6,16 +6,16 @@
 
 int main(int argc, char* argv[])
 {	
-	App raytracer{"../scene1.sdf"};
-	raytracer.run();
+	App raytracer{"../default_scene.sdf"};
+	//raytracer.run();
 
 	//App raytracer{};
 
-	//raytracer.createScenes();
+	//raytracer.createScenes("image");
 
-	//raytracer.loadScenes
+	//raytracer.loadScenes("image",0,119);
 
-	//raytracer.run();
+	raytracer.run();
 
 	return 0;
 }

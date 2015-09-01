@@ -69,25 +69,7 @@ std::ostream& ShapeComposite::print(std::ostream& os) const
 }
 
 OptionalHit ShapeComposite::intersect(Ray const& ray, float& distance) const
-{	
-	/*
-	float closest = INFINITY;
-	
-	OptionalHit hit;
-	
-	for(auto shape : _shapes)
-	{
-	
-		OptionalHit hit_temp = shape.second->intersect(ray, distance);
-
-		if(hit_temp._t < closest && hit_temp._t>0.01) 
-		{
-		closest = hit_temp._t;
-		hit = hit_temp;
-		}
-	}
-	return hit;
-	*/
+{
 	OptionalHit tmpHit{};
 	for(auto shapePair : _shapes)
 	{
@@ -100,12 +82,14 @@ OptionalHit ShapeComposite::intersect(Ray const& ray, float& distance) const
 			}
 		}
 	}
-	//test cout
 	if(tmpHit._hit)
 	{
-	//std::cout << tmpHit._shape << "tmpHit: " << glm::to_string(tmpHit._intersect) << "\n";
-	}	
-	return tmpHit;
+		return tmpHit;
+	}
+	else
+	{
+		//return OptionalHit{false,nullptr,INFINITY};
+	}
 }
 
 std::string ShapeComposite::className() const
