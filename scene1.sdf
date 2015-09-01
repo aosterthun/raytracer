@@ -1,8 +1,16 @@
-define material red 1 0 0 1 0 0 1 0 0 50 1 1
-define material blue 0 0 1 0 0 1 0 0 1 50 1 1
-define shape sphere sphere1 0 -8 -40 3 red
-define shape box box1 -10 -15 -20 10 -14 -80 blue
-define light sun1 5 15 -38 0.2 0.2 0.2 0.8 0.8 0.8
-define light sun2 -5 15 -38 0.2 0.2 0.2 0.8 0.8 0.8
+define material glass 0 0 0 0 0 0 0.5 0.5 0.5 50 0.5 0.999
+define material mirror 0 0 0 0 0 0 1 1 1 100 0.5 0.5
+define material blue 0 0 1 0 0 1 0 0 1 50 1 0.999
+define material red 1 0 0 1 0 0 1 0 0 50 1 0.999
+define material yellow 1 1 0 1 1 0 1 1 0 50 0.3 0.5
+define material grey 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 50 1 0.999
+
+define shape sphere sphere1 0 0 -20 5 yellow
+define shape sphere sphere2 0 0 -70 35 blue
+define shape box ground -200 -30 -20 200 -29 -200 mirror
+define shape box back -200 -30 -200 200 200 -201 grey
+define light sun1 -30 15 -20 0.2 0.2 0.2 0.8 0.8 0.8
+define light sun2 30 15 -20 0.2 0.2 0.2 0.8 0.8 0.8
+define light sun3 0 0 0 0.2 0.2 0.2 0.8 0.8 0.8
 camera eye 100.0
 render eye image.ppm 800 800

@@ -9,7 +9,7 @@
 
 #include "renderer.hpp"
 
-const int RECURSION_DEPTH = 5;
+const int RECURSION_DEPTH = 3;
 
 const float SHADOW_BIAS = 0.9;
 
